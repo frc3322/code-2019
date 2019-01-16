@@ -8,6 +8,12 @@
 package frc.robot;
 
 public class RobotMap {
+
+  public static class PCM {
+
+    //values for talons goes here
+
+  }
   
   public static class XBOX {
     // Buttons

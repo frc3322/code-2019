@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class lineFollowing extends Subsystem {
+public class LineFollowing extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
