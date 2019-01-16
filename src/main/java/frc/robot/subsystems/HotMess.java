@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class habClimbing extends Subsystem {
+public class HotMess extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
