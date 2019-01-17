@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class DriveTrain extends Subsystem {
+  
+  public DriveTrain(){
+
+  }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
