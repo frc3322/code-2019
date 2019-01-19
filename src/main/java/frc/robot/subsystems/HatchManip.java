@@ -5,16 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
-public class HatchIntake extends Subsystem {
+public class HatchManip extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  
 
   @Override
   public void initDefaultCommand() {
