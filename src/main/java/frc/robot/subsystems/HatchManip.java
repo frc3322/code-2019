@@ -20,11 +20,11 @@ public class HatchManip extends Subsystem {
 
   DoubleSolenoid hatchPiston = new DoubleSolenoid(RobotMap.PCM.hatchShrink, RobotMap.PCM.hatchEnlarge);
 
-    public void shrink(){
+    public void shrink(){ //make it fit through hole inhatch
         hatchPiston.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void enlarge(){
+    public void enlarge(){ // make it too big to fit through hatch
         hatchPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
