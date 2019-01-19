@@ -15,9 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HotMess;
-import frc.robot.subsystems.intake.*;
-import frc.robot.subsystems.outtake.CargoPlacement;
-import frc.robot.subsystems.outtake.HatchPlacement;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,10 +26,8 @@ import frc.robot.subsystems.outtake.HatchPlacement;
  */
 public class Robot extends TimedRobot {
   
-    public static CargoIntake cargoIntake;
-    public static HatchIntake hatchIntake;
-    public static CargoPlacement cargoPlacement;
-    public static HatchPlacement hatchPlacement;
+    public static CargoManip cargoManip;
+    public static HatchManip hatchManip;
     public static DriveTrain driveTrain;
     public static HotMess hotMess;
     public static OI m_oi;
@@ -46,10 +42,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
 
-        cargoIntake = new CargoIntake();
-        hatchIntake = new HatchIntake();
-        cargoPlacement = new CargoPlacement();
-        hatchPlacement = new HatchPlacement();
+        cargoManip = new CargoManip();
+        hatchManip = new HatchManip();
         driveTrain = new DriveTrain();
         hotMess = new HotMess();
 
