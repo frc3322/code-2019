@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.HotMess;
 import frc.robot.subsystems.intake.*;
 import frc.robot.subsystems.outtake.CargoPlacement;
@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   public static HatchIntake hatchIntake;
   public static CargoPlacement cargoPlacement;
   public static HatchPlacement hatchPlacement;
-  public static DriveTrain driveTrain;
+  public static Drivetrain drivetrain;
   public static HotMess hotMess;
   public static OI m_oi;
 
@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
     hatchIntake = new HatchIntake();
     cargoPlacement = new CargoPlacement();
     hatchPlacement = new HatchPlacement();
-    driveTrain = new DriveTrain();
+    drivetrain = new Drivetrain();
     hotMess = new HotMess();
 
     m_oi = new OI();
