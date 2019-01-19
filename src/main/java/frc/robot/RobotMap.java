@@ -7,13 +7,18 @@
 
 package frc.robot;
 
+import java.util.Random;
+
 public class RobotMap {
 
     public static class CAN {
 
+        public static final int cargoMotor1 = 0;
+
     }
 
     public static class DIO {
+        public static final int cargoIntakeEncoder = 1;
 
     }
 
