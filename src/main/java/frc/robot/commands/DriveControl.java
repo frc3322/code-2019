@@ -9,14 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import static frc.robot.Robot.drivetrain;
 
 /**
  * An example command.  You can replace me with your own command.
  */
 public class DriveControl extends Command {
   public DriveControl() {
-    requires(DriveTrain);
+    requires(drivetrain);
     // Use requires() here to declare subsystem dependencies
   }
 

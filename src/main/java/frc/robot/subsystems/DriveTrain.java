@@ -8,13 +8,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.DriveControl;
 
 /**
  * Add your docs here.
  */
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
   
-    public DriveTrain(){
+    public Drivetrain(){
 
     }
     // Put methods for controlling this subsystem
@@ -22,6 +23,7 @@ public class DriveTrain extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
+        setDefaultCommand(new DriveControl());
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
