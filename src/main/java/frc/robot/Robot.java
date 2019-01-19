@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
   
   public static CargoIntake cargoIntake;
   public static HatchIntake hatchIntake;
+  public static SuctionCup suctionCup;
   public static CargoPlacement cargoPlacement;
   public static HatchPlacement hatchPlacement;
   public static Drivetrain drivetrain;
@@ -48,6 +49,7 @@ public class Robot extends TimedRobot {
 
     cargoIntake = new CargoIntake();
     hatchIntake = new HatchIntake();
+    suctionCup = new SuctionCup();
     cargoPlacement = new CargoPlacement();
     hatchPlacement = new HatchPlacement();
     drivetrain = new Drivetrain();
