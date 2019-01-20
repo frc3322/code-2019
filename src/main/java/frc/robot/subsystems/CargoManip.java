@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems.outtake;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
-public class CargoPlacement extends Subsystem {
+public class CargoManip extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
