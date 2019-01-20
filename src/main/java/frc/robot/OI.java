@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.LimelightAlign;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,14 +18,26 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-    Joystick lowerChassis = new Joystick(0);
-    Joystick upperChassis = new Joystick(1);
+    public Joystick lowerChassis = new Joystick(0);
+    public Joystick upperChassis = new Joystick(1);
     //new buttons goes here
+
+    Button button_a = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_A);
+    Button button_b = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_B);
+    Button button_x = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_X);
+    Button button_y = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_Y);
+    Button bumper_left = new JoystickButton(upperChassis, RobotMap.XBOX.BUMPER_LEFT);
+    Button bumper_right = new JoystickButton(upperChassis, RobotMap.XBOX.BUMPER_RIGHT);
+    Button button_back = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_BACK);
+    Button button_start = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_START);
+    Button stick_left = new JoystickButton(upperChassis, RobotMap.XBOX.STICK_LEFT);
+    Button stick_right = new JoystickButton(upperChassis, RobotMap.XBOX.STICK_RIGHT);
 
     public OI(){
 
-      //trigger command for buttons goes here
+        bumper_right.whileHeld(new LimelightAlign());
 
     }
+
   
 }
