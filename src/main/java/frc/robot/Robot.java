@@ -13,16 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
-<<<<<<< Chasis
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.HotMess;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.intake.*;
-import frc.robot.subsystems.outtake.CargoPlacement;
-import frc.robot.subsystems.outtake.HatchPlacement;
-=======
 import frc.robot.subsystems.*;
->>>>>>> master
 
 /**
  * The VM is configured to automatically run this class, and to call the
