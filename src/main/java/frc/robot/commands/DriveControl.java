@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 import static frc.robot.Robot.drivetrain;
 
@@ -17,13 +18,32 @@ import static frc.robot.Robot.drivetrain;
  */
 public class DriveControl extends Command {
 
+    private final int LEFT_AXIS;
+    private final int RIGHT_AXIS;
+
+    private int pow = 1;
+    private double deadZone = 0.1;
 
     public DriveControl() {
+
         requires(drivetrain);
+
+        LEFT_AXIS = RobotMap.XBOX.STICK_L_Y_AXIS;
+        RIGHT_AXIS = RobotMap.XBOX.STICK_R_Y_AXIS;
+
     }
 
     @Override
     protected void execute() {
+
+        double leftSpeed = Robot.m_oi.lowerChassis.getRawAxis(LEFT_AXIS);
+        double rightSpeed = Robot.m_oi.lowerChassis.getRawAxis(RIGHT_AXIS);
+        
+        leftSpeed = (Math.abs(leftSpeed) > deadZone) ? leftSpeed * Math.abs(Math.pow(leftSpeed, pow - 1)) : 0;
+        rightSpeed = (Math.abs(rightSpeed) > deadZone) ? rightSpeed * Math.abs(Math.pow(rightSpeed, pow - 1)) : 0;
+
+        drivetrain.drive(leftSpeed, rightSpeed);
+
     }
 
     @Override

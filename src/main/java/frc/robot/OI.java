@@ -20,8 +20,8 @@ public class OI {
 
     public Joystick lowerChassis = new Joystick(0);
     public Joystick upperChassis = new Joystick(1);
+    
     //new buttons goes here
-
     Button button_a = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_A);
     Button button_b = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_B);
     Button button_x = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_X);
@@ -30,8 +30,6 @@ public class OI {
     Button bumper_right = new JoystickButton(upperChassis, RobotMap.XBOX.BUMPER_RIGHT);
     Button button_back = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_BACK);
     Button button_start = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_START);
-    Button stick_left = new JoystickButton(upperChassis, RobotMap.XBOX.STICK_LEFT);
-    Button stick_right = new JoystickButton(upperChassis, RobotMap.XBOX.STICK_RIGHT);
 
     public OI(){
 
