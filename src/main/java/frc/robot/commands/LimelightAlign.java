@@ -13,9 +13,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.subsystems.Limelight;
 import frc.robot.OI;
-import frc.robot.subsystems.DriveTrain;
 
-import static frc.robot.Robot.driveTrain;
+import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.limelight;
 
 /**
@@ -26,13 +25,13 @@ public class LimelightAlign extends Command {
     double angleModifier = .1;
 
     public void LimelightAlign() {
-        requires(driveTrain);
+        requires(drivetrain);
         requires(limelight);
     }
 
     @Override
     protected void execute() {
-        driveTrain.drive(Robot.m_oi.lowerChassis.getRawAxis(1), Limelight.getTx() * angleModifier);
+        drivetrain.drive(Robot.m_oi.lowerChassis.getRawAxis(1), Limelight.getTx() * angleModifier);
     }
 
     @Override

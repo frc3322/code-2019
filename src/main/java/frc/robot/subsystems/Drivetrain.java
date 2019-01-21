@@ -19,7 +19,7 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
   
     private DifferentialDrive robotDrive;
 
@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
     //                     rightBackMotor,
     //                     rightFrontMotor;
 
-    public DriveTrain(){
+    public Drivetrain(){
 
         // leftBackMotor = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
         // leftFrontMotor = new CANSparkMax(RobotMap.CAN.LEFT_FRONT_MOTOR, MotorType.kBrushless);
