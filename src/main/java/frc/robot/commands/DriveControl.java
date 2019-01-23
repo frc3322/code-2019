@@ -36,14 +36,14 @@ public class DriveControl extends Command {
     @Override
     protected void execute() {
 
-        double leftSpeed = Robot.m_oi.lowerChassis.getRawAxis(LEFT_AXIS);
-        double rightSpeed = Robot.m_oi.lowerChassis.getRawAxis(RIGHT_AXIS);
+        double leftSpeed = Robot.oi.lowerChassis.getRawAxis(LEFT_AXIS);
+        double rightSpeed = Robot.oi.lowerChassis.getRawAxis(RIGHT_AXIS);
         
         leftSpeed = (Math.abs(leftSpeed) > deadZone) ? leftSpeed * Math.abs(Math.pow(leftSpeed, pow - 1)) : 0;
         rightSpeed = (Math.abs(rightSpeed) > deadZone) ? rightSpeed * Math.abs(Math.pow(rightSpeed, pow - 1)) : 0;
 
-        drivetrain.drive(leftSpeed, rightSpeed);
-
+        drivetrain.driveClamped(leftSpeed, rightSpeed);
+        
     }
 
     @Override

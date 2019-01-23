@@ -27,8 +27,8 @@ public class Robot extends TimedRobot {
     public static CargoManip cargoManip;
     public static HatchManip hatchManip;
     public static Drivetrain drivetrain;
-    public static HotMess hotMess;
-    public static OI m_oi;
+    public static HotMess hotmess;
+    public static OI oi;
     public static Limelight limelight;
 
     Command m_autonomousCommand;
@@ -44,10 +44,10 @@ public class Robot extends TimedRobot {
         cargoManip = new CargoManip();
         hatchManip = new HatchManip();
         drivetrain = new Drivetrain();
-        hotMess = new HotMess();
+        hotmess = new HotMess();
         limelight = new Limelight();
 
-        m_oi = new OI();
+        oi = new OI();
 
         m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
         // chooser.addOption("My Auto", new MyAutoCommand());
@@ -133,6 +133,11 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+
+        SmartDashboard.putNumber("Left Back Encoder", drivetrain.getLeftBackEncoder());
+        SmartDashboard.putNumber("Left Front Encoder", drivetrain.getLeftFrontEncoder());
+        SmartDashboard.putNumber("Right Back Encoder", drivetrain.getRightBackEncoder());
+        SmartDashboard.putNumber("Right Front Encoder", drivetrain.getRightFrontEncoder());
     }
 
     /**

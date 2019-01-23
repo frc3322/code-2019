@@ -5,10 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/*
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.CANSparkMax;
+import edu.wpi.first.wpilibj.CANEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -68,3 +70,5 @@ public void stop() { //stop the elevator
 } //add more methods as needed
 
 }
+
+*/
