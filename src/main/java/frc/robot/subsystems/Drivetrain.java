@@ -9,17 +9,17 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveControl;
 
 /**
- * Add your docs here.
+ * Code for drive train
  */
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
   
     private DifferentialDrive robotDrive;
 
@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
     //                     rightBackMotor,
     //                     rightFrontMotor;
 
-    public DriveTrain(){
+    public Drivetrain(){
 
         // leftBackMotor = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
         // leftFrontMotor = new CANSparkMax(RobotMap.CAN.LEFT_FRONT_MOTOR, MotorType.kBrushless);
@@ -46,8 +46,6 @@ public class DriveTrain extends Subsystem {
         robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
     }
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
     public void drive(double leftSpeed, double rightSpeed){
 
@@ -55,9 +53,13 @@ public class DriveTrain extends Subsystem {
 
     }
 
+    public void stop(){
+        drive(0, 0);
+    }
+
     @Override
     public void initDefaultCommand() {
-        // setDefaultCommand(new MySpecialCommand());  
+        setDefaultCommand(new DriveControl());
     }
 
 }
