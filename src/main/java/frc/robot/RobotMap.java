@@ -11,16 +11,23 @@ public class RobotMap {
 
     public static class CAN {
 
+        //drivetrain
+        public static final int LEFT_FRONT_MOTOR = 0;
+        public static final int LEFT_BACK_MOTOR = 1;
+        public static final int RIGHT_FRONT_MOTOR = 2;
+        public static final int RIGHT_BACK_MOTOR = 3;
+
     }
 
     public static class DIO {
-
+        public static final int HATCH_DETECTOR = 0;
     }
 
     public static class PCM {
-
-        //values for talons goes here
-
+        public static final int GRAB_HATCH = 0;
+        public static final int RELESE_HATCH = 1;
+        public static final int LOWER_MECHANISM = 2;
+        public static final int RAISE_MECHANSIM = 3;
     }
   
     public static class XBOX {

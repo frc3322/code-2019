@@ -8,30 +8,54 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
  * Add your docs here.
  */
 public class HatchManip extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
-  DoubleSolenoid hatchPiston = new DoubleSolenoid(RobotMap.PCM.hatchShrink, RobotMap.PCM.hatchEnlarge);
+    public boolean hatchGrabberActivated;
+    public boolean hatchGrabberExtended;
+    public boolean holdingHatch;
 
-    public void shrink(){ //make it fit through hole inhatch
-        hatchPiston.set(DoubleSolenoid.Value.kForward);
+    DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
+    DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELESE_HATCH);
+    DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
+
+    public void grabHatch() {
+        SmartDashboard.putBoolean("hatchGrabberActivated", hatchGrabberActivated);
+        if(hatchGrabberActivated) {
+            hatchGrabber.set(DoubleSolenoid.Value.kForward);
+        }else{
+            hatchGrabber.set(DoubleSolenoid.Value.kReverse);
+        }
     }
 
-    public void enlarge(){ // make it too big to fit through hatch
-        hatchPiston.set(DoubleSolenoid.Value.kReverse);
+    public void extendGrabber() {
+        SmartDashboard.putBoolean("hatchGrabberExtended", hatchGrabberExtended);
+        if(hatchGrabberActivated) {
+            grabberExtender.set(DoubleSolenoid.Value.kForward);
+        }else{
+            grabberExtender.set(DoubleSolenoid.Value.kReverse);
+        }
+    }
+    
+    public boolean hatchGrabberActivated() {
+        return hatchGrabber.get() == DoubleSolenoid.Value.kForward;
     }
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    enlarge();
-  }
+    public boolean hatchGrabberExtended() {
+        return grabberExtender.get() == DoubleSolenoid.Value.kForward;
+    }
+
+    @Override
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        // setDefaultCommand(new MySpecialCommand());
+    }
 }
