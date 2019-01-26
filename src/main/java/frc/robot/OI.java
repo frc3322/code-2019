@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ElevatorControl;
 import frc.robot.commands.LimelightAlign;
 
 /**
@@ -34,6 +35,9 @@ public class OI {
     public OI(){
 
         bumper_right.whileHeld(new LimelightAlign());
+
+        bumper_left.whenPressed(new ElevatorControl(true));
+        bumper_right.whenPressed(new ElevatorControl(false));
 
     }
 

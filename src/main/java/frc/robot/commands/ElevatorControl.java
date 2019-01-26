@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/*
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,47 +14,45 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.OI;
 import frc.robot.Robot;
 
+import static frc.robot.Robot.elevator;
+
 public class ElevatorControl extends Command {
 
-    private final int UP_AXIS;
-    private final int DOWN_AXIS;
+	private static int level=1;
 
-    private Elevator elevator;
+  	public ElevatorControl(boolean upOrDown) {
 
-  public ElevatorControl() {
-      this.elevator = new Elevator(); //call with up and down speeds if needed
+		requires(elevator);
 
-      this.UP_AXIS = RobotMap.XBOX.TRIGGER_L_AXIS;
-      this.DOWN_AXIS = RobotMap.XBOX.TRIGGER_R_AXIS;
+		level += (upOrDown) ? ((level == 3) ? 0 : 1) : ((level == 1) ? 0 : -1);
 
+	}
 
-  }
+	public ElevatorControl(){
+	
+		requires(elevator);
+	
+	}
 
-  @Override
-  protected void initialize() {
-  }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		elevator.goToLevel(level);
+	}
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    double moveInput = Robot.m_oi.upperChassis.getRawAxis(UP_AXIS) - Robot.m_oi.upperChassis.getRawAxis(DOWN_AXIS);
-    elevator.move(moveInput);
-  }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-      return false;
-  }
+	@Override
+	protected void end() {
+		elevator.stop();
+	}
 
-  @Override
-  protected void end() {
-      elevator.stop();
-  }
-
-  @Override
-  protected void interrupted() {
-      super.interrupted();
-  }
-}
-*/
+	@Override
+	protected void interrupted() {
+		super.interrupted();
+	}
+	}

@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
     public static HatchManip hatchManip;
     public static Drivetrain drivetrain;
     public static HotMess hotmess;
+    public static Elevator elevator;
     public static OI oi;
     public static Limelight limelight;
 
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain();
         hotmess = new HotMess();
         limelight = new Limelight();
+        elevator = new Elevator();
 
         oi = new OI();
 
