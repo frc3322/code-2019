@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
@@ -19,30 +18,42 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  */
 public class HatchManip extends Subsystem {
 
-    public boolean hatchGrabberActivated;
-    public boolean hatchGrabberExtended;
-    public boolean holdingHatch;
-
     DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
     DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELESE_HATCH);
     DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
 
     public void grabHatch() {
-        SmartDashboard.putBoolean("hatchGrabberActivated", hatchGrabberActivated);
-        if(hatchGrabberActivated) {
-            hatchGrabber.set(DoubleSolenoid.Value.kForward);
+        SmartDashboard.putBoolean("hatchGrabberActivated", hatchGrabberActivated());
+        if(hatchGrabberActivated()) {
+            hatchRelease();
         }else{
-            hatchGrabber.set(DoubleSolenoid.Value.kReverse);
+            hatchGrab();
         }
     }
 
     public void extendGrabber() {
-        SmartDashboard.putBoolean("hatchGrabberExtended", hatchGrabberExtended);
-        if(hatchGrabberActivated) {
-            grabberExtender.set(DoubleSolenoid.Value.kForward);
+        SmartDashboard.putBoolean("hatchGrabberExtended", hatchGrabberExtended());
+        if(hatchGrabberActivated()) {
+            grabberRetract();
         }else{
-            grabberExtender.set(DoubleSolenoid.Value.kReverse);
+            grabberExtend();
         }
+    }
+
+    public void hatchGrab() {
+        hatchGrabber.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void hatchRelease() {
+        hatchGrabber.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void grabberExtend() {
+        grabberExtender.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void grabberRetract() {
+        grabberExtender.set(DoubleSolenoid.Value.kReverse);
     }
     
     public boolean hatchGrabberActivated() {
@@ -51,6 +62,10 @@ public class HatchManip extends Subsystem {
 
     public boolean hatchGrabberExtended() {
         return grabberExtender.get() == DoubleSolenoid.Value.kForward;
+    }
+
+    public boolean hatchIsGrabbed() {
+        return hatchDetector.get();
     }
 
     @Override
