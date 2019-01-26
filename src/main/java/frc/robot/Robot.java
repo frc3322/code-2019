@@ -24,7 +24,7 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
   
-    public static CargoManip cargoManip;
+    public static SideOuttake sideouttake;
     public static HatchManip hatchManip;
     public static Drivetrain drivetrain;
     public static HotMess hotMess;
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
 
-        cargoManip = new CargoManip();
+        sideouttake = new SideOuttake();
         hatchManip = new HatchManip();
         drivetrain = new Drivetrain();
         hotMess = new HotMess();
