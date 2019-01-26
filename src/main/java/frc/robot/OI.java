@@ -35,8 +35,10 @@ public class OI {
 
         bumper_right.whileHeld(new LimelightAlign());
 
-        button_a.whileHeld(new HotMessClimb());
-        button_b.whileHeld(new HotMessForceClimb());
+        button_a.whenPressed(new HotMessClimb());
+        button_a.whenReleased(new HotMessIdle());
+        button_b.whenPressed(new HotMessForceClimb());
+        button_b.whenReleased(new HotMessIdle());
 
     }
 
