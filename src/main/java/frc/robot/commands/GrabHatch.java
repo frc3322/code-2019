@@ -11,18 +11,20 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchManip;
 
+import static frc.robot.Robot.hatchManip;
+
 /**
  * Add your docs here.
  */
 public class GrabHatch extends Command{
 
     public void GrabHatch() {
-        requires(Robot.hatchManip);
+        requires(hatchManip);
     }
 
     @Override
     protected void execute() {
-        Robot.hatchManip.grabHatch();
+        hatchManip.grabHatch();
     }
 
     @Override
