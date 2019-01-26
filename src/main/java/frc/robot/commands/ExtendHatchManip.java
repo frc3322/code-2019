@@ -10,14 +10,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+import static frc.robot.Robot.hatchManip;
+
 /**
  * Add your docs here.
  */
 public class ExtendHatchManip extends Command{
 
+    public ExtendHatchManip(){
+
+        requires(hatchManip);
+
+    }
+
     @Override
     protected void execute() {
-        Robot.hatchManip.extendGrabber();
+        hatchManip.extendGrabber();
     }
 
     @Override
