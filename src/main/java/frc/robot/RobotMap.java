@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import java.util.Random;
+
 public class RobotMap {
 
     public static class CAN {
@@ -21,17 +23,32 @@ public class RobotMap {
         public static final int HOTMESS_MOTOR1 = 4;
         public static final int HOTMESS_MOTOR2 = 5;
 
+        //cargo
+        public static final int L_SIDE_OUTTAKE = 0;
+        public static final int R_SIDE_OUTTAKE = 1;
+        public static final int INTAKE_MOTOR = 2;
+
     }
 
     public static class DIO {
         public static final int HATCH_DETECTOR = 0;
+
+        public static final int LEFT_INFRARED = 0;
+        public static final int RIGHT_INFRARED = 1;
+
     }
 
     public static class PCM {
+        
         public static final int GRAB_HATCH = 0;
         public static final int RELESE_HATCH = 1;
         public static final int LOWER_MECHANISM = 2;
         public static final int RAISE_MECHANSIM = 3;
+        
+
+        public static final int INTAKE_EXTEND = 0;
+        public static final int INTAKE_RETRACT = 1;
+
     }
   
     public static class XBOX {
