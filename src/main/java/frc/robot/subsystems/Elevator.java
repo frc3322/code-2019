@@ -29,7 +29,6 @@ public class Elevator extends Subsystem {
     private SpeedControllerGroup elevator;
     private CANEncoder encoder1;
     private CANEncoder encoder2;
-    //private PIDController pid;
     private double upSpeed=1; //temp
     private double downSpeed=-1; //temp
     private double firstLevel=10; //temp
@@ -47,8 +46,6 @@ public class Elevator extends Subsystem {
 
         encoder1=elevatorMotor1.getEncoder();
         encoder2=elevatorMotor2.getEncoder();
-
-        //pid = new PIDController("Elevator", ELEVATOR_KP, ELEVATOR_DECAY, ELEVATOR_KI, ELEVATOR_KD);
     }
 
     public Elevator(double upSpeed, double downSpeed) { //set up and down speeds
