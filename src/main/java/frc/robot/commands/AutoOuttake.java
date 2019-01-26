@@ -23,9 +23,9 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        // Robot.drivetrain.drive(.55, Robot.oi.lowerChassis.getRawAxis());
+        Robot.drivetrain.driveClamped(.55, Robot.oi.lowerChassis.getRawAxis(4));
         if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
-            //Robot.drivetrain.driveStop();
+            Robot.drivetrain.stop();
             if (sideouttake.getRightInfrared()) {
                 sideouttake.outtakeRight();
             } else {

@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import java.util.Random;
-
 public class RobotMap {
 
     public static class CAN {
