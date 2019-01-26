@@ -34,9 +34,6 @@ public class RobotMap {
         public static final int LEFT_INFRARED = 0;
         public static final int RIGHT_INFRARED = 1;
 
-        public static final int HOTMESS_ENCODER1 = 0;
-        public static final int HOTMESS_ENCODER2 = 1;
-
     }
 
     public static class PCM {
