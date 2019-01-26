@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.HotMessIdle;
 
 /**
  * Add your docs here.
@@ -60,6 +61,6 @@ public class HotMess extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        // setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new HotMessIdle());
     }
 }
