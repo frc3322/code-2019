@@ -8,9 +8,9 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -21,21 +21,20 @@ import frc.robot.commands.HotMessIdle;
  */
 public class HotMess extends Subsystem {
     
-    private CANSparkMax motor1,
+    private WPI_TalonSRX motor1,
                         motor2;
     
-    private CANEncoder encoder1,
+    private Encoder encoder1,
                        encoder2;
     
     private SpeedControllerGroup motorGroup;
 
     public HotMess(){
 
-        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR1, MotorType.kBrushless);
-        motor2 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR2, MotorType.kBrushless);
+        motor1 = new WPI_TalonSRX(RobotMap.CAN.HOTMESS_MOTOR1);
+        motor2 = new WPI_TalonSRX(RobotMap.CAN.HOTMESS_MOTOR2);
 
-        encoder1 = motor1.getEncoder();
-        encoder2 = motor2.getEncoder();
+        encoder1 = new Encoder(RobotMap.DIO.HOTMESS_ENCODER1, RobotMap.DIO.HOTMESS_ENCODER2);
 
         motorGroup = new SpeedControllerGroup(motor1, motor2);
 
@@ -55,7 +54,7 @@ public class HotMess extends Subsystem {
 
     public double getEncoderVal(){
 
-        return (encoder1.getPosition() + encoder2.getPosition()) / 2;
+        return (encoder1.getDistance() + encoder2.getDistance()) / 2;
 
     }
 

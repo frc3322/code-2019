@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.*;
@@ -24,8 +23,8 @@ public class SideOuttake extends Subsystem{
 
     public static final long outtakeTime = 2000;
 
-    CANSparkMax leftOuttake = new CANSparkMax(RobotMap.CAN.L_SIDE_OUTTAKE, MotorType.kBrushless);
-    CANSparkMax rightOuttake = new CANSparkMax(RobotMap.CAN.R_SIDE_OUTTAKE, MotorType.kBrushless);
+    WPI_TalonSRX leftOuttake = new WPI_TalonSRX(RobotMap.CAN.L_SIDE_OUTTAKE);
+    WPI_TalonSRX rightOuttake = new WPI_TalonSRX(RobotMap.CAN.R_SIDE_OUTTAKE);
 
     DigitalInput leftInfrared = new DigitalInput(RobotMap.DIO.LEFT_INFRARED);
     DigitalInput rightInfrared = new DigitalInput(RobotMap.DIO.RIGHT_INFRARED);

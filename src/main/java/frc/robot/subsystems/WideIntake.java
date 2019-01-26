@@ -12,15 +12,14 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * Add your docs here.
  */
 public class WideIntake extends Subsystem{
 
-    CANSparkMax intakeMotor = new CANSparkMax(RobotMap.CAN.INTAKE_MOTOR, MotorType.kBrushless);
+    WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.CAN.INTAKE_MOTOR);
     DoubleSolenoid intakeExtender = new DoubleSolenoid(RobotMap.PCM.INTAKE_EXTEND, RobotMap.PCM.INTAKE_RETRACT);
 
     public WideIntake() {
