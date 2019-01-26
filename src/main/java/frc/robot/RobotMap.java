@@ -13,22 +13,22 @@ public class RobotMap {
 
     public static class CAN {
 
-        public static final int cargoMotor1 = 0;
-        public static final int L_SIDE_OUTTAKE = 1;
-        public static final int R_SIDE_OUTTAKE = 2;
+        public static final int L_SIDE_OUTTAKE = 0;
+        public static final int R_SIDE_OUTTAKE = 1;
+        public static final int INTAKE_MOTOR = 2;
 
     }
 
     public static class DIO {
-        public static final int cargoIntakeEncoder = 0;
-        public static final int LEFT_INFRARED = 1;
-        public static final int RIGHT_INFRARED = 2;
+        public static final int LEFT_INFRARED = 0;
+        public static final int RIGHT_INFRARED = 1;
 
     }
 
     public static class PCM {
 
-        //values for talons goes here
+        public static final int INTAKE_EXTEND = 0;
+        public static final int INTAKE_RETRACT = 1;
 
     }
   

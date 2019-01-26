@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
     public static HatchManip hatchManip;
     public static Drivetrain drivetrain;
     public static HotMess hotMess;
+    public static WideIntake wideintake;
     public static OI m_oi;
 
     Command m_autonomousCommand;
@@ -44,6 +45,7 @@ public class Robot extends TimedRobot {
         hatchManip = new HatchManip();
         drivetrain = new Drivetrain();
         hotMess = new HotMess();
+        wideintake = new WideIntake();
 
         m_oi = new OI();
 
