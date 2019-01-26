@@ -17,6 +17,10 @@ public class RobotMap {
         public static final int RIGHT_FRONT_MOTOR = 2;
         public static final int RIGHT_BACK_MOTOR = 3;
 
+        //hot mess
+        public static final int HOTMESS_MOTOR1 = 4;
+        public static final int HOTMESS_MOTOR2 = 5;
+
     }
 
     public static class DIO {
