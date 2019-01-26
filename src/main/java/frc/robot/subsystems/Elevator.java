@@ -9,7 +9,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -27,15 +26,12 @@ public class Elevator extends Subsystem {
     //create constants
 
     private SpeedControllerGroup elevator;
-    private CANEncoder encoder1;
-    private CANEncoder encoder2;
+    private int currentLevel=1;
     private double upSpeed=1; //temp
     private double downSpeed=-1; //temp
     private double firstLevel=10; //temp
     private double secondLevel=20; //temp
     private double thirdLevel=30; //temp
-    private double convertToInches=15; //temp
-    private double errorMargin=0.25; //temp
 
 
     public Elevator() {
@@ -44,8 +40,10 @@ public class Elevator extends Subsystem {
         elevator = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
         elevator.setInverted(true);
 
-        encoder1=elevatorMotor1.getEncoder();
-        encoder2=elevatorMotor2.getEncoder();
+        DigitalInput hallEffectLevel0 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_0);
+        DigitalInput hallEffectLevel1 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_1);
+        DigitalInput hallEffectLevel2 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_2);
+        DigitalInput hallEffectLevel3 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_3);
     }
 
     public Elevator(double upSpeed, double downSpeed) { //set up and down speeds
@@ -78,14 +76,17 @@ public class Elevator extends Subsystem {
 
     public void goToLevel(int level) {
         switch(level) {
+            case 0:
+                goToLevel0();
+                break;
             case 1:
-                goToHeight(firstLevel);
+                goToLevel1();
                 break;
             case 2:
-                goToHeight(secondLevel);
+                goToLevel2();
                 break;
             case 3:
-                goToHeight(thirdLevel);
+                goToLevel3();
                 break;
             default:
                 return;
@@ -93,21 +94,21 @@ public class Elevator extends Subsystem {
 
     }
 
-    public void goToHeight(double height){
-        if(height > getHeight() + errorMargin) {
-            moveDown();
-        } else if(height < getHeight() - errorMargin) {
-            moveUp();
-        } else {
-            stop();
-        }
+    public void goToLevel0() {
+        
     }
 
-    public double getHeight(){
-        return ((encoder1.getPosition() + encoder2.getPosition())/2)*convertToInches;
+    public void goToLevel1(){
+
     }
 
+    public void goToLevel2(){
 
+    }
+
+    public void goToLevel3(){
+
+    }
 
 
 }
