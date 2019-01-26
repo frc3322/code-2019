@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
- * Add your docs here.
+ * code for hatch manipulation
  */
 public class HatchManip extends Subsystem {
 
@@ -70,7 +70,6 @@ public class HatchManip extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
 }

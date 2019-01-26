@@ -18,7 +18,7 @@ import static frc.robot.Robot.hatchManip;
  */
 public class GrabHatch extends Command{
 
-    public void GrabHatch() {
+    public GrabHatch() {
         requires(hatchManip);
     }
 
