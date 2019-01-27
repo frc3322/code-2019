@@ -29,7 +29,7 @@ public class RobotMap {
     }
 
     public static class DIO {
-        public static final int HATCH_DETECTOR = 0;
+        public static final int HATCH_DETECTOR = 2;
 
         public static final int LEFT_INFRARED = 0;
         public static final int RIGHT_INFRARED = 1;
@@ -44,8 +44,8 @@ public class RobotMap {
         public static final int RAISE_MECHANSIM = 3;
         
 
-        public static final int INTAKE_EXTEND = 0;
-        public static final int INTAKE_RETRACT = 1;
+        public static final int INTAKE_EXTEND = 4;
+        public static final int INTAKE_RETRACT = 5;
 
     }
   
