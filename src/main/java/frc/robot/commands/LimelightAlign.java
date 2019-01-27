@@ -21,7 +21,7 @@ public class LimelightAlign extends Command {
 
     double angleModifier = .05;
 
-    public void LimelightAlign() {
+    public LimelightAlign() {
         requires(drivetrain);
         requires(limelight);
     }

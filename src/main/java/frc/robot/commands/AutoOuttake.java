@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.SideOuttake;
 
 import static frc.robot.Robot.sideouttake;
@@ -23,7 +24,7 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        Robot.drivetrain.driveClamped(.55, Robot.oi.lowerChassis.getRawAxis(4));
+        Robot.drivetrain.driveClamped(.55, RobotMap.XBOX.STICK_R_X_AXIS);
         if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
             Robot.drivetrain.stop();
             if (sideouttake.getRightInfrared()) {
