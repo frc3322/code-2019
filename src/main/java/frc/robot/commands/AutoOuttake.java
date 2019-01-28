@@ -19,6 +19,8 @@ import static frc.robot.Robot.sideouttake;
  */
 public class AutoOuttake extends Command {
 
+    public boolean outtaking;
+
     public AutoOuttake() {
         requires(Robot.sideouttake);
     }
@@ -26,7 +28,10 @@ public class AutoOuttake extends Command {
     protected void execute() {
         Robot.drivetrain.driveClamped(.55, RobotMap.XBOX.STICK_R_X_AXIS);
         if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
-            Robot.drivetrain.stop();
+            outtaking = true;
+            while(outtaking) {
+                Robot.drivetrain.stop();
+            }
             if (sideouttake.getRightInfrared()) {
                 sideouttake.outtakeRight();
             } else {
@@ -39,6 +44,7 @@ public class AutoOuttake extends Command {
                 e.printStackTrace();
             }
             sideouttake.outtakeStop();
+            outtaking = false;
         }
     }
 
