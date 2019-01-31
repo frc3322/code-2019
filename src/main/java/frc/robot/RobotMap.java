@@ -62,7 +62,7 @@ public class RobotMap {
 
         public static final int INTAKE_EXTEND = 4;
         public static final int INTAKE_RETRACT = 5;
-
+ 
     }
   
     public static class XBOX {

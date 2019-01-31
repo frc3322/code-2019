@@ -16,7 +16,6 @@ import com.ctre.phoenix.motion.MotionProfileStatus;
 import com.ctre.phoenix.motion.TrajectoryPoint;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.sun.org.apache.xerces.internal.util.Status;
 
 //import frc.robot.PIDController;
 import frc.robot.RobotMap;
