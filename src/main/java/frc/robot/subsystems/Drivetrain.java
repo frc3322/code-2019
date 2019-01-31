@@ -76,9 +76,9 @@ public class Drivetrain extends Subsystem {
         return rightFrontEncoder.getPosition();
     }
 
-    public void drive(double leftSpeed, double rightSpeed){
+    public void drive(double speed, double rotation){
 
-        robotDrive.tankDrive(leftSpeed, rightSpeed);
+        robotDrive.arcadeDrive(speed, rotation);
 
     }
 

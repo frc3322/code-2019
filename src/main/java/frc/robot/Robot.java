@@ -24,13 +24,14 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
   
-    public static CargoManip cargoManip;
+    public static SideOuttake sideouttake;
     public static HatchManip hatchManip;
     public static Drivetrain drivetrain;
-    public static HotMess hotmess;
     public static Elevator elevator;
+    public static HotMess hotMess;
     public static OI oi;
     public static Limelight limelight;
+    public static WideIntake wideintake;
 
     Command m_autonomousCommand;
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -42,16 +43,19 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
 
-        cargoManip = new CargoManip();
+        sideouttake = new SideOuttake();
         hatchManip = new HatchManip();
         drivetrain = new Drivetrain();
-        hotmess = new HotMess();
+        hotMess = new HotMess();
         limelight = new Limelight();
         elevator = new Elevator();
+        wideintake = new WideIntake();
 
         oi = new OI();
 
-        m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+        hatchManip.grabberExtend();
+        hatchManip.hatchGrab();
+
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
     }

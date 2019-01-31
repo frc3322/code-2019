@@ -5,20 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.Command;
+
+import static frc.robot.Robot.hatchManip;
 
 /**
  * Add your docs here.
  */
-public class CargoManip extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+public class GrabHatch extends Command{
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+    public GrabHatch() {
+        requires(hatchManip);
+    }
+
+    @Override
+    protected void execute() {
+        hatchManip.grabHatch();
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return false;
+    }
 }

@@ -12,10 +12,19 @@ public class RobotMap {
     public static class CAN {
 
         //drivetrain
-        public static final int LEFT_FRONT_MOTOR = 0;
-        public static final int LEFT_BACK_MOTOR = 1;
-        public static final int RIGHT_FRONT_MOTOR = 2;
-        public static final int RIGHT_BACK_MOTOR = 3;
+        public static final int LEFT_FRONT_MOTOR = 36 ;
+        public static final int LEFT_BACK_MOTOR = 37;
+        public static final int RIGHT_FRONT_MOTOR = 35;
+        public static final int RIGHT_BACK_MOTOR = 34;
+
+        //hot mess
+        public static final int HOTMESS_MOTOR1 = 4;
+        public static final int HOTMESS_MOTOR2 = 5;
+
+        //cargo
+        public static final int L_SIDE_OUTTAKE = 0;
+        public static final int R_SIDE_OUTTAKE = 1;
+        public static final int INTAKE_MOTOR = 2;
 
         //elevator
         public static final int ELEVATOR_MOTOR_1 = 4;
@@ -24,6 +33,10 @@ public class RobotMap {
     }
 
     public static class DIO {
+        public static final int HATCH_DETECTOR = 2;
+
+        public static final int LEFT_INFRARED = 0;
+        public static final int RIGHT_INFRARED = 1;
 
       //elevator
         public static final int HALL_EFFECT_LEVEL_0 = 0;
@@ -40,6 +53,15 @@ public class RobotMap {
     }
 
     public static class PCM {
+        
+        public static final int GRAB_HATCH = 0;
+        public static final int RELESE_HATCH = 1;
+        public static final int LOWER_MECHANISM = 2;
+        public static final int RAISE_MECHANSIM = 3;
+        
+
+        public static final int INTAKE_EXTEND = 4;
+        public static final int INTAKE_RETRACT = 5;
 
     }
   
