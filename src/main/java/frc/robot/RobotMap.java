@@ -26,10 +26,10 @@ public class RobotMap {
     public static class DIO {
 
       //elevator
-    //   public static final int HALL_EFFECT_LEVEL_0 = 0;
-    //   public static final int HALL_EFFECT_LEVEL_1 = 1;
-    //   public static final int HALL_EFFECT_LEVEL_2 = 2;
-    //   public static final int HALL_EFFECT_LEVEL_3 = 3;
+        public static final int HALL_EFFECT_LEVEL_0 = 0;
+        public static final int HALL_EFFECT_LEVEL_1 = 1;
+        public static final int HALL_EFFECT_LEVEL_2 = 2;
+        public static final int HALL_EFFECT_LEVEL_3 = 3;
         public static final int ELEVATOR_M_ENCODER_1_A = 4;
         public static final int ELEVATOR_M_ENCODER_1_B = 5;
         public static final int ELEVATOR_M_ENCODER_2_A = 6;
