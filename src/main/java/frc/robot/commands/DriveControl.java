@@ -18,7 +18,7 @@ import static frc.robot.Robot.drivetrain;
  */
 public class DriveControl extends Command {
 
-    private final int LEFT_AXIS;
+    private final int SPEED_AXIS;
     private final int ROTATION_AXIS;
 
     private int pow = 1;
@@ -28,7 +28,7 @@ public class DriveControl extends Command {
 
         requires(drivetrain);
 
-        LEFT_AXIS = RobotMap.XBOX.STICK_L_Y_AXIS;
+        SPEED_AXIS = RobotMap.XBOX.STICK_L_Y_AXIS;
         ROTATION_AXIS = RobotMap.XBOX.STICK_R_X_AXIS;
 
     }
@@ -36,13 +36,13 @@ public class DriveControl extends Command {
     @Override
     protected void execute() {
 
-        double leftSpeed = Robot.oi.lowerChassis.getRawAxis(LEFT_AXIS);
-        double rightSpeed = Robot.oi.lowerChassis.getRawAxis(ROTATION_AXIS);
+        double speed = Robot.oi.lowerChassis.getRawAxis(SPEED_AXIS);
+        double turn = Robot.oi.lowerChassis.getRawAxis(ROTATION_AXIS);
         
-        leftSpeed = (Math.abs(leftSpeed) > deadZone) ? leftSpeed * Math.abs(Math.pow(leftSpeed, pow - 1)) : 0;
-        rightSpeed = (Math.abs(rightSpeed) > deadZone) ? rightSpeed * Math.abs(Math.pow(rightSpeed, pow - 1)) : 0;
+        speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, pow - 1)) : 0;
+        turn = (Math.abs(turn) > deadZone) ? turn * Math.abs(Math.pow(turn, pow - 1)) : 0;
 
-        drivetrain.driveClamped(leftSpeed, rightSpeed);
+        drivetrain.driveClamped(speed, turn);
         
     }
 
