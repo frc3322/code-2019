@@ -9,26 +9,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Limelight;
-
-import static frc.robot.Robot.drivetrain;
-import static frc.robot.Robot.limelight;
+import frc.robot.subsystems.SideOuttake;
 
 /**
  * Add your docs here.
  */
-public class LimelightAlign extends Command {
+public class RightOuttake extends Command {
 
-    double angleModifier = .05;
-
-    public LimelightAlign() {
-        requires(drivetrain);
-        requires(limelight);
-    }
-
-    @Override
     protected void execute() {
-        drivetrain.drive(Robot.oi.lowerChassis.getRawAxis(1), Limelight.getTx() * angleModifier);
+        Robot.sideouttake.outtakeRight();
+        try {
+            Thread.sleep(SideOuttake.outtakeTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Robot.sideouttake.outtakeStop();
     }
 
     @Override

@@ -10,8 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ElevatorControl;
-import frc.robot.commands.LimelightAlign;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -38,8 +37,12 @@ public class OI {
 
         bumper_left.whenPressed(new ElevatorControl(true));
         bumper_right.whenPressed(new ElevatorControl(false));
+        
+        button_a.whenPressed(new HotMessClimb());
+        button_a.whenReleased(new HotMessIdle());
+        button_b.whenPressed(new HotMessForceClimb());
+        button_b.whenReleased(new HotMessIdle());
 
     }
 
-  
 }

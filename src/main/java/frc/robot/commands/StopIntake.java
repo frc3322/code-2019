@@ -9,26 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Limelight;
-
-import static frc.robot.Robot.drivetrain;
-import static frc.robot.Robot.limelight;
 
 /**
  * Add your docs here.
  */
-public class LimelightAlign extends Command {
-
-    double angleModifier = .05;
-
-    public LimelightAlign() {
-        requires(drivetrain);
-        requires(limelight);
-    }
+public class StopIntake extends Command{
 
     @Override
     protected void execute() {
-        drivetrain.drive(Robot.oi.lowerChassis.getRawAxis(1), Limelight.getTx() * angleModifier);
+        Robot.wideintake.intakeStop();
     }
 
     @Override

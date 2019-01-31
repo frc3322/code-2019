@@ -8,19 +8,70 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
- * Add your docs here.
+ * code for hatch manipulation
  */
 public class HatchManip extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
-  
+    DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
+    DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELESE_HATCH);
+    DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+
+    
+    public void grabHatch() {
+        SmartDashboard.putBoolean("hatchGrabberActivated", hatchGrabberActivated());
+        if(hatchGrabberActivated()) {
+            hatchRelease();
+        }else{
+            hatchGrab();
+        }
+    }
+
+    public void extendGrabber() {
+        SmartDashboard.putBoolean("hatchGrabberExtended", hatchGrabberExtended());
+        if(hatchGrabberActivated()) {
+            grabberRetract();
+        }else{
+            grabberExtend();
+        }
+    }
+
+    public void hatchGrab() {
+        hatchGrabber.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void hatchRelease() {
+        hatchGrabber.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void grabberExtend() {
+        grabberExtender.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void grabberRetract() {
+        grabberExtender.set(DoubleSolenoid.Value.kReverse);
+    }
+    
+    public boolean hatchGrabberActivated() {
+        return hatchGrabber.get() == DoubleSolenoid.Value.kForward;
+    }
+
+    public boolean hatchGrabberExtended() {
+        return grabberExtender.get() == DoubleSolenoid.Value.kForward;
+    }
+
+    public boolean hatchIsGrabbed() {
+        return hatchDetector.get();
+    }
+
+    @Override
+    public void initDefaultCommand() {
+        // setDefaultCommand(new MySpecialCommand());
+    }
 }
