@@ -58,6 +58,12 @@ public class Drivetrain extends Subsystem {
 
         robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
+        leftBackMotor.follow(leftFrontMotor);
+        rightBackMotor.follow(rightFrontMotor);
+
+        leftFrontMotor.setRampRate(.1);
+        rightFrontMotor.setRampRate(.1);
+
     }
 
     public double getLeftBackEncoder() {
