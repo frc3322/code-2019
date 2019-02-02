@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
     public static OI oi;
     public static Limelight limelight;
     public static WideIntake wideintake;
+    public static Compressor compressor;
 
     Command m_autonomousCommand;
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot {
         hotMess = new HotMess();
         limelight = new Limelight();
         wideintake = new WideIntake();
+        compressor = new Compressor(4);
 
         oi = new OI();
 
