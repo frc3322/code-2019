@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
         hotMess = new HotMess();
         limelight = new Limelight();
         wideintake = new WideIntake();
-        compressor = new Compressor(4);
+        compressor = new Compressor(3);
 
         oi = new OI();
 
@@ -140,7 +140,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-
+        /*
         SmartDashboard.putNumber("Left Back Encoder", drivetrain.getEncoder(0));
         SmartDashboard.putNumber("Right Back Encoder", drivetrain.getEncoder(1));
         SmartDashboard.putNumber("Left Front Encoder", drivetrain.getEncoder(2));
@@ -170,6 +170,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Right Back Output Current", drivetrain.getOutputCurrent(1));
         SmartDashboard.putNumber("Left Front Output Current", drivetrain.getOutputCurrent(2));
         SmartDashboard.putNumber("Right Front Output Current", drivetrain.getOutputCurrent(3));
+        */
     }
 
     /**

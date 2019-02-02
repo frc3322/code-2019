@@ -61,13 +61,13 @@ public class Drivetrain extends Subsystem {
         SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftBackMotor, leftFrontMotor);
         SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightBackMotor, rightFrontMotor);
 
-        robotDrive = new DifferentialDrive(leftGroup, rightGroup);
+        robotDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
 
         leftBackMotor.follow(leftFrontMotor);
         rightBackMotor.follow(rightFrontMotor);
 
-        leftFrontMotor.setRampRate(.1);
-        rightFrontMotor.setRampRate(.1);
+        leftFrontMotor.setRampRate(.5);
+        rightFrontMotor.setRampRate(.5);
 
     }
 
