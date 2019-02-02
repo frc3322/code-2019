@@ -24,6 +24,8 @@ public class DriveControl extends Command {
     private int pow = 1;
     private double deadZone = 0.1;
 
+    private double maxSpeed = .2;
+
     public DriveControl() {
 
         requires(drivetrain);
@@ -41,6 +43,10 @@ public class DriveControl extends Command {
         
         speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, pow - 1)) : 0;
         turn = (Math.abs(turn) > deadZone) ? turn * Math.abs(Math.pow(turn, pow - 1)) : 0;
+
+        if(speed > maxSpeed) {
+            speed = maxSpeed;
+        }
 
         drivetrain.driveClamped(speed, turn);
         

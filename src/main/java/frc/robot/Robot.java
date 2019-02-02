@@ -141,10 +141,35 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
 
-        SmartDashboard.putNumber("Left Back Encoder", drivetrain.getLeftBackEncoder());
-        SmartDashboard.putNumber("Left Front Encoder", drivetrain.getLeftFrontEncoder());
-        SmartDashboard.putNumber("Right Back Encoder", drivetrain.getRightBackEncoder());
-        SmartDashboard.putNumber("Right Front Encoder", drivetrain.getRightFrontEncoder());
+        SmartDashboard.putNumber("Left Back Encoder", drivetrain.getEncoder(0));
+        SmartDashboard.putNumber("Right Back Encoder", drivetrain.getEncoder(1));
+        SmartDashboard.putNumber("Left Front Encoder", drivetrain.getEncoder(2));
+        SmartDashboard.putNumber("Right Front Encoder", drivetrain.getEncoder(3));
+
+        SmartDashboard.putNumber("Left Back Velocity", drivetrain.getVelocity(0));
+        SmartDashboard.putNumber("Right Back Velocity", drivetrain.getVelocity(1));
+        SmartDashboard.putNumber("Left Front Velocity", drivetrain.getVelocity(2));
+        SmartDashboard.putNumber("Right Front Velocity", drivetrain.getVelocity(3));
+
+        SmartDashboard.putNumber("Left Back Motor Heat", drivetrain.getMotorHeat(0));
+        SmartDashboard.putNumber("Right Back Motor Heat", drivetrain.getMotorHeat(1));
+        SmartDashboard.putNumber("Left Front Motor Heat", drivetrain.getMotorHeat(2));
+        SmartDashboard.putNumber("Right Front Motor Heat", drivetrain.getMotorHeat(3));
+
+        SmartDashboard.putNumber("Left Back Encoder", drivetrain.getEncoder(0));
+        SmartDashboard.putNumber("Right Back Encoder", drivetrain.getEncoder(1));
+        SmartDashboard.putNumber("Left Front Encoder", drivetrain.getEncoder(2));
+        SmartDashboard.putNumber("Right Front Encoder", drivetrain.getEncoder(3));
+
+        SmartDashboard.putNumber("Left Back Voltage", drivetrain.getVoltage(0));
+        SmartDashboard.putNumber("Right Back Voltage", drivetrain.getVoltage(1));
+        SmartDashboard.putNumber("Left Front Voltage", drivetrain.getVoltage(2));
+        SmartDashboard.putNumber("Right Front Voltage", drivetrain.getVoltage(3));
+
+        SmartDashboard.putNumber("Left Back Output Current", drivetrain.getOutputCurrent(0));
+        SmartDashboard.putNumber("Right Back Output Current", drivetrain.getOutputCurrent(1));
+        SmartDashboard.putNumber("Left Front Output Current", drivetrain.getOutputCurrent(2));
+        SmartDashboard.putNumber("Right Front Output Current", drivetrain.getOutputCurrent(3));
     }
 
     /**

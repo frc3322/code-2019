@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
 
@@ -37,6 +38,10 @@ public class Drivetrain extends Subsystem {
             previousTurn = 0,
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
+
+    private CANSparkMax[] motors = {leftBackMotor, rightBackMotor, leftFrontMotor, rightFrontMotor};
+
+    private CANEncoder[] encoders = {leftBackEncoder, rightBackEncoder, leftFrontEncoder, rightFrontEncoder};
 
     public Drivetrain() {
 
@@ -66,20 +71,24 @@ public class Drivetrain extends Subsystem {
 
     }
 
-    public double getLeftBackEncoder() {
-        return leftBackEncoder.getPosition();
+    public double getVoltage(int n) {
+        return motors[n].getBusVoltage();
     }
 
-    public double getLeftFrontEncoder() {
-        return leftFrontEncoder.getPosition();
+    public double getMotorHeat(int n) {
+        return motors[n].getMotorTemperature();
     }
 
-    public double getRightBackEncoder() {
-        return rightBackEncoder.getPosition();
+    public double getOutputCurrent(int n) {
+        return motors[n].getOutputCurrent();
     }
 
-    public double getRightFrontEncoder() {
-        return rightFrontEncoder.getPosition();
+    public double getEncoder(int n) {
+        return encoders[n].getPosition();
+    }
+
+    public double getVelocity(int n) {
+        return encoders[n].getVelocity();
     }
 
     public void drive(double speed, double rotation){
