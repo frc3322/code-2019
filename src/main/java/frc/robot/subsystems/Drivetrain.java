@@ -27,17 +27,12 @@ public class Drivetrain extends Subsystem {
   
     private DifferentialDrive robotDrive;
 
-    private CANSparkMax leftBackMotor,
-                         leftFrontMotor,
-                         rightBackMotor,
-                         rightFrontMotor;
-
-    private CANEncoder leftBackEncoder,
-                        leftFrontEncoder,
-                        rightBackEncoder,
-                        rightFrontEncoder;
-
     private DoubleSolenoid shiftSolenoid;
+
+    private final int LEFT_BACK = 0,
+                      LEFT_FRONT = 1,
+                      RIGHT_BACK = 2,
+                      RIGHT_FRONT = 3;
 
     double previousThrottle = 0,
             previousTurn = 0,
@@ -46,40 +41,40 @@ public class Drivetrain extends Subsystem {
 
     public int highThreshold, lowThreshold;
 
-    private CANSparkMax[] motors = {leftBackMotor, rightBackMotor, leftFrontMotor, rightFrontMotor};
+    private CANSparkMax[] motors = new CANSparkMax[4];
 
-    private CANEncoder[] encoders = {leftBackEncoder, rightBackEncoder, leftFrontEncoder, rightFrontEncoder};
+    private CANEncoder[] encoders = new CANEncoder[4];
 
     private boolean straightModeStart, straightModeRun;
     private double runDelay;
 
     public Drivetrain() {
 
-        leftBackMotor = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
-        leftFrontMotor = new CANSparkMax(RobotMap.CAN.LEFT_FRONT_MOTOR, MotorType.kBrushless);
-        rightBackMotor = new CANSparkMax(RobotMap.CAN.RIGHT_BACK_MOTOR, MotorType.kBrushless);
-        rightFrontMotor = new CANSparkMax(RobotMap.CAN.RIGHT_FRONT_MOTOR, MotorType.kBrushless);
+        motors[LEFT_BACK] = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
+        motors[LEFT_FRONT] = new CANSparkMax(RobotMap.CAN.LEFT_FRONT_MOTOR, MotorType.kBrushless);
+        motors[RIGHT_BACK] = new CANSparkMax(RobotMap.CAN.RIGHT_BACK_MOTOR, MotorType.kBrushless);
+        motors[RIGHT_FRONT] = new CANSparkMax(RobotMap.CAN.RIGHT_FRONT_MOTOR, MotorType.kBrushless);
 
-        leftBackEncoder = leftBackMotor.getEncoder();
-        leftFrontEncoder = leftFrontMotor.getEncoder();
-        rightBackEncoder = rightBackMotor.getEncoder();
-        rightFrontEncoder = rightFrontMotor.getEncoder();
+        encoders[LEFT_BACK] = motors[LEFT_BACK].getEncoder();
+        encoders[LEFT_FRONT] = motors[LEFT_FRONT].getEncoder();
+        encoders[RIGHT_BACK] = motors[RIGHT_BACK].getEncoder();
+        encoders[RIGHT_FRONT] = motors[RIGHT_FRONT].getEncoder();
 
         shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
 
-        double leftEncoders = (leftBackEncoder.getPosition() + leftFrontEncoder.getPosition())/2;
-        double rightEncoders = (rightBackEncoder.getPosition() + rightFrontEncoder.getPosition())/2;
+        double leftEncoders = (encoders[LEFT_BACK].getPosition() + encoders[LEFT_FRONT].getPosition())/2;
+        double rightEncoders = (encoders[RIGHT_BACK].getPosition() + encoders[RIGHT_FRONT].getPosition())/2;
 
-        SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftBackMotor, leftFrontMotor);
-        SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightBackMotor, rightFrontMotor);
+        SpeedControllerGroup leftGroup = new SpeedControllerGroup(motors[LEFT_BACK], motors[LEFT_FRONT]);
+        SpeedControllerGroup rightGroup = new SpeedControllerGroup(motors[RIGHT_BACK], motors[RIGHT_FRONT]);
 
-        robotDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+        robotDrive = new DifferentialDrive(motors[LEFT_FRONT], motors[RIGHT_FRONT]);
 
-        leftBackMotor.follow(leftFrontMotor);
-        rightBackMotor.follow(rightFrontMotor);
+        motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
+        motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        leftFrontMotor.setRampRate(.5);
-        rightFrontMotor.setRampRate(.5);
+        motors[LEFT_FRONT].setRampRate(.5);
+        motors[RIGHT_FRONT].setRampRate(.5);
 
         straightModeStart = false;
         straightModeRun = false;
@@ -188,11 +183,11 @@ public class Drivetrain extends Subsystem {
         shiftSolenoid.set(Value.kReverse);
     }
 
-    public double wheelRPM(CANEncoder e) {
+    public double wheelRPM(int n) {
         if(isHighGear()) {
-            return leftFrontEncoder.getVelocity() / 5.1;
+            return encoders[n].getVelocity() / 5.1;
         } else {
-            return leftFrontEncoder.getVelocity() / 11.03;
+            return encoders[n].getVelocity() / 11.03;
         }
     }
 
@@ -210,11 +205,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public void autoShift() {
-        if (wheelRPM(leftFrontEncoder) > highThreshold && wheelRPM(rightFrontEncoder) > highThreshold) {
+        if (wheelRPM(LEFT_FRONT) > highThreshold && wheelRPM(RIGHT_FRONT) > highThreshold) {
             if (!isHighGear()) {
                 shiftHigh();
             }
-        } else if (wheelRPM(leftFrontEncoder) < lowThreshold && wheelRPM(rightFrontEncoder) < lowThreshold) {
+        } else if (wheelRPM(LEFT_FRONT) < lowThreshold && wheelRPM(RIGHT_FRONT) < lowThreshold) {
             if (isHighGear()) {
                 shiftLow();
             }
