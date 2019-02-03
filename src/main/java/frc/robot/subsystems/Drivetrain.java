@@ -44,6 +44,8 @@ public class Drivetrain extends Subsystem {
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
 
+    public int highThreshold, lowThreshold;
+
     private CANSparkMax[] motors = {leftBackMotor, rightBackMotor, leftFrontMotor, rightFrontMotor};
 
     private CANEncoder[] encoders = {leftBackEncoder, rightBackEncoder, leftFrontEncoder, rightFrontEncoder};
@@ -132,9 +134,25 @@ public class Drivetrain extends Subsystem {
 
     public void toggleShift() {
         if(isHighGear()) {
-            shiftSolenoid.set(Value.kReverse);
+            shiftLow();
         } else {
-            shiftSolenoid.set(Value.kForward);
+            shiftHigh();
+        }
+    }
+
+    public void shiftHigh() {
+        shiftSolenoid.set(Value.kForward);
+    }
+
+    public void shiftLow() {
+        shiftSolenoid.set(Value.kReverse);
+    }
+
+    public double wheelRPM(CANEncoder e) {
+        if(isHighGear()) {
+            return leftFrontEncoder.getVelocity() / 5.1;
+        } else {
+            return leftFrontEncoder.getVelocity() / 11.03;
         }
     }
 
@@ -149,6 +167,19 @@ public class Drivetrain extends Subsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DriveControl());
+    }
+
+    public void autoShift() {
+        if (wheelRPM(leftFrontEncoder) > highThreshold && wheelRPM(rightFrontEncoder) > highThreshold) {
+            if (!isHighGear()) {
+                shiftHigh();
+            }
+        } else if (wheelRPM(leftFrontEncoder) < lowThreshold && wheelRPM(rightFrontEncoder) < lowThreshold) {
+            if (isHighGear()) {
+                shiftLow();
+            }
+        }
+        
     }
 
 }
