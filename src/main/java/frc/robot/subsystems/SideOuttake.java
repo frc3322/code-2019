@@ -36,13 +36,13 @@ public class SideOuttake extends Subsystem{
     }
 
     public void outtakeRight() {
-        leftOuttake.set(0);
-        rightOuttake.set(1);
+        leftOuttake.set(-.3);
+        rightOuttake.set(.7);
     }
 
     public void outtakeLeft() {
-        rightOuttake.set(0);
-        leftOuttake.set(1);
+        rightOuttake.set(-.3);
+        leftOuttake.set(.7);
     }
 
     public void outtakeStop() {
@@ -51,8 +51,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void intakeCarriage() {
-        leftOuttake.set(1);
-        rightOuttake.set(-1);
+        leftOuttake.set(.5);
+        rightOuttake.set(-.5);
     }
 
     public boolean hasCargo() {
