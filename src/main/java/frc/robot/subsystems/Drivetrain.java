@@ -50,6 +50,9 @@ public class Drivetrain extends Subsystem {
 
     private CANEncoder[] encoders = {leftBackEncoder, rightBackEncoder, leftFrontEncoder, rightFrontEncoder};
 
+    private boolean straightModeStart, straightModeRun;
+    private double runDelay;
+
     public Drivetrain() {
 
         leftBackMotor = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
@@ -77,6 +80,9 @@ public class Drivetrain extends Subsystem {
 
         leftFrontMotor.setRampRate(.5);
         rightFrontMotor.setRampRate(.5);
+
+        straightModeStart = false;
+        straightModeRun = false;
 
     }
 
@@ -126,6 +132,40 @@ public class Drivetrain extends Subsystem {
 
         previousThrottle = throttle;
         previousTurn = turn;
+    }
+
+    public void driveStraight(double speed, double rotation){
+
+        if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){
+            if (!straightModeStart) {
+                straightModeStart = true;
+
+                runDelay = System.currentTimeMillis();
+            }
+
+            // Wait a bit before setting our desired angle
+            if (System.currentTimeMillis() - runDelay > 250 && !straightModeRun) {
+                //initialize pid code here
+                straightModeRun = true;
+            }
+
+            if (straightModeRun) {
+                //pid command for driving straight
+                drive(speed, 0);
+            } else {
+                drive(speed, rotation);
+            }
+
+
+        }else{
+
+            straightModeStart = false;
+            straightModeRun = false;
+
+            drive(speed, rotation);
+
+        }
+
     }
 
     public void stop(){
