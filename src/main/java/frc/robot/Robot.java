@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
     public static SideOuttake sideouttake;
     public static HatchManip hatchManip;
     public static Drivetrain drivetrain;
+    public static Elevator elevator;
     public static HotMess hotMess;
     public static OI oi;
     public static Limelight limelight;
@@ -49,6 +50,7 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain();
         hotMess = new HotMess();
         limelight = new Limelight();
+        elevator = new Elevator();
         wideintake = new WideIntake();
         compressor = new Compressor(RobotMap.PCM.PCM_ID);
 
