@@ -49,7 +49,7 @@ public class Elevator extends PIDSubsystem {
     DigitalInput hallEffectLevel3;
 
     public Elevator() {
-        super("Elevator PID", 0, 0, 0);
+        super("Elevator PID", 0, 0, 0, 0);
         setAbsoluteTolerance(0.05);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
@@ -79,6 +79,22 @@ public class Elevator extends PIDSubsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new ElevatorControl()); // run elevator command in Commands
+    }
+
+    public boolean atLevel0() {
+        return hallEffectLevel0.get();
+    }
+
+    public boolean atLevel1() {
+        return hallEffectLevel1.get();
+    }
+
+    public boolean atLevel2() {
+        return hallEffectLevel2.get();
+    }
+
+    public boolean atLevel3() {
+        return hallEffectLevel3.get();
     }
 
     public void moveUp() { // move at current upSpeed
