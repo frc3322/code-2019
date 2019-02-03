@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,6 +22,7 @@ public class WideIntake extends Subsystem{
 
     WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.CAN.INTAKE_MOTOR);
     DoubleSolenoid intakeExtender = new DoubleSolenoid(RobotMap.PCM.INTAKE_EXTEND, RobotMap.PCM.INTAKE_RETRACT);
+    DigitalInput cargoDetector = new DigitalInput(RobotMap.DIO.CARGO_DETECTOR_INTAKE);
 
     public WideIntake() {
 
@@ -52,6 +54,10 @@ public class WideIntake extends Subsystem{
 
     public boolean isIntakeExtended() {
         return intakeExtender.get() == Value.kForward;
+    }
+
+    public boolean hasCargo() {
+        return cargoDetector.get();
     }
 
     @Override

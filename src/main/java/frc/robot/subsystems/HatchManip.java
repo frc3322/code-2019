@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  */
 public class HatchManip extends Subsystem {
 
-    DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
     DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELEASE_HATCH);
     DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
     
@@ -62,10 +61,6 @@ public class HatchManip extends Subsystem {
 
     public boolean hatchGrabberExtended() {
         return grabberExtender.get() == DoubleSolenoid.Value.kForward;
-    }
-
-    public boolean hatchIsGrabbed() {
-        return hatchDetector.get();
     }
 
     @Override

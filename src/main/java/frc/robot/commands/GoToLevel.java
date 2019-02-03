@@ -13,34 +13,22 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeCargo extends Command{
+public class GoToLevel extends Command{
 
-    public IntakeCargo() {
-        requires(Robot.wideintake);
-        requires(Robot.sideouttake);
+    public int level;
+
+    public GoToLevel(int level) {
+        requires(Robot.elevator);
+        this.level = level;
     }
 
     @Override
     protected void execute() {
-        if(!Robot.wideintake.hasCargo() && !Robot.sideouttake.hasCargo() && Robot.elevator.atLevel0()) {
-            Robot.wideintake.intakeStart();
-            Robot.sideouttake.intakeCarriage();
-        } else if(Robot.wideintake.hasCargo() && !Robot.elevator.atLevel0()) {
-            Robot.wideintake.intakeStop();
-            Robot.elevator.goToLevel(0);
-            Robot.sideouttake.intakeCarriage();
-        }
+        Robot.elevator.goToLevel(level);
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.sideouttake.hasCargo();
+        return false;
     }
-
-    @Override
-    protected void end() {
-        Robot.wideintake.intakeStop();
-        Robot.sideouttake.outtakeStop();
-    }
-
 }

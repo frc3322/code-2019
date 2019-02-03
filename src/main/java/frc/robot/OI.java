@@ -36,6 +36,9 @@ public class OI {
 
         bumper_right.whileHeld(new LimelightAlign());
 
+        bumper_left.whenPressed(new ElevatorControl(true));
+        bumper_right.whenPressed(new ElevatorControl(false));
+        
         button_a.whenPressed(new HotMessClimb());
         button_a.whenReleased(new HotMessIdle());
         button_b.whenPressed(new HotMessForceClimb());
