@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
         hotMess = new HotMess();
         limelight = new Limelight();
         wideintake = new WideIntake();
-        compressor = new Compressor(3);
+        compressor = new Compressor(RobotMap.PCM.PCM_ID);
 
         oi = new OI();
 

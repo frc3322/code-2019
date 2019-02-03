@@ -37,6 +37,8 @@ public class RobotMap {
     }
 
     public static class PCM {
+
+        public static final int PCM_ID = 3;
         
         public static final int GRAB_HATCH = 0;
         public static final int RELESE_HATCH = 1;
