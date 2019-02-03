@@ -65,8 +65,8 @@ public class RobotMap {
         public static final int RELEASE_HATCH = 5;
         
 
-        public static final int INTAKE_EXTEND = 4;
-        public static final int INTAKE_RETRACT = 5;
+        public static final int INTAKE_EXTEND = 6;
+        public static final int INTAKE_RETRACT = 7;
  
     }
   

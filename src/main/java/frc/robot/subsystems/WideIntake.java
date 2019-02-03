@@ -21,9 +21,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class WideIntake extends Subsystem{
 
     WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.CAN.INTAKE_MOTOR);
-    DoubleSolenoid intakeExtender = new DoubleSolenoid(RobotMap.PCM.INTAKE_EXTEND, RobotMap.PCM.INTAKE_RETRACT);
+    DoubleSolenoid intakeExtender = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.INTAKE_EXTEND, RobotMap.PCM.INTAKE_RETRACT);
     DigitalInput cargoDetector = new DigitalInput(RobotMap.DIO.CARGO_DETECTOR_INTAKE);
-
     public WideIntake() {
 
     }
