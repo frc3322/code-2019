@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 public class HatchManip extends Subsystem {
 
     DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
-    DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELESE_HATCH);
+    DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELEASE_HATCH);
     DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
 
 

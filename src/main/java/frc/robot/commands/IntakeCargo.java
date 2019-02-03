@@ -9,11 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.WideIntake;
 
 /**
  * Add your docs here.
  */
 public class IntakeCargo extends Command{
+
+    public IntakeCargo() {
+        requires(Robot.wideintake);
+        requires(Robot.sideouttake);
+    }
 
     @Override
     protected void execute() {

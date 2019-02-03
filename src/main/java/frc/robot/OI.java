@@ -30,6 +30,7 @@ public class OI {
     Button bumper_right = new JoystickButton(upperChassis, RobotMap.XBOX.BUMPER_RIGHT);
     Button button_back = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_BACK);
     Button button_start = new JoystickButton(upperChassis, RobotMap.XBOX.BUTTON_START);
+    Button left_stick = new JoystickButton(lowerChassis, RobotMap.XBOX.STICK_LEFT);
 
     public OI(){
 
@@ -39,6 +40,8 @@ public class OI {
         button_a.whenReleased(new HotMessIdle());
         button_b.whenPressed(new HotMessForceClimb());
         button_b.whenReleased(new HotMessIdle());
+
+        left_stick.whenPressed(new ToggleShift());
 
     }
 

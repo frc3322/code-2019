@@ -38,10 +38,12 @@ public class RobotMap {
 
     public static class PCM {
         
-        public static final int GRAB_HATCH = 0;
-        public static final int RELESE_HATCH = 1;
+        public static final int SHIFT_GEAR_1 = 0;
+        public static final int SHIFT_GEAR_2 = 1;
         public static final int LOWER_MECHANISM = 2;
         public static final int RAISE_MECHANSIM = 3;
+        public static final int GRAB_HATCH = 4;
+        public static final int RELEASE_HATCH = 5;
         
 
         public static final int INTAKE_EXTEND = 4;

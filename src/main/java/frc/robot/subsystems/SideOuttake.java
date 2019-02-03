@@ -29,23 +29,29 @@ public class SideOuttake extends Subsystem{
     DigitalInput leftInfrared = new DigitalInput(RobotMap.DIO.LEFT_INFRARED);
     DigitalInput rightInfrared = new DigitalInput(RobotMap.DIO.RIGHT_INFRARED);
 
-    SpeedControllerGroup outtake = new SpeedControllerGroup(leftOuttake, rightOuttake);
-
     public SideOuttake() {
         SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
         SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
     }
 
     public void outtakeRight() {
-        outtake.set(1);
+        leftOuttake.set(0);
+        rightOuttake.set(1);
     }
 
     public void outtakeLeft() {
-        outtake.set(-1);
+        rightOuttake.set(0);
+        leftOuttake.set(1);
     }
 
     public void outtakeStop() {
-        outtake.set(0);
+        leftOuttake.set(0);
+        rightOuttake.set(0);
+    }
+
+    public void intakeCarriage() {
+        leftOuttake.set(1);
+        rightOuttake.set(-1);
     }
 
     public boolean getRightInfrared() {

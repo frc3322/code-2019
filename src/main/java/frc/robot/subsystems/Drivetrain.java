@@ -10,7 +10,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +37,8 @@ public class Drivetrain extends Subsystem {
                         rightBackEncoder,
                         rightFrontEncoder;
 
+    private DoubleSolenoid shiftSolenoid;
+
     double previousThrottle = 0,
             previousTurn = 0,
             maxTurnDelta = .05,
@@ -54,6 +59,8 @@ public class Drivetrain extends Subsystem {
         leftFrontEncoder = leftFrontMotor.getEncoder();
         rightBackEncoder = rightBackMotor.getEncoder();
         rightFrontEncoder = rightFrontMotor.getEncoder();
+
+        shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
 
         double leftEncoders = (leftBackEncoder.getPosition() + leftFrontEncoder.getPosition())/2;
         double rightEncoders = (rightBackEncoder.getPosition() + rightFrontEncoder.getPosition())/2;
@@ -121,6 +128,22 @@ public class Drivetrain extends Subsystem {
 
     public void stop(){
         drive(0, 0);
+    }
+
+    public void toggleShift() {
+        if(isHighGear()) {
+            shiftSolenoid.set(Value.kReverse);
+        } else {
+            shiftSolenoid.set(Value.kForward);
+        }
+    }
+
+    public boolean isHighGear() {
+        return shiftSolenoid.get() == Value.kForward;
+    }
+
+    public boolean isLowGear() {
+        return shiftSolenoid.get() == Value.kReverse;
     }
 
     @Override
