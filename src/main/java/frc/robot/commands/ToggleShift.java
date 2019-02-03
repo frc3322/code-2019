@@ -20,12 +20,12 @@ public class ToggleShift extends Command{
     }
 
     @Override
-    protected void execute() {
+    protected void initialize() {
         Robot.drivetrain.toggleShift();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 }

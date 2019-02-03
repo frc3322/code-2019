@@ -16,12 +16,12 @@ import frc.robot.Robot;
 public class ToggleIntake extends Command{
 
     @Override
-    protected void execute() {
+    protected void initialize() {
         Robot.wideintake.toggleIntake();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 }

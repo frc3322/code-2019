@@ -21,7 +21,7 @@ public class GrabHatch extends Command{
     }
 
     @Override
-    protected void execute() {
+    protected void initialize() {
         hatchManip.grabHatch();
     }
 
