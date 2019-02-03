@@ -60,7 +60,7 @@ public class Drivetrain extends Subsystem {
         rightBackEncoder = rightBackMotor.getEncoder();
         rightFrontEncoder = rightFrontMotor.getEncoder();
 
-        shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
+        shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
 
         double leftEncoders = (leftBackEncoder.getPosition() + leftFrontEncoder.getPosition())/2;
         double rightEncoders = (rightBackEncoder.getPosition() + rightFrontEncoder.getPosition())/2;
