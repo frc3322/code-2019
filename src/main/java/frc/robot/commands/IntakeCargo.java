@@ -13,7 +13,7 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class IntakeCargo extends Command{
+public class IntakeCargo extends Command {
 
     public IntakeCargo() {
         requires(Robot.wideintake);
@@ -22,13 +22,19 @@ public class IntakeCargo extends Command{
 
     @Override
     protected void execute() {
-        if(!Robot.wideintake.hasCargo() && !Robot.sideouttake.hasCargo() && Robot.elevator.atLevel0()) {
+        if (!Robot.wideintake.hasCargo() && !Robot.sideouttake.hasCargo() && Robot.elevator.atLevel0()) {
             Robot.wideintake.intakeStart();
             Robot.sideouttake.intakeCarriage();
-        } else if(Robot.wideintake.hasCargo() && !Robot.elevator.atLevel0()) {
+        } else if (Robot.wideintake.hasCargo() && !Robot.elevator.atLevel0()) {
             Robot.wideintake.intakeStop();
             Robot.elevator.goToLevel(0);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Robot.sideouttake.intakeCarriage();
+            Robot.wideintake.intakeStart();
         }
     }
 

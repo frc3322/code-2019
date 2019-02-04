@@ -107,28 +107,6 @@ public class Drivetrain extends Subsystem {
 
     }
 
-    public void driveClamped(double throttle, double turn) {
-        double deltaThrottle = throttle - previousThrottle;
-        double deltaTurn = turn - previousTurn;
-
-        // Limit change in throttle value
-        // if current change in throttle value exceeds max, clamp it
-        if (Math.abs(deltaThrottle) > maxThrottleDelta && (previousThrottle / deltaThrottle) > 0) {
-            throttle = previousThrottle + ((deltaThrottle < 0)? -maxThrottleDelta : maxThrottleDelta);
-        }
-
-        // Limit change in turn value
-        // if current change in turn value exceeds max, clamp it
-        if(Math.abs(deltaTurn) > maxTurnDelta && (previousTurn / deltaTurn) > 0){
-            turn = previousTurn + ((deltaTurn < 0)? -maxTurnDelta : maxTurnDelta);
-        }
-
-        drive(throttle, turn);
-
-        previousThrottle = throttle;
-        previousTurn = turn;
-    }
-
     public void driveStraight(double speed, double rotation){
 
         if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){

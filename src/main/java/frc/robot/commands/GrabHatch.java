@@ -22,7 +22,11 @@ public class GrabHatch extends Command{
 
     @Override
     protected void initialize() {
-        hatchManip.grabHatch();
+        if(!hatchManip.hasHatch()) {
+            hatchManip.grabHatch();
+        } else {
+            hatchManip.toggleHatch();
+        }
     }
 
     @Override
