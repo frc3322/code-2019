@@ -39,18 +39,30 @@ public class HotMess extends Subsystem {
 
         motorGroup = new SpeedControllerGroup(motor1, motor2);
 
+        motor1.setInverted(true);
+
+        //motor1.setRampRate(0.5);
+        //motor2.setRampRate(0.5);
+
     }
 
-    public void climb(){
-
-        motorGroup.set(1);
-
+    public void climb(double speed){
+        if(speed >= .5) {
+            speed = .5;
+            motorGroup.set(speed);
+        } else {
+            motorGroup.set(speed);
+        }
     }
 
     public void stop(){
 
         motorGroup.set(0);
 
+    }
+
+    public void reverse() {
+        motorGroup.set(-.2);
     }
 
     public double getEncoderVal(){

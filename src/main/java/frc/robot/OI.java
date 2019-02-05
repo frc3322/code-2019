@@ -39,10 +39,12 @@ public class OI {
         bumper_left.whenPressed(new ElevatorControl(true));
         bumper_right.whenPressed(new ElevatorControl(false));
         
-        button_a.whenPressed(new HotMessClimb());
+        button_a.whileHeld(new HotMessClimb());
         button_a.whenReleased(new HotMessIdle());
-        button_b.whenPressed(new HotMessForceClimb());
-        button_b.whenReleased(new HotMessIdle());
+        //button_b.whenPressed(new HotMessForceClimb());
+        //button_b.whenReleased(new HotMessIdle());
+        button_x.whileHeld(new HotMessReverse());
+        button_x.whenReleased(new HotMessIdle());
 
         left_stick.whenPressed(new ToggleShift());
 

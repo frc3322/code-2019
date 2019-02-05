@@ -1,12 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.*;
 
 import static frc.robot.Robot.hotMess;
 
 public class HotMessClimb extends Command{
 
-    double stopVal = 100;
+    // double stopVal = 100;
 
     public HotMessClimb(){
         requires(hotMess);
@@ -14,12 +16,13 @@ public class HotMessClimb extends Command{
 
     @Override
     protected void execute() {
-        hotMess.climb();
+        hotMess.climb(.5);
+        //SmartDashboard.putNumber("HotMess Speed", RobotMap.XBOX)
     }
 
     @Override
     protected boolean isFinished() {
-        return hotMess.getEncoderVal() <= stopVal;
+        return false; //hotMess.getEncoderVal() <= stopVal;
     }
 
     @Override

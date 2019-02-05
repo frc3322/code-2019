@@ -12,7 +12,7 @@ public class HotMessForceClimb extends Command {
 
     @Override
     protected void execute() {
-        hotMess.climb();
+        hotMess.climb(.5);
     }
 
     @Override
