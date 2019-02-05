@@ -28,7 +28,10 @@ public class LimelightAlign extends Command {
 
     @Override
     protected void execute() {
-        drivetrain.drive(Robot.oi.lowerChassis.getRawAxis(1), Limelight.getTx() * angleModifier);
+        drivetrain.drive(Robot.oi.lowerChassis.getRawAxis(1) * .75, Limelight.getTx() * angleModifier);
+        if(Robot.hatchManip.hasHatch()) {
+            Robot.hatchManip.hatchGrab();
+        }
     }
 
     @Override

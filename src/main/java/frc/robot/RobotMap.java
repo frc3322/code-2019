@@ -36,6 +36,8 @@ public class RobotMap {
         public static final int CARGO_DETECTOR_INTAKE = 2;
         public static final int CARGO_DETECTOR_OUTTAKE = 3;
 
+        public static final int HATCH_DETECTOR = 4;
+
         public static final int LEFT_INFRARED = 0;
         public static final int RIGHT_INFRARED = 1;
 
