@@ -9,12 +9,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.WideIntake;
 
 /**
  * Add your docs here.
  */
-public class IntakeCargo extends Command{
+public class IntakeCargo extends Command {
 
     public IntakeCargo() {
         requires(Robot.wideintake);
@@ -23,12 +22,31 @@ public class IntakeCargo extends Command{
 
     @Override
     protected void execute() {
-        Robot.wideintake.intakeStart();
+        if (!Robot.wideintake.hasCargo() && !Robot.sideouttake.hasCargo() && Robot.elevator.atLevel0()) {
+            Robot.wideintake.intakeStart();
+            Robot.sideouttake.intakeCarriage();
+        } else if (Robot.wideintake.hasCargo() && !Robot.elevator.atLevel0()) {
+            Robot.wideintake.intakeStop();
+            Robot.elevator.goToLevel(0);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Robot.sideouttake.intakeCarriage();
+            Robot.wideintake.intakeStart();
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return Robot.sideouttake.hasCargo();
+    }
+
+    @Override
+    protected void end() {
+        Robot.wideintake.intakeStop();
+        Robot.sideouttake.outtakeStop();
     }
 
 }

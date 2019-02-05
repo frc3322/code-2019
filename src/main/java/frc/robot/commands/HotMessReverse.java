@@ -8,25 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import static frc.robot.Robot.hatchManip;
+import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class GrabHatch extends Command{
+public class HotMessReverse extends Command{
 
-    public GrabHatch() {
-        requires(hatchManip);
+    public HotMessReverse() {
+        requires(Robot.hotMess);
     }
 
     @Override
-    protected void initialize() {
-        if(!hatchManip.hasHatch()) {
-            hatchManip.grabHatch();
-        } else {
-            hatchManip.toggleHatch();
-        }
+    protected void execute() {
+        Robot.hotMess.reverse();
     }
 
     @Override

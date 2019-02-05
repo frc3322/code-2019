@@ -9,29 +9,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Limelight;
-
-import static frc.robot.Robot.drivetrain;
-import static frc.robot.Robot.limelight;
 
 /**
  * Add your docs here.
  */
-public class LimelightAlign extends Command {
+public class GoToLevel extends Command{
 
-    double angleModifier = .05;
+    public int level;
 
-    public LimelightAlign() {
-        requires(drivetrain);
-        requires(limelight);
+    public GoToLevel(int level) {
+        requires(Robot.elevator);
+        this.level = level;
     }
 
     @Override
     protected void execute() {
-        drivetrain.drive(Robot.oi.lowerChassis.getRawAxis(1) * .75, Limelight.getTx() * angleModifier);
-        if(Robot.hatchManip.hasHatch()) {
-            Robot.hatchManip.hatchGrab();
-        }
+        Robot.elevator.goToLevel(level);
     }
 
     @Override

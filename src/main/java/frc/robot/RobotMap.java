@@ -18,8 +18,8 @@ public class RobotMap {
         public static final int RIGHT_BACK_MOTOR = 34;
 
         //hot mess
-        public static final int HOTMESS_MOTOR1 = 4;
-        public static final int HOTMESS_MOTOR2 = 5;
+        public static final int HOTMESS_MOTOR1 = 39;
+        public static final int HOTMESS_MOTOR2 = 40;
 
         //cargo
         public static final int L_SIDE_OUTTAKE = 0;
@@ -27,28 +27,31 @@ public class RobotMap {
         public static final int INTAKE_MOTOR = 2;
 
         //elevator
-        public static final int ELEVATOR_MOTOR_1 = 4;
-        public static final int ELEVATOR_MOTOR_2 = 5;
+        public static final int ELEVATOR_MOTOR_1 = 24;
+        public static final int ELEVATOR_MOTOR_2 = 25;
 
     }
 
     public static class DIO {
-        public static final int HATCH_DETECTOR = 2;
+        public static final int CARGO_DETECTOR_INTAKE = 2;
+        public static final int CARGO_DETECTOR_OUTTAKE = 3;
+
+        public static final int HATCH_DETECTOR = 4;
 
         public static final int LEFT_INFRARED = 0;
         public static final int RIGHT_INFRARED = 1;
 
       //elevator
-        public static final int HALL_EFFECT_LEVEL_0 = 10;
-        public static final int HALL_EFFECT_LEVEL_1 = 11;
-        public static final int HALL_EFFECT_LEVEL_2 = 12;
-        public static final int HALL_EFFECT_LEVEL_3 = 13;
-        public static final int ELEVATOR_M_ENCODER_1_A = 14;
-        public static final int ELEVATOR_M_ENCODER_1_B = 15;
-        public static final int ELEVATOR_M_ENCODER_2_A = 16;
-        public static final int ELEVATOR_M_ENCODER_2_B = 17;
-        public static final int ELEVATOR_TRACK_ENCODER_A = 18;
-        public static final int ELEVATOR_TRACK_ENCODER_B = 19;
+        public static final int HALL_EFFECT_LEVEL_0 = 4;
+        public static final int HALL_EFFECT_LEVEL_1 = 5;
+        public static final int HALL_EFFECT_LEVEL_2 = 6;
+        public static final int HALL_EFFECT_LEVEL_3 = 7;
+        public static final int ELEVATOR_M_ENCODER_1_A = 8;
+        public static final int ELEVATOR_M_ENCODER_1_B = 9;
+        public static final int ELEVATOR_M_ENCODER_2_A = 10;
+        public static final int ELEVATOR_M_ENCODER_2_B = 11;
+        public static final int ELEVATOR_TRACK_ENCODER_A = 12;
+        public static final int ELEVATOR_TRACK_ENCODER_B = 13;
 
     }
 
@@ -64,8 +67,8 @@ public class RobotMap {
         public static final int RELEASE_HATCH = 5;
         
 
-        public static final int INTAKE_EXTEND = 4;
-        public static final int INTAKE_RETRACT = 5;
+        public static final int INTAKE_EXTEND = 6;
+        public static final int INTAKE_RETRACT = 7;
  
     }
   
