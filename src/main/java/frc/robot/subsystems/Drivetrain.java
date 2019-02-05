@@ -39,7 +39,14 @@ public class Drivetrain extends Subsystem {
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
 
-    public int highThreshold, lowThreshold;
+    public int minUpShiftThreshold = 450, 
+                maxUpShiftThreshold = 500, 
+                minDownShiftThreshold = 1000, 
+                maxDownShiftThreshold = 1200,
+                upShiftMidpoint = 470,
+                downShiftMidpoint = 900;
+
+    public boolean shiftPause;
 
     private CANSparkMax[] motors = new CANSparkMax[4];
 
@@ -79,6 +86,15 @@ public class Drivetrain extends Subsystem {
         straightModeStart = false;
         straightModeRun = false;
 
+    }
+
+    public void updateDrivetrain() {
+        SmartDashboard.putNumber("WheelRPM Left", wheelRPM(LEFT_FRONT));
+        SmartDashboard.putNumber("WheelRPM Right", wheelRPM(RIGHT_FRONT));
+        SmartDashboard.putBoolean("Is High Gear", isHighGear());
+        SmartDashboard.putBoolean("Is Low Gear", isLowGear());
+        SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
+        SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
     }
 
     public double getVoltage(int n) {
@@ -176,11 +192,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public void shiftHigh() {
-        shiftSolenoid.set(Value.kForward);
+        shiftSolenoid.set(Value.kReverse);
     }
 
     public void shiftLow() {
-        shiftSolenoid.set(Value.kReverse);
+        shiftSolenoid.set(Value.kForward);
     }
 
     public double wheelRPM(int n) {
@@ -192,11 +208,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public boolean isHighGear() {
-        return shiftSolenoid.get() == Value.kForward;
+        return shiftSolenoid.get() == Value.kReverse;
     }
 
     public boolean isLowGear() {
-        return shiftSolenoid.get() == Value.kReverse;
+        return shiftSolenoid.get() == Value.kForward;
     }
 
     @Override
@@ -205,13 +221,34 @@ public class Drivetrain extends Subsystem {
     }
 
     public void autoShift() {
-        if (wheelRPM(LEFT_FRONT) > highThreshold && wheelRPM(RIGHT_FRONT) > highThreshold) {
-            if (!isHighGear()) {
-                shiftHigh();
+        if(straightModeRun) {
+            if(Math.abs(wheelRPM(LEFT_FRONT)) > upShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) > upShiftMidpoint){
+                while((Math.abs(wheelRPM(LEFT_FRONT)) > minUpShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) > minUpShiftThreshold) && (Math.abs(wheelRPM(LEFT_FRONT)) < maxUpShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) < maxUpShiftThreshold)) {
+                    if (!isHighGear()) {
+                        shiftHigh();
+                        shiftPause = true;
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        shiftPause = false;
+                    }
+                } 
             }
-        } else if (wheelRPM(LEFT_FRONT) < lowThreshold && wheelRPM(RIGHT_FRONT) < lowThreshold) {
-            if (isHighGear()) {
-                shiftLow();
+            if(Math.abs(wheelRPM(LEFT_FRONT)) < downShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) < downShiftMidpoint) {
+                    while((Math.abs(wheelRPM(LEFT_FRONT)) < maxDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) < maxDownShiftThreshold) && (Math.abs(wheelRPM(LEFT_FRONT)) > minDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) > minDownShiftThreshold)) {
+                        if (isHighGear()) {
+                        shiftLow();
+                        shiftPause = true;
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        shiftPause = false;
+                    }
+                }
             }
         }
         
