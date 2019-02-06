@@ -215,8 +215,8 @@ public class Drivetrain extends Subsystem {
                 } 
             }
             if(Math.abs(wheelRPM(LEFT_FRONT)) < downShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) < downShiftMidpoint) {
-                    while((Math.abs(wheelRPM(LEFT_FRONT)) < maxDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) < maxDownShiftThreshold) && (Math.abs(wheelRPM(LEFT_FRONT)) > minDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) > minDownShiftThreshold)) {
-                        if (isHighGear()) {
+                while((Math.abs(wheelRPM(LEFT_FRONT)) < maxDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) < maxDownShiftThreshold) && (Math.abs(wheelRPM(LEFT_FRONT)) > minDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) > minDownShiftThreshold)) {
+                    if (isHighGear()) {
                         shiftLow();
                         shiftPause = true;
                         try {
