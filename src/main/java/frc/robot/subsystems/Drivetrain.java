@@ -17,13 +17,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
+
+import com.kauailabs.navx.frc.AHRS;
+
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
+
 
 /**
  * Code for drive train
  */
-public class Drivetrain extends Subsystem {
+public class Drivetrain extends PIDSubsystem {
   
     private DifferentialDrive robotDrive;
 
@@ -33,6 +38,10 @@ public class Drivetrain extends Subsystem {
                       LEFT_FRONT = 1,
                       RIGHT_BACK = 2,
                       RIGHT_FRONT = 3;
+
+    private static final double kP = 0,
+                         kI = 0,
+                         kD = 0;
 
     double previousThrottle = 0,
             previousTurn = 0,
@@ -46,6 +55,8 @@ public class Drivetrain extends Subsystem {
                 upShiftMidpoint = 470,
                 downShiftMidpoint = 900;
 
+    public AHRS navx;
+
     public boolean shiftPause;
 
     private CANSparkMax[] motors = new CANSparkMax[4];
@@ -56,6 +67,9 @@ public class Drivetrain extends Subsystem {
     private double runDelay;
 
     public Drivetrain() {
+        super("TurnToAnglePID", kP, kI, kD);
+
+        navx = new AHRS(SPI.Port.kMXP);
 
         motors[LEFT_BACK] = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
         motors[LEFT_FRONT] = new CANSparkMax(RobotMap.CAN.LEFT_FRONT_MOTOR, MotorType.kBrushless);
@@ -229,7 +243,21 @@ public class Drivetrain extends Subsystem {
                 }
             }
         }
-        
+       
     }
 
+    
+
+    @Override
+    public void setSetpoint(double setpoint) {
+        super.setSetpoint(setpoint);
+    }
+
+    public double returnPIDInput(){
+        return navx();
+    }
+
+    public void usePIDOutput(double output){
+        
+    }
 }
