@@ -143,7 +143,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
 
-        //drivetrain.autoShift();
+        drivetrain.autoShift();
         /*
         SmartDashboard.putNumber("Left Back Encoder", drivetrain.getEncoder(0));
         SmartDashboard.putNumber("Right Back Encoder", drivetrain.getEncoder(1));
