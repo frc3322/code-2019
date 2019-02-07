@@ -50,12 +50,8 @@ public class Drivetrain extends PIDSubsystem {
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
 
-    public int minUpShiftThreshold = 450, 
-                maxUpShiftThreshold = 500, 
-                minDownShiftThreshold = 1000, 
-                maxDownShiftThreshold = 1200,
-                upShiftMidpoint = 470,
-                downShiftMidpoint = 900;
+    public int upShiftMidpoint = 500,
+                downShiftMidpoint = 1000;
 
     public AHRS navx;
 
@@ -111,6 +107,7 @@ public class Drivetrain extends PIDSubsystem {
         SmartDashboard.putBoolean("Is Low Gear", isLowGear());
         SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
         SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
+        SmartDashboard.putBoolean("Straight Mode", straightModeRun);
     }
 
     public double getVoltage(int n) {
@@ -217,31 +214,13 @@ public class Drivetrain extends PIDSubsystem {
     public void autoShift() {
         if(straightModeRun) {
             if(Math.abs(wheelRPM(LEFT_FRONT)) > upShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) > upShiftMidpoint){
-                while((Math.abs(wheelRPM(LEFT_FRONT)) > minUpShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) > minUpShiftThreshold) && (Math.abs(wheelRPM(LEFT_FRONT)) < maxUpShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) < maxUpShiftThreshold)) {
-                    if (!isHighGear()) {
-                        shiftHigh();
-                        shiftPause = true;
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        shiftPause = false;
-                    }
-                } 
+                if (!isHighGear()) {
+                    shiftHigh();         
+                }
             }
             if(Math.abs(wheelRPM(LEFT_FRONT)) < downShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) < downShiftMidpoint) {
-                while((Math.abs(wheelRPM(LEFT_FRONT)) < maxDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) < maxDownShiftThreshold) && (Math.abs(wheelRPM(LEFT_FRONT)) > minDownShiftThreshold && Math.abs(wheelRPM(RIGHT_FRONT)) > minDownShiftThreshold)) {
-                    if (isHighGear()) {
-                        shiftLow();
-                        shiftPause = true;
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        shiftPause = false;
-                    }
+                if (isHighGear()) {
+                shiftLow();
                 }
             }
         }

@@ -24,11 +24,10 @@ public class WideIntake extends Subsystem{
     DoubleSolenoid intakeExtender = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.INTAKE_EXTEND, RobotMap.PCM.INTAKE_RETRACT);
     DigitalInput cargoDetector = new DigitalInput(RobotMap.DIO.CARGO_DETECTOR_INTAKE);
     public WideIntake() {
-
     }
 
     public void intakeStart() {
-        intakeMotor.set(1);
+        intakeMotor.set(-.5);
     }
 
     public void intakeStop() {

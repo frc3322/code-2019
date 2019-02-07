@@ -35,9 +35,6 @@ public class OI {
     public OI(){
 
         bumper_right.whileHeld(new LimelightAlign());
-
-        bumper_left.whenPressed(new ElevatorControl(true));
-        bumper_right.whenPressed(new ElevatorControl(false));
         
         button_a.whileHeld(new HotMessClimb());
         button_a.whenReleased(new HotMessIdle());
@@ -45,6 +42,10 @@ public class OI {
         //button_b.whenReleased(new HotMessIdle());
         button_x.whileHeld(new HotMessReverse());
         button_x.whenReleased(new HotMessIdle());
+
+        bumper_left.whenPressed(new ToggleIntake());
+        button_y.whileHeld(new TestIntake());
+        button_y.whenReleased(new IntakeIdle());
 
         left_stick.whenPressed(new ToggleShift());
 
