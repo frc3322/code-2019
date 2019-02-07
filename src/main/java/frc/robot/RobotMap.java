@@ -50,8 +50,8 @@ public class RobotMap {
         public static final int ELEVATOR_M_ENCODER_1_B = 10;
         public static final int ELEVATOR_M_ENCODER_2_A = 11;
         public static final int ELEVATOR_M_ENCODER_2_B = 12;
-        public static final int ELEVATOR_TRACK_ENCODER_A = 13;
-        public static final int ELEVATOR_TRACK_ENCODER_B = 14;
+        // public static final int ELEVATOR_TRACK_ENCODER_A = 13;
+        // public static final int ELEVATOR_TRACK_ENCODER_B = 14;
 
     }
 

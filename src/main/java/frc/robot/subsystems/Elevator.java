@@ -53,7 +53,7 @@ public class Elevator extends PIDSubsystem {
 
         elevatorMEncoder1 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_1_A, RobotMap.DIO.ELEVATOR_M_ENCODER_1_B);
         elevatorMEncoder2 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_2_A, RobotMap.DIO.ELEVATOR_M_ENCODER_2_B);
-        elevatorTrackEncoder = new Encoder(RobotMap.DIO.ELEVATOR_TRACK_ENCODER_A, RobotMap.DIO.ELEVATOR_TRACK_ENCODER_B);
+        //elevatorTrackEncoder = new Encoder(RobotMap.DIO.ELEVATOR_TRACK_ENCODER_A, RobotMap.DIO.ELEVATOR_TRACK_ENCODER_B);
         elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
         elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
         
