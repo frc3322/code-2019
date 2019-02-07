@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.SPI;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -42,6 +43,8 @@ public class Drivetrain extends PIDSubsystem {
     private static final double kP = 0,
                          kI = 0,
                          kD = 0;
+
+    public double PIDOutput = 0;
 
     double previousThrottle = 0,
             previousTurn = 0,
@@ -246,18 +249,16 @@ public class Drivetrain extends PIDSubsystem {
        
     }
 
-    
-
     @Override
     public void setSetpoint(double setpoint) {
         super.setSetpoint(setpoint);
     }
 
     public double returnPIDInput(){
-        return navx();
+        return navx.getAngle();
     }
 
     public void usePIDOutput(double output){
-        
+        PIDOutput = output;
     }
 }
