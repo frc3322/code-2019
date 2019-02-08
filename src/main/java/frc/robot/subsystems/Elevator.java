@@ -14,6 +14,12 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 //import frc.robot.PIDController;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorControl;
@@ -37,8 +43,11 @@ public class Elevator extends PIDSubsystem {
     Encoder elevatorMEncoder1;
     Encoder elevatorMEncoder2;
     Encoder elevatorTrackEncoder;
-    WPI_TalonSRX elevatorMotor1; 
-    WPI_TalonSRX elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
+    // WPI_TalonSRX elevatorMotor1;
+    // WPI_TalonSRX elevatorMotor2;
+
+    CANSparkMax elevatorMotor1;
+    CANSparkMax elevatorMotor2;
     
     DigitalInput hallEffectLevel0;
     DigitalInput hallEffectLevel1;
@@ -51,11 +60,14 @@ public class Elevator extends PIDSubsystem {
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
 
-        elevatorMEncoder1 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_1_A, RobotMap.DIO.ELEVATOR_M_ENCODER_1_B);
-        elevatorMEncoder2 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_2_A, RobotMap.DIO.ELEVATOR_M_ENCODER_2_B);
-        //elevatorTrackEncoder = new Encoder(RobotMap.DIO.ELEVATOR_TRACK_ENCODER_A, RobotMap.DIO.ELEVATOR_TRACK_ENCODER_B);
-        elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
-        elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
+        // elevatorMEncoder1 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_1_A, RobotMap.DIO.ELEVATOR_M_ENCODER_1_B);
+        // elevatorMEncoder2 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_2_A, RobotMap.DIO.ELEVATOR_M_ENCODER_2_B);
+        // elevatorTrackEncoder = new Encoder(RobotMap.DIO.ELEVATOR_TRACK_ENCODER_A, RobotMap.DIO.ELEVATOR_TRACK_ENCODER_B);
+        // elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
+        // elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
+
+        CANSparkMax elevatorMotor1 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_1, MotorType.kBrushless);
+        CANSparkMax elevatorMotor2 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_2, MotorType.kBrushless);
         
         hallEffectLevel0 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_0);
         hallEffectLevel1 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_1);
