@@ -37,7 +37,7 @@ public class HatchManip extends Subsystem {
     }
 
     public void extendGrabber() {
-        if(hatchGrabberActivated()) {
+        if(hatchGrabberExtended()) {
             grabberRetract();
         }else{
             grabberExtend();
