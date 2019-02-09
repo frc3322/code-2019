@@ -22,15 +22,11 @@ public class GrabHatch extends Command{
 
     @Override
     protected void initialize() {
-        if(!hatchManip.hasHatch()) {
-            hatchManip.grabHatch();
-        } else {
-            hatchManip.toggleHatch();
-        }
+        hatchManip.toggleHatch();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 }

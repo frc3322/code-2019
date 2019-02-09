@@ -63,8 +63,8 @@ public class OI {
         button_start_upper.whenPressed(new ExtendHatchManip());
         bumper_left_upper.whenPressed(new ToggleIntake());
         bumper_right_upper.whenPressed(new GrabHatch());
-        left_trigger_upper.whileHeld(new ElevatorUp());
-        right_trigger_upper.whileHeld(new ElevatorDown());
+        //left_trigger_upper.whileHeld(new ElevatorUp());
+        //right_trigger_upper.whileHeld(new ElevatorDown());
 
         /*
         bumper_right.whileHeld(new LimelightAlign());

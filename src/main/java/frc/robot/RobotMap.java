@@ -36,7 +36,7 @@ public class RobotMap {
         public static final int CARGO_DETECTOR_INTAKE = 0;
         public static final int CARGO_DETECTOR_OUTTAKE = 1;
 
-        public static final int HATCH_DETECTOR = 1;
+        public static final int HATCH_DETECTOR = 10;
 
         public static final int LEFT_INFRARED = 2;
         public static final int RIGHT_INFRARED = 3;
@@ -61,14 +61,14 @@ public class RobotMap {
 
         public static final int SHIFT_GEAR_1 = 4;
         public static final int SHIFT_GEAR_2 = 5;
-        public static final int LOWER_MECHANISM = 6;
-        public static final int RAISE_MECHANSIM = 7;
-        public static final int GRAB_HATCH = 2;
-        public static final int RELEASE_HATCH = 3;
+        public static final int LOWER_MECHANISM = 2;
+        public static final int RAISE_MECHANSIM = 3;
+        public static final int GRAB_HATCH = 0;
+        public static final int RELEASE_HATCH = 1;
         
 
-        public static final int INTAKE_EXTEND = 0;
-        public static final int INTAKE_RETRACT = 1;
+        public static final int INTAKE_EXTEND = 6;
+        public static final int INTAKE_RETRACT = 7;
  
     }
   

@@ -23,12 +23,12 @@ public class ExtendHatchManip extends Command{
     }
 
     @Override
-    protected void execute() {
+    protected void initialize() {
         hatchManip.extendGrabber();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 }
