@@ -246,7 +246,7 @@ public class Drivetrain extends PIDSubsystem {
 
     public double getAngleToTarget(){
         //calculate distance from the limelight to the target using equation found on limelight website
-        double limelightDistanceToTarget = (Constants.FieldDetails.targetHeight - Constants.LimelightMountingDetails.height) / Math.tan(Constants.LimelightMountingDetails.mountingAngle + Limelight.getTy());
+        double limelightDistanceToTarget = (Constants.FieldDetails.targetHeight - Constants.LimelightMountingDetails.height) / Math.tan((Constants.LimelightMountingDetails.mountingAngle + Limelight.getTy()) * Math.PI / 180);
         //calculate the angle from the limelight to the target based on how the limelight is mounted and the angle that the limelight calculates between the center of its fov and the target
         double limelightAngleFromTarget = Constants.LimelightMountingDetails.angleOffset - Limelight.getTx();
         

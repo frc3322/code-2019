@@ -59,16 +59,16 @@ public class RobotMap {
 
         public static final int PCM_ID = 3;
 
-        public static final int SHIFT_GEAR_1 = 0;
-        public static final int SHIFT_GEAR_2 = 1;
+        public static final int SHIFT_GEAR_1 = 4;
+        public static final int SHIFT_GEAR_2 = 5;
         public static final int LOWER_MECHANISM = 6;
         public static final int RAISE_MECHANSIM = 7;
-        public static final int GRAB_HATCH = 4;
-        public static final int RELEASE_HATCH = 5;
+        public static final int GRAB_HATCH = 2;
+        public static final int RELEASE_HATCH = 3;
         
 
-        public static final int INTAKE_EXTEND = 2;
-        public static final int INTAKE_RETRACT = 3;
+        public static final int INTAKE_EXTEND = 0;
+        public static final int INTAKE_RETRACT = 1;
  
     }
   
