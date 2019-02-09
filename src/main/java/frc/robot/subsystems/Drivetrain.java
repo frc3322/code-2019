@@ -19,11 +19,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.SPI;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
-
+import frc.robot.Constants;
 
 /**
  * Code for drive train
@@ -238,5 +242,21 @@ public class Drivetrain extends PIDSubsystem {
 
     public void usePIDOutput(double output){
         PIDOutput = output;
+    }
+
+    public double getAngleToTarget(){
+        //calculate distance from the limelight to the target using equation found on limelight website
+        double limelightDistanceToTarget = (Constants.FieldDetails.targetHeight - Constants.LimelightMountingDetails.height) / Math.tan(Constants.LimelightMountingDetails.mountingAngle + Limelight.getTy());
+        //calculate the angle from the limelight to the target based on how the limelight is mounted and the angle that the limelight calculates between the center of its fov and the target
+        double limelightAngleFromTarget = Constants.LimelightMountingDetails.angleOffset - Limelight.getTx();
+        
+        //calculate the distance between the robot and the target using the law of cosines
+        double robotDistanceToTarget = Math.sqrt(Math.pow(limelightDistanceToTarget, 2) + Math.pow(Constants.LimelightMountingDetails.centerOffset, 2) - 2 * limelightDistanceToTarget * Constants.LimelightMountingDetails.centerOffset * Math.cos(limelightAngleFromTarget * Math.PI / 180));
+        //calculate the angle between the robot and the target using the law of cosines
+        double calculatedAngle = Math.acos(Math.sqrt((Math.pow(limelightDistanceToTarget, 2) - Math.pow(Constants.LimelightMountingDetails.centerOffset, 2) - Math.pow(robotDistanceToTarget, 2)) / -2 * Constants.LimelightMountingDetails.centerOffset * robotDistanceToTarget)) * Math.PI / 180;
+        //find the turn angle
+        double returnAngle = 90 - calculatedAngle;
+
+        return returnAngle;
     }
 }

@@ -28,7 +28,7 @@ public class LimelightAlign extends Command {
 
     @Override
     protected void initialize(){
-        drivetrain.setSetpoint(drivetrain.navx.getAngle() + limelight.getTx());
+        
     }
     
     @Override

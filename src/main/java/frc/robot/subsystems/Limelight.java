@@ -125,5 +125,4 @@ public class Limelight extends Subsystem {
 
         return table.getTable("limelight").getEntry(key);
     }
-
 }
