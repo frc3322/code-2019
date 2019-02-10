@@ -14,8 +14,6 @@ import frc.robot.subsystems.SideOuttake;
 
 import static frc.robot.Robot.sideouttake;
 
-import org.junit.rules.Timeout;
-
 /**
  * Add your docs here.
  */

@@ -12,6 +12,9 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.SideOuttake;
 
+import static frc.robot.Robot.sideouttake;
+import static frc.robot.Robot.oi;
+
 /**
  * Add your docs here.
  */
@@ -28,10 +31,12 @@ public class OuttakeControl extends Command{
 
     @Override
     protected void execute() {
-        if(Robot.oi.lowerChassis.getRawAxis(RIGHT_AXIS) > 0){
-            Robot.sideouttake.outtakeRight(Robot.oi.lowerChassis.getRawAxis(RIGHT_AXIS));
-        } else if(Robot.oi.lowerChassis.getRawAxis(LEFT_AXIS) > 0){
-            Robot.sideouttake.outtakeLeft(Robot.oi.lowerChassis.getRawAxis(LEFT_AXIS));
+        if(oi.lowerChassis.getRawAxis(RIGHT_AXIS) > 0){
+            sideouttake.outtakeRight(Math.sqrt(oi.lowerChassis.getRawAxis(RIGHT_AXIS)));
+        } else if(oi.lowerChassis.getRawAxis(LEFT_AXIS) > 0){
+            sideouttake.outtakeLeft(Math.sqrt(oi.lowerChassis.getRawAxis(LEFT_AXIS)));
+        } else {
+            sideouttake.outtakeStop();
         }
     }
 

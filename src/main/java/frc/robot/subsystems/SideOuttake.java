@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-
+import frc.robot.commands.OuttakeControl;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  * Add your docs here.
  */
 public class SideOuttake extends Subsystem{
-    private double slowSpeedModifier = 0.5;
+    private double slowSpeedModifier = 0.3;
+    private double fastSpeedModifier = 0.75;
+    private double leftOuttakeModifier = 0.8;
 
     public static final long outtakeTime = 2000;
 
@@ -33,16 +35,18 @@ public class SideOuttake extends Subsystem{
     public SideOuttake() {
         SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
         SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
+
+        leftOuttake.setInverted(true);
     }
 
     public void outtakeRight(double baseSpeed) {
-        leftOuttake.set(baseSpeed*slowSpeedModifier);
-        rightOuttake.set(baseSpeed);
+        leftOuttake.set(baseSpeed*slowSpeedModifier*leftOuttakeModifier);
+        rightOuttake.set(baseSpeed*fastSpeedModifier);
     }
 
     public void outtakeLeft(double baseSpeed) {
         rightOuttake.set(baseSpeed*slowSpeedModifier);
-        leftOuttake.set(baseSpeed);
+        leftOuttake.set(baseSpeed*fastSpeedModifier*leftOuttakeModifier);
     }
 
     public void outtakeStop() {
@@ -69,6 +73,6 @@ public class SideOuttake extends Subsystem{
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new OuttakeControl());
     }
 }

@@ -22,9 +22,9 @@ public class RobotMap {
         public static final int HOTMESS_MOTOR2 = 40;
 
         //cargo
-        public static final int L_SIDE_OUTTAKE = 0;
-        public static final int R_SIDE_OUTTAKE = 1;
-        public static final int INTAKE_MOTOR = 20;
+        public static final int L_SIDE_OUTTAKE = 20;
+        public static final int R_SIDE_OUTTAKE = 19;
+        public static final int INTAKE_MOTOR = 21;
 
         //elevator
         public static final int ELEVATOR_MOTOR_1 = 24;
