@@ -8,31 +8,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.*;
 import static frc.robot.Robot.elevator;
 
 public class ElevatorControl extends Command {
 
-	private static int level=1;
+    private static int level=1;
+    
+    private final int UP_AXIS;
+    private final int DOWN_AXIS;
 
+    /*
   	public ElevatorControl(boolean upOrDown) {
 
 		requires(elevator);
 
-		level += (upOrDown) ? ((level == 3) ? 0 : 1) : ((level == 1) ? 0 : -1);
+		//level += (upOrDown) ? ((level == 3) ? 0 : 1) : ((level == 1) ? 0 : -1);
 
-	}
+    }
+     */
 
 	public ElevatorControl(){
-	
-		requires(elevator);
+        requires(elevator);
+        
+        this.UP_AXIS = RobotMap.XBOX.TRIGGER_L_AXIS;
+        this.DOWN_AXIS = RobotMap.XBOX.TRIGGER_R_AXIS;
 	
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		elevator.goToLevel(level);
+        double moveInput = Robot.oi.upperChassis.getRawAxis(UP_AXIS) - Robot.oi.upperChassis.getRawAxis(DOWN_AXIS) * elevator.downSpeedModifier;
+        
+        elevator.move(moveInput);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

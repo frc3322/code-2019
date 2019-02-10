@@ -39,6 +39,7 @@ public class Elevator extends PIDSubsystem {
     private double secondLevel = 20; // temp
     private double thirdLevel = 30; // temp
     public double pidSpeed;
+    public double downSpeedModifier = .75;
 
     Encoder elevatorMEncoder1;
     Encoder elevatorMEncoder2;

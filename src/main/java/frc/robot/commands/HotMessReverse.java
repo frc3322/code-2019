@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -21,7 +22,14 @@ public class HotMessReverse extends Command{
 
     @Override
     protected void execute() {
-        Robot.hotMess.reverse();
+        if(Timer.getFPGATimestamp() > 120) {
+            Robot.hotMess.reverse();
+        }
+    }
+
+    @Override
+    protected void end() {
+        Robot.hotMess.stop();
     }
 
     @Override

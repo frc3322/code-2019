@@ -14,12 +14,17 @@ import frc.robot.subsystems.SideOuttake;
 
 import static frc.robot.Robot.sideouttake;
 
+import org.junit.rules.Timeout;
+
 /**
  * Add your docs here.
  */
 public class AutoOuttake extends Command {
 
     public boolean outtaking;
+
+    // long millisecondsToRun = 1000; // This should run 1000ms = 1 s.
+    // long initTime = 
 
     public AutoOuttake() {
         requires(Robot.sideouttake);
@@ -33,18 +38,22 @@ public class AutoOuttake extends Command {
                 Robot.drivetrain.stop();
             }
             if (sideouttake.getRightInfrared()) {
-                sideouttake.outtakeRight();
+                sideouttake.outtakeRight(0.75);
             } else {
-                sideouttake.outtakeLeft();
+                sideouttake.outtakeLeft(0.75);
             }
-            //Take notice that this exists: Timeout.seconds(2);
-            try {
-                Thread.sleep(SideOuttake.outtakeTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            sideouttake.outtakeStop();
-            outtaking = false;
+            //Timer.delay(2)?
+            new java.util.Timer().schedule( 
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        sideouttake.outtakeStop();
+                        outtaking = false;
+                    }
+                }, 
+                2000 
+            );
+            
         }
     }
 

@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  * Add your docs here.
  */
 public class SideOuttake extends Subsystem{
+    private double slowSpeedModifier = 0.5;
 
     public static final long outtakeTime = 2000;
 
@@ -34,14 +35,14 @@ public class SideOuttake extends Subsystem{
         SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
     }
 
-    public void outtakeRight() {
-        leftOuttake.set(-.3);
-        rightOuttake.set(.7);
+    public void outtakeRight(double baseSpeed) {
+        leftOuttake.set(baseSpeed*slowSpeedModifier);
+        rightOuttake.set(baseSpeed);
     }
 
-    public void outtakeLeft() {
-        rightOuttake.set(-.3);
-        leftOuttake.set(.7);
+    public void outtakeLeft(double baseSpeed) {
+        rightOuttake.set(baseSpeed*slowSpeedModifier);
+        leftOuttake.set(baseSpeed);
     }
 
     public void outtakeStop() {
