@@ -8,22 +8,29 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.subsystems.SideOuttake;
+
+import static frc.robot.Robot.sideouttake;
 
 /**
  * Add your docs here.
  */
 public class RightOuttake extends Command {
 
+    public RightOuttake(){
+
+        requires(sideouttake);
+
+    }
+
     protected void execute() {
-        Robot.sideouttake.outtakeRight(.75);
+        sideouttake.outtakeRight(.75);
         try {
             Thread.sleep(SideOuttake.outtakeTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Robot.sideouttake.outtakeStop();
+        sideouttake.outtakeStop();
     }
 
     @Override

@@ -8,11 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.SideOuttake;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static frc.robot.Robot.sideouttake;
+import static frc.robot.Robot.drivetrain;
+import static frc.robot.Robot.oi;
 
 /**
  * Add your docs here.
@@ -25,15 +28,15 @@ public class AutoOuttake extends Command {
     // long initTime = 
 
     public AutoOuttake() {
-        requires(Robot.sideouttake);
+        requires(sideouttake);
     }
 
     protected void execute() {
-        Robot.drivetrain.driveStraight(Robot.oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .55, RobotMap.XBOX.STICK_R_X_AXIS);
+        drivetrain.driveStraight(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .55, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
         if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
             outtaking = true;
             while(outtaking) {
-                Robot.drivetrain.stop();
+                drivetrain.stop();
             }
             if (sideouttake.getRightInfrared()) {
                 sideouttake.outtakeRight(0.75);
@@ -41,8 +44,8 @@ public class AutoOuttake extends Command {
                 sideouttake.outtakeLeft(0.75);
             }
             //Timer.delay(2)?
-            new java.util.Timer().schedule( 
-                new java.util.TimerTask() {
+            new Timer().schedule( 
+                new TimerTask() {
                     @Override
                     public void run() {
                         sideouttake.outtakeStop();

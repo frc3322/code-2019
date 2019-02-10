@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.SideOuttake;
 
@@ -24,7 +23,7 @@ public class OuttakeControl extends Command{
     private final int LEFT_AXIS;
 
     public OuttakeControl() {
-        requires(Robot.sideouttake);
+        requires(sideouttake);
         RIGHT_AXIS = RobotMap.XBOX.TRIGGER_R_AXIS;
         LEFT_AXIS = RobotMap.XBOX.TRIGGER_L_AXIS;
     }
@@ -47,7 +46,7 @@ public class OuttakeControl extends Command{
 
     @Override
     protected void end() {
-        Robot.sideouttake.outtakeStop();
+        sideouttake.outtakeStop();
     }
 
     @Override

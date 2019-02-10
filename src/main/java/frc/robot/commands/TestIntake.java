@@ -8,8 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.subsystems.WideIntake;
+
+import static frc.robot.Robot.wideintake;
 
 /**
  * Add your docs here.
@@ -17,13 +18,13 @@ import frc.robot.subsystems.WideIntake;
 public class TestIntake extends Command {
 
     public TestIntake() {
-        requires(Robot.wideintake);
+        requires(wideintake);
     }
 
     @Override
     protected void execute() {
         System.out.println("Intake started");
-        Robot.wideintake.intakeStart();
+        wideintake.intakeStart();
     }
 
     @Override

@@ -12,6 +12,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import static frc.robot.Robot.drivetrain;
+import static frc.robot.Robot.oi;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -39,8 +40,8 @@ public class DriveControl extends Command {
     @Override
     protected void execute() {
 
-        double speed = Robot.oi.lowerChassis.getRawAxis(SPEED_AXIS);
-        double turn = -Robot.oi.lowerChassis.getRawAxis(ROTATION_AXIS) * 0.7;
+        double speed = oi.lowerChassis.getRawAxis(SPEED_AXIS);
+        double turn = -oi.lowerChassis.getRawAxis(ROTATION_AXIS) * 0.7;
         
         // speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, speedPow - 1)) : 0;
         // turn = (Math.abs(turn) > deadZone) ? turn * Math.abs(Math.pow(turn, turnPow - 1)) : 0;

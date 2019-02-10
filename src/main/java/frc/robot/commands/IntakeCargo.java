@@ -8,7 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import static frc.robot.Robot.wideintake;
+import static frc.robot.Robot.sideouttake;
+import static frc.robot.Robot.elevator;
 
 /**
  * Add your docs here.
@@ -16,37 +18,38 @@ import frc.robot.Robot;
 public class IntakeCargo extends Command {
 
     public IntakeCargo() {
-        requires(Robot.wideintake);
-        requires(Robot.sideouttake);
+        requires(wideintake);
+        requires(sideouttake);
+        requires(elevator);
     }
 
     @Override
     protected void execute() {
-        if (!Robot.wideintake.hasCargo() && !Robot.sideouttake.hasCargo() && Robot.elevator.atLevel0()) {
-            Robot.wideintake.intakeStart();
-            Robot.sideouttake.intakeCarriage();
-        } else if (Robot.wideintake.hasCargo() && !Robot.elevator.atLevel0()) {
-            Robot.wideintake.intakeStop();
-            Robot.elevator.goToLevel(0);
+        if (!wideintake.hasCargo() && !sideouttake.hasCargo() && elevator.atLevel0()) {
+            wideintake.intakeStart();
+            sideouttake.intakeCarriage();
+        } else if (wideintake.hasCargo() && !elevator.atLevel0()) {
+            wideintake.intakeStop();
+            elevator.goToLevel(0);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Robot.sideouttake.intakeCarriage();
-            Robot.wideintake.intakeStart();
+            sideouttake.intakeCarriage();
+            wideintake.intakeStart();
         }
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.sideouttake.hasCargo();
+        return sideouttake.hasCargo();
     }
 
     @Override
     protected void end() {
-        Robot.wideintake.intakeStop();
-        Robot.sideouttake.outtakeStop();
+        wideintake.intakeStop();
+        sideouttake.outtakeStop();
     }
 
 }

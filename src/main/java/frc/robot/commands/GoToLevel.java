@@ -8,7 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+
+import static frc.robot.Robot.elevator;
 
 /**
  * Add your docs here.
@@ -18,13 +19,13 @@ public class GoToLevel extends Command{
     public int level;
 
     public GoToLevel(int level) {
-        requires(Robot.elevator);
+        requires(elevator);
         this.level = level;
     }
 
     @Override
     protected void execute() {
-        Robot.elevator.goToLevel(level);
+        elevator.goToLevel(level);
     }
 
     @Override

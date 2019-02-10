@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.limelight;
-
+import static frc.robot.Robot.hatchManip;
 
 /**
  * Add your docs here.
@@ -24,6 +24,7 @@ public class LimelightAlign extends Command {
     public LimelightAlign() {
         requires(drivetrain);
         requires(limelight);
+        requires(hatchManip);
     }
 
     @Override
@@ -34,8 +35,8 @@ public class LimelightAlign extends Command {
     @Override
     protected void execute() {
         drivetrain.drive(Robot.oi.lowerChassis.getRawAxis(1) * .75, drivetrain.PIDOutput);
-        if(Robot.hatchManip.hasHatch()) {
-            Robot.hatchManip.hatchGrab();
+        if(hatchManip.hasHatch()) {
+            hatchManip.hatchGrab();
         }
     }
 

@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import static frc.robot.Robot.drivetrain;
 
 /**
  * Add your docs here.
@@ -16,12 +16,12 @@ import frc.robot.Robot;
 public class ToggleShift extends Command{
 
     public ToggleShift() {
-        requires(Robot.drivetrain);
+        requires(drivetrain);
     }
 
     @Override
     protected void initialize() {
-        Robot.drivetrain.toggleShift();
+        drivetrain.toggleShift();
     }
 
     @Override

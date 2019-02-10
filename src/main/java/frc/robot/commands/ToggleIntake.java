@@ -8,16 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import static frc.robot.Robot.wideintake;
 
 /**
  * Add your docs here.
  */
 public class ToggleIntake extends Command{
 
+    public ToggleIntake(){
+
+        requires(wideintake);
+
+    }
+
     @Override
     protected void initialize() {
-        Robot.wideintake.toggleIntake();
+        wideintake.toggleIntake();
     }
 
     @Override
