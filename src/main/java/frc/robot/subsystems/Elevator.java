@@ -32,8 +32,8 @@ public class Elevator extends PIDSubsystem {
     
     private int currentLevel = 1;
     private int desiredLevel;
-    private double upSpeed = 1; // temp
-    private double downSpeed = -1; // temp
+    private double upSpeed = 0.2; // temp
+    private double downSpeed = -0.2; // temp
     private double bottom = 0;
     private double firstLevel = 10; // temp
     private double secondLevel = 20; // temp
@@ -44,11 +44,11 @@ public class Elevator extends PIDSubsystem {
     Encoder elevatorMEncoder1;
     Encoder elevatorMEncoder2;
     Encoder elevatorTrackEncoder;
-    // WPI_TalonSRX elevatorMotor1;
-    // WPI_TalonSRX elevatorMotor2;
+    WPI_TalonSRX elevatorMotor1;
+    WPI_TalonSRX elevatorMotor2;
 
-    CANSparkMax elevatorMotor1;
-    CANSparkMax elevatorMotor2;
+    // CANSparkMax elevatorMotor1;
+    // CANSparkMax elevatorMotor2;
     
     DigitalInput hallEffectLevel0;
     DigitalInput hallEffectLevel1;
@@ -64,19 +64,19 @@ public class Elevator extends PIDSubsystem {
         // elevatorMEncoder1 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_1_A, RobotMap.DIO.ELEVATOR_M_ENCODER_1_B);
         // elevatorMEncoder2 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_2_A, RobotMap.DIO.ELEVATOR_M_ENCODER_2_B);
         // elevatorTrackEncoder = new Encoder(RobotMap.DIO.ELEVATOR_TRACK_ENCODER_A, RobotMap.DIO.ELEVATOR_TRACK_ENCODER_B);
-        // elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
-        // elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
+        elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
+        elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
 
-        CANSparkMax elevatorMotor1 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_1, MotorType.kBrushless);
-        CANSparkMax elevatorMotor2 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_2, MotorType.kBrushless);
+        // CANSparkMax elevatorMotor1 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_1, MotorType.kBrushless);
+        // CANSparkMax elevatorMotor2 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_2, MotorType.kBrushless);
         
         hallEffectLevel0 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_0);
         hallEffectLevel1 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_1);
         hallEffectLevel2 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_2);
         hallEffectLevel3 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_3);
 
+        elevatorMotor1.setInverted(true);
         elevator = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
-        elevator.setInverted(true);
         
     }
 
@@ -112,7 +112,7 @@ public class Elevator extends PIDSubsystem {
     }
 
     public void moveDown() { // move at current downSpeed
-        move(-downSpeed);
+        move(downSpeed);
     }
 
     public void move(double speed) { // make it move at specified speed

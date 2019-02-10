@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.*;
 import static frc.robot.Robot.elevator;
+import static frc.robot.Robot.oi;
 
 public class ElevatorControl extends Command {
 
@@ -39,9 +40,9 @@ public class ElevatorControl extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        double moveInput = Robot.oi.upperChassis.getRawAxis(UP_AXIS) - Robot.oi.upperChassis.getRawAxis(DOWN_AXIS) * elevator.downSpeedModifier;
+        double moveInput = oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS) * elevator.downSpeedModifier;
         
-        elevator.move(moveInput);
+        elevator.move(moveInput * 0.5);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -59,4 +60,4 @@ public class ElevatorControl extends Command {
 	protected void interrupted() {
 		super.interrupted();
 	}
-	}
+}
