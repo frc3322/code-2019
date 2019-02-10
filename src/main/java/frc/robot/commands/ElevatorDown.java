@@ -8,18 +8,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.*;
 
 /**
  * Add your docs here.
  */
-public class StopIntake extends Command{
+public class ElevatorDown extends Command{
+
+    public ElevatorDown() {
+        requires(Robot.elevator);
+    }
 
     @Override
     protected void execute() {
-        Robot.wideintake.intakeStop();
+        Robot.elevator.moveDown();
     }
-
     @Override
     protected boolean isFinished() {
         return false;

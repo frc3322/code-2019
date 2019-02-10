@@ -77,6 +77,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
+        drivetrain.updateDrivetrain();
+        hatchManip.updateHatch();
     }
 
     /**
@@ -179,7 +181,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Left Front Output Current", drivetrain.getOutputCurrent(2));
         SmartDashboard.putNumber("Right Front Output Current", drivetrain.getOutputCurrent(3));
         */
-        drivetrain.updateDrivetrain();
+
     }
 
     /**
