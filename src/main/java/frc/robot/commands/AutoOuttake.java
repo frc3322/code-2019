@@ -37,23 +37,23 @@ public class AutoOuttake extends Command {
             outtaking = true;
             while(outtaking) {
                 drivetrain.stop();
+                if (sideouttake.getRightInfrared()) {
+                    sideouttake.outtakeRight(0.75);
+                } else {
+                    sideouttake.outtakeLeft(0.75);
+                }
+                //Timer.delay(2)?
+                new Timer().schedule( 
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            sideouttake.outtakeStop();
+                            outtaking = false;
+                        }
+                    }, 
+                    2000 
+                );
             }
-            if (sideouttake.getRightInfrared()) {
-                sideouttake.outtakeRight(0.75);
-            } else {
-                sideouttake.outtakeLeft(0.75);
-            }
-            //Timer.delay(2)?
-            new Timer().schedule( 
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        sideouttake.outtakeStop();
-                        outtaking = false;
-                    }
-                }, 
-                2000 
-            );
             
         }
     }
