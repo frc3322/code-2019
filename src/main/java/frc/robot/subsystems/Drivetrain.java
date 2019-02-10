@@ -50,8 +50,8 @@ public class Drivetrain extends PIDSubsystem {
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
 
-    public int upShiftMidpoint = 500,
-                downShiftMidpoint = 1000;
+    public int upShiftMidpoint = 530,
+                downShiftMidpoint = 1120;
 
     public AHRS navx;
 
@@ -62,7 +62,7 @@ public class Drivetrain extends PIDSubsystem {
     private CANEncoder[] encoders = new CANEncoder[4];
 
     private boolean straightModeStart, straightModeRun;
-    private double runDelay;
+    private double runDelay, lastShift;
 
     public Drivetrain() {
         super("TurnToAnglePID", kP, kI, kD);
@@ -92,11 +92,14 @@ public class Drivetrain extends PIDSubsystem {
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        motors[LEFT_FRONT].setRampRate(.5);
-        motors[RIGHT_FRONT].setRampRate(.5);
+        motors[LEFT_FRONT].setRampRate(.7);
+        motors[RIGHT_FRONT].setRampRate(.7);
 
         straightModeStart = false;
         straightModeRun = false;
+
+        lastShift = System.currentTimeMillis() - 2000;
+        runDelay = System.currentTimeMillis();
 
     }
 
@@ -212,15 +215,17 @@ public class Drivetrain extends PIDSubsystem {
     }
 
     public void autoShift() {
-        if(straightModeRun) {
+        if(System.currentTimeMillis() - lastShift > 2000 && straightModeRun) {
             if(Math.abs(wheelRPM(LEFT_FRONT)) > upShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) > upShiftMidpoint){
                 if (!isHighGear()) {
-                    shiftHigh();         
+                    shiftHigh();
+                    lastShift = System.currentTimeMillis();    
                 }
             }
             if(Math.abs(wheelRPM(LEFT_FRONT)) < downShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) < downShiftMidpoint) {
                 if (isHighGear()) {
-                shiftLow();
+                    shiftLow();
+                    lastShift = System.currentTimeMillis();
                 }
             }
         }

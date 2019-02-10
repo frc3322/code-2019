@@ -27,7 +27,7 @@ public class WideIntake extends Subsystem{
     }
 
     public void intakeStart() {
-        intakeMotor.set(-.5);
+        intakeMotor.set(-.6);
     }
 
     public void intakeStop() {
