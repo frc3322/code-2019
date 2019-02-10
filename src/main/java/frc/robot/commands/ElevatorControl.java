@@ -43,7 +43,7 @@ public class ElevatorControl extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        double moveInput = oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS) * elevator.downSpeedModifier;
+        double moveInput = (oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS)) * elevator.downSpeedModifier;
         
         elevator.move(moveInput * 0.5);
 	}
