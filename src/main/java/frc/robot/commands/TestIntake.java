@@ -11,7 +11,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.WideIntake;
 
 import static frc.robot.Robot.wideintake;
 

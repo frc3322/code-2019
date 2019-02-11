@@ -28,31 +28,16 @@ public class IntakeCargo extends Command {
 
     @Override
     protected void execute() {
-        if (!wideintake.hasCargo() && !sideouttake.hasCargo() && elevator.atLevel0()) {
-            wideintake.intakeStart();
-            sideouttake.intakeCarriage();
-        } else if (wideintake.hasCargo() && !elevator.atLevel0()) {
-            wideintake.intakeStop();
+        if(!elevator.atLevel0()) {
             elevator.goToLevel(0);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            sideouttake.intakeCarriage();
-            wideintake.intakeStart();
         }
+        wideintake.intakeStart();
+        sideouttake.intakeCarriage();
     }
 
     @Override
     protected boolean isFinished() {
-        return sideouttake.hasCargo();
-    }
-
-    @Override
-    protected void end() {
-        wideintake.intakeStop();
-        sideouttake.outtakeStop();
+        return false;
     }
 
 }

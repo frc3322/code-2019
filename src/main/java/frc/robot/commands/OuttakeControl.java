@@ -12,7 +12,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.SideOuttake;
 
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.oi;
