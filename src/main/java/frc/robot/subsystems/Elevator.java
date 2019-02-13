@@ -19,10 +19,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 // import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 //import frc.robot.PIDController;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorControl;
@@ -33,7 +29,7 @@ public class Elevator extends PIDSubsystem {
 
     private SpeedControllerGroup elevator;
     
-    private int currentLevel = 1;
+    private int currentLevel = 0;
     private int desiredLevel;
     private double upSpeed = 0.2; // temp
     private double downSpeed = -0.2; // temp
@@ -44,13 +40,10 @@ public class Elevator extends PIDSubsystem {
     public double pidSpeed;
     public double downSpeedModifier = .75;
 
-    Encoder elevatorMEncoder;
-    //Encoder elevatorTrackEncoder;
+    Encoder elevatorEncoder;
+
     WPI_TalonSRX elevatorMotor1;
     WPI_TalonSRX elevatorMotor2;
-
-    // CANSparkMax elevatorMotor1;
-    // CANSparkMax elevatorMotor2;
     
     DigitalInput hallEffectLevel0;
     DigitalInput hallEffectLevel1;
@@ -63,10 +56,7 @@ public class Elevator extends PIDSubsystem {
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
 
-        // elevatorMEncoder1 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_1_A, RobotMap.DIO.ELEVATOR_M_ENCODER_1_B);
-        // elevatorMEncoder2 = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_2_A, RobotMap.DIO.ELEVATOR_M_ENCODER_2_B);
-        // elevatorTrackEncoder = new Encoder(RobotMap.DIO.ELEVATOR_TRACK_ENCODER_A, RobotMap.DIO.ELEVATOR_TRACK_ENCODER_B);
-        elevatorMEncoder = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_1_A, RobotMap.DIO.ELEVATOR_M_ENCODER_1_B);
+        elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_A, RobotMap.DIO.ELEVATOR_M_ENCODER_B);
         
         elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
         elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
@@ -80,6 +70,7 @@ public class Elevator extends PIDSubsystem {
         hallEffectLevel3 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_3);
 
         elevatorMotor1.setInverted(true);
+        elevatorMotor2.follow(elevatorMotor1);
         elevator = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
         
     }
@@ -133,50 +124,57 @@ public class Elevator extends PIDSubsystem {
         case 0:
             desiredLevel = 0;
             setSetpoint(bottom);
-            if(hallEffectLevel0.get() && desiredLevel == 0) {
-                elevator.stopMotor();
-            }
             currentLevel = 0;
             break;
         case 1:
             desiredLevel = 1;
             setSetpoint(firstLevel);
-            if(hallEffectLevel1.get() && desiredLevel == 1) {
-                elevator.stopMotor();
-            }
             currentLevel = 1;
             break;
         case 2:
             desiredLevel = 2;
             setSetpoint(secondLevel);
-            if(hallEffectLevel2.get() && desiredLevel == 2) {
-                elevator.stopMotor();
-            }
             currentLevel = 2;
             break;
         case 3:
             desiredLevel = 3;
             setSetpoint(thirdLevel);
-            if(hallEffectLevel3.get() && desiredLevel == 3) {
-                elevator.stopMotor();
-            }
             currentLevel = 3;
             break;
         default:
             return;
         }
-        elevator.set(pidSpeed);
+        //elevator.set(pidSpeed);
 
+    }
+
+    public void stopAtGoal() {
+        if(hallEffectLevel0.get() && desiredLevel == 0) {
+            elevator.stopMotor();
+        }
+
+        if(hallEffectLevel1.get() && desiredLevel == 1) {
+            elevator.stopMotor();
+        }
+
+        if(hallEffectLevel2.get() && desiredLevel == 2) {
+            elevator.stopMotor();
+        }
+
+        if(hallEffectLevel3.get() && desiredLevel == 3) {
+            elevator.stopMotor();
+        }
     }
 
     @Override
     protected double returnPIDInput() {
-        return elevatorMEncoder.getDistance();
+        return elevatorEncoder.getDistance();
     }
 
     @Override
     protected void usePIDOutput(double output) {
-        pidSpeed = output;
+        //pidSpeed = output;
+        elevatorMotor1.pidWrite(output);
     }
 
 }
