@@ -15,9 +15,9 @@ public class RobotMap {
     public static class CAN {
 
         //drivetrain
-        public static final int LEFT_FRONT_MOTOR = 36 ;
-        public static final int LEFT_BACK_MOTOR = 37;
-        public static final int RIGHT_FRONT_MOTOR = 35;
+        public static final int LEFT_FRONT_MOTOR = 37;
+        public static final int LEFT_BACK_MOTOR = 35;
+        public static final int RIGHT_FRONT_MOTOR = 36;
         public static final int RIGHT_BACK_MOTOR = 34;
 
         //hot mess
@@ -26,23 +26,23 @@ public class RobotMap {
 
         //cargo
         public static final int L_SIDE_OUTTAKE = 20;
-        public static final int R_SIDE_OUTTAKE = 19;
-        public static final int INTAKE_MOTOR = 21;
+        public static final int R_SIDE_OUTTAKE = 23;
+        public static final int INTAKE_MOTOR = 19;
 
         //elevator
-        public static final int ELEVATOR_MOTOR_1 = 22;
-        public static final int ELEVATOR_MOTOR_2 = 23;
+        public static final int ELEVATOR_MOTOR_1 = 33;
+        public static final int ELEVATOR_MOTOR_2 = 22;
 
     }
 
     public static class DIO {
-        public static final int CARGO_DETECTOR_INTAKE = 0;
-        public static final int CARGO_DETECTOR_OUTTAKE = 1;
+        public static final int CARGO_DETECTOR_INTAKE = 2;
+        public static final int CARGO_DETECTOR_OUTTAKE = 3;
 
         public static final int HATCH_DETECTOR = 10;
 
-        public static final int LEFT_INFRARED = 2;
-        public static final int RIGHT_INFRARED = 3;
+        public static final int LEFT_INFRARED = 0;
+        public static final int RIGHT_INFRARED = 1;
 
       //elevator
         public static final int HALL_EFFECT_LEVEL_0 = 4;

@@ -27,8 +27,8 @@ public class HatchManip extends Subsystem {
     DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
 
     public void updateHatch() {
-        SmartDashboard.putBoolean("hatchGrabberActivated", hatchGrabberActivated());
-        SmartDashboard.putBoolean("hatchGrabberExtended", hatchGrabberExtended());
+        SmartDashboard.putBoolean("hatchGrabberActivated", !hatchGrabberActivated());
+        SmartDashboard.putBoolean("hatchGrabberExtended", !hatchGrabberExtended());
     }
 
     public void grabHatch() {

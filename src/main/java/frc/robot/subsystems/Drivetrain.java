@@ -10,6 +10,7 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.LinkedHashMap;
 
-import com.kauailabs.navx.frc.AHRS;
+
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
@@ -99,8 +100,8 @@ public class Drivetrain extends PIDSubsystem {
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        motors[LEFT_FRONT].setRampRate(.7);
-        motors[RIGHT_FRONT].setRampRate(.7);
+        motors[LEFT_FRONT].setRampRate(.5);
+        motors[RIGHT_FRONT].setRampRate(.5);
 
         straightModeStart = false;
         straightModeRun = false;
@@ -249,7 +250,7 @@ public class Drivetrain extends PIDSubsystem {
     }
 
     public void usePIDOutput(double output){
-        PIDOutput = output;
+        drive(0,output);
     }
 
     public double degreeToRadian(double degree) {       
@@ -259,7 +260,9 @@ public class Drivetrain extends PIDSubsystem {
     public double radianToDegree(double radian) {
         return (radian * 180) / Math.PI;
     }
-
+    public double getAngle(){
+        return navx.getAngle();
+    }
     public double getAngleToTarget(){
         //calculate distance from the limelight to the target using equation found on limelight website
         double limelightDistanceToTarget = (Constants.FieldDetails.targetHeight - Constants.LimelightMountingDetails.height) / Math.tan(degreeToRadian((Constants.LimelightMountingDetails.mountingAngle + Limelight.getTy())));

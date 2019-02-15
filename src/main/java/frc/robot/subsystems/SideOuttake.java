@@ -36,19 +36,16 @@ public class SideOuttake extends Subsystem{
     DigitalInput cargoDetector = new DigitalInput(RobotMap.DIO.CARGO_DETECTOR_OUTTAKE);
 
     public SideOuttake() {
-        SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
-        SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
-
         leftOuttake.setInverted(true);
     }
 
     public void outtakeRight(double baseSpeed) {
-        leftOuttake.set(baseSpeed*slowSpeedModifier*leftOuttakeModifier);
+        leftOuttake.set(-(baseSpeed*slowSpeedModifier*leftOuttakeModifier));
         rightOuttake.set(baseSpeed*fastSpeedModifier);
     }
 
     public void outtakeLeft(double baseSpeed) {
-        rightOuttake.set(baseSpeed*slowSpeedModifier);
+        rightOuttake.set(-(baseSpeed*slowSpeedModifier));
         leftOuttake.set(baseSpeed*fastSpeedModifier*leftOuttakeModifier);
     }
 
@@ -58,8 +55,13 @@ public class SideOuttake extends Subsystem{
     }
 
     public void intakeCarriage() {
-        leftOuttake.set(.5);
-        rightOuttake.set(-.5);
+        leftOuttake.set(.4);
+        rightOuttake.set(.4);
+    }
+
+    public void update(){
+        SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
+        SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
     }
 
     public boolean hasCargo() {
