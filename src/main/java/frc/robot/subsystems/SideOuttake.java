@@ -33,7 +33,6 @@ public class SideOuttake extends Subsystem{
 
     DigitalInput leftInfrared = new DigitalInput(RobotMap.DIO.LEFT_INFRARED);
     DigitalInput rightInfrared = new DigitalInput(RobotMap.DIO.RIGHT_INFRARED);
-    DigitalInput cargoDetector = new DigitalInput(RobotMap.DIO.CARGO_DETECTOR_OUTTAKE);
 
     public SideOuttake() {
         SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
@@ -60,10 +59,6 @@ public class SideOuttake extends Subsystem{
     public void intakeCarriage() {
         leftOuttake.set(.5);
         rightOuttake.set(-.5);
-    }
-
-    public boolean hasCargo() {
-        return cargoDetector.get();
     }
 
     public boolean getRightInfrared() {

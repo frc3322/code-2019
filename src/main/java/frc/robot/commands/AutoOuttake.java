@@ -12,7 +12,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.SideOuttake;
 import java.util.Timer;
 import java.util.TimerTask;
 

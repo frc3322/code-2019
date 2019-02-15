@@ -15,16 +15,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.SPI;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.LinkedHashMap;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -87,12 +82,6 @@ public class Drivetrain extends PIDSubsystem {
         encoders[RIGHT_FRONT] = motors[RIGHT_FRONT].getEncoder();
 
         shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
-
-        double leftEncoders = (encoders[LEFT_BACK].getPosition() + encoders[LEFT_FRONT].getPosition())/2;
-        double rightEncoders = (encoders[RIGHT_BACK].getPosition() + encoders[RIGHT_FRONT].getPosition())/2;
-
-        SpeedControllerGroup leftGroup = new SpeedControllerGroup(motors[LEFT_BACK], motors[LEFT_FRONT]);
-        SpeedControllerGroup rightGroup = new SpeedControllerGroup(motors[RIGHT_BACK], motors[RIGHT_FRONT]);
 
         robotDrive = new DifferentialDrive(motors[LEFT_FRONT], motors[RIGHT_FRONT]);
 

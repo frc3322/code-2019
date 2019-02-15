@@ -53,6 +53,7 @@ public class OI {
         button_start_lower.whileHeld(new HotMessClimb());
         button_back_lower.whileHeld(new HotMessReverse());
         bumper_right_lower.whenPressed(new GrabHatch());
+        bumper_right_lower.whileHeld(new AutoOuttake());
         left_stick.whenPressed(new ToggleShift());
 
         //upperChassis controller
@@ -60,7 +61,8 @@ public class OI {
         button_b.whenPressed(new GoToLevel(2));
         button_a.whenPressed(new GoToLevel(1));
         button_x.whenPressed(new GoToLevel(0));
-        button_back_upper.whenPressed(new IntakeCargo());
+        button_back_upper.whileHeld(new IntakeCargo());
+        button_back_upper.whenReleased(new IntakeIdle());
         button_start_upper.whenPressed(new ExtendHatchManip());
         bumper_left_upper.whenPressed(new ToggleIntake());
         bumper_right_upper.whenPressed(new GrabHatch());

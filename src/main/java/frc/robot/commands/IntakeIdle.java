@@ -12,6 +12,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.wideintake;
 
 public class IntakeIdle extends Command {
@@ -21,10 +22,9 @@ public class IntakeIdle extends Command {
     }
 
     @Override
-    protected void execute() {
-  
+    protected void execute() { 
         wideintake.intakeStop();
-
+        sideouttake.outtakeStop();
     }
 
     @Override

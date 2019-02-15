@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         drivetrain.updateDrivetrain();
         hatchManip.updateHatch();
+        elevator.stopAtGoal();
     }
 
     /**
