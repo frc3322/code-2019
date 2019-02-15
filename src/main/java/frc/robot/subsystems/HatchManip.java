@@ -23,8 +23,6 @@ public class HatchManip extends Subsystem {
 
     DoubleSolenoid hatchGrabber = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.GRAB_HATCH, RobotMap.PCM.RELEASE_HATCH);
     DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
-    
-    DigitalInput hatchDetector = new DigitalInput(RobotMap.DIO.HATCH_DETECTOR);
 
     public void updateHatch() {
         SmartDashboard.putBoolean("hatchGrabberActivated", !hatchGrabberActivated());
@@ -77,10 +75,6 @@ public class HatchManip extends Subsystem {
 
     public boolean hatchGrabberExtended() {
         return grabberExtender.get() == DoubleSolenoid.Value.kForward;
-    }
-
-    public boolean hasHatch() {
-        return hatchDetector.get();
     }
 
     @Override

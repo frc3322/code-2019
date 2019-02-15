@@ -45,16 +45,12 @@ public class RobotMap {
         public static final int RIGHT_INFRARED = 1;
 
       //elevator
-        public static final int HALL_EFFECT_LEVEL_0 = 4;
-        public static final int HALL_EFFECT_LEVEL_1 = 5;
-        public static final int HALL_EFFECT_LEVEL_2 = 6;
-        public static final int HALL_EFFECT_LEVEL_3 = 7;
-        public static final int ELEVATOR_M_ENCODER_1_A = 8;
-        public static final int ELEVATOR_M_ENCODER_1_B = 9;
-        // public static final int ELEVATOR_M_ENCODER_2_A = 11;
-        // public static final int ELEVATOR_M_ENCODER_2_B = 12;
-        // public static final int ELEVATOR_TRACK_ENCODER_A = 13;
-        // public static final int ELEVATOR_TRACK_ENCODER_B = 14;
+        public static final int HALL_EFFECT_LEVEL_0 = 2;
+        public static final int HALL_EFFECT_LEVEL_1 = 3;
+        public static final int HALL_EFFECT_LEVEL_2 = 4;
+        public static final int HALL_EFFECT_LEVEL_3 = 5;
+        public static final int ELEVATOR_M_ENCODER_A = 6;
+        public static final int ELEVATOR_M_ENCODER_B = 7;
 
     }
 

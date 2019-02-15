@@ -87,6 +87,7 @@ public class Robot extends TimedRobot {
         sideouttake.update();
         drivetrain.updateDrivetrain();
         hatchManip.updateHatch();
+        elevator.stopAtGoal();
     }
 
     /**
