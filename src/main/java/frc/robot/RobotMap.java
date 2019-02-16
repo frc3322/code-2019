@@ -36,13 +36,13 @@ public class RobotMap {
     }
 
     public static class DIO {
-        public static final int CARGO_DETECTOR_INTAKE = 2;
-        public static final int CARGO_DETECTOR_OUTTAKE = 3;
+        public static final int CARGO_DETECTOR_INTAKE = 3;
+        public static final int CARGO_DETECTOR_OUTTAKE = 2;
 
         public static final int HATCH_DETECTOR = 10;
 
-        public static final int LEFT_INFRARED = 0;
-        public static final int RIGHT_INFRARED = 1;
+        public static final int LEFT_INFRARED = 1;
+        public static final int RIGHT_INFRARED = 0;
 
       //elevator
         public static final int HALL_EFFECT_LEVEL_0 = 2;

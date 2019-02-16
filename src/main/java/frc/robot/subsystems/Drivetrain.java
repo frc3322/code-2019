@@ -47,9 +47,9 @@ public class Drivetrain extends PIDSubsystem {
                       RIGHT_BACK = 2,
                       RIGHT_FRONT = 3;
 
-    private static final double kP = 0,
+    private static final double kP = 0.5,
                          kI = 0,
-                         kD = 0;
+                         kD = 0.1;
 
     public double PIDOutput = 0;
 
@@ -74,7 +74,9 @@ public class Drivetrain extends PIDSubsystem {
 
     public Drivetrain() {
         super("TurnToAnglePID", kP, kI, kD);
-
+        setAbsoluteTolerance(2.5);
+        getPIDController().setContinuous(false);
+        
         navx = new AHRS(SPI.Port.kMXP);
 
         motors[LEFT_BACK] = new CANSparkMax(RobotMap.CAN.LEFT_BACK_MOTOR, MotorType.kBrushless);
@@ -113,6 +115,7 @@ public class Drivetrain extends PIDSubsystem {
         SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
         SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
         SmartDashboard.putBoolean("Straight Mode", straightModeRun);
+        //SmartDashboard.putData("Turn PID", getPIDController().)
     }
 
     public double getVoltage(int n) {
@@ -239,12 +242,15 @@ public class Drivetrain extends PIDSubsystem {
         super.setSetpoint(setpoint);
     }
 
+    @Override
     public double returnPIDInput(){
         return navx.getAngle();
     }
 
+    @Override
     public void usePIDOutput(double output){
-        drive(0,output);
+        drive(0, output);
+        SmartDashboard.putNumber("PID Output", output);
     }
 
     public double degreeToRadian(double degree) {       
