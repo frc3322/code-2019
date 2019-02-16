@@ -75,6 +75,8 @@ public class Drivetrain extends PIDSubsystem {
     public Drivetrain() {
         super("TurnToAnglePID", kP, kI, kD);
         setAbsoluteTolerance(2.5);
+        setInputRange(-180.0, 180.0);
+        setOutputRange(-1.0, 1.0);
         getPIDController().setContinuous(false);
         
         navx = new AHRS(SPI.Port.kMXP);
