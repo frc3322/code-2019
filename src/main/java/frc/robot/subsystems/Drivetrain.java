@@ -96,7 +96,7 @@ public class Drivetrain extends Subsystem {
         lastShift = System.currentTimeMillis() - 2000;
         runDelay = System.currentTimeMillis();
         
-        pidForDriveStraight = new PIDController(0.0415, 0, 0, new PIDSource(){
+        pidForDriveStraight = new PIDController(0.0315, 0, 0, new PIDSource(){
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
             @Override
@@ -195,7 +195,7 @@ public class Drivetrain extends Subsystem {
 
             if (straightModeRun) {
                 //pid command for driving straight
-                drive(speed, pidOutputForDriveStraight);
+                tankDrive(speed - pidOutputForDriveStraight / 2, speed + pidOutputForDriveStraight / 2);
             } else {
                 drive(speed, rotation);
             }
@@ -207,7 +207,7 @@ public class Drivetrain extends Subsystem {
 
                 straightModeStart = false;
                 straightModeRun = false; 
-                
+
                 pidForDriveStraight.disable();
 
             }
