@@ -83,7 +83,7 @@ public class Elevator extends PIDSubsystem {
 
     @Override
     public void initDefaultCommand() {
-        //setDefaultCommand(new ElevatorControl()); // run elevator command in Commands
+        setDefaultCommand(new ElevatorControl()); // run elevator command in Commands
     }
 
     public boolean atLevel0() {

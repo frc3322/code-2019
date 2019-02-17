@@ -45,12 +45,14 @@ public class ElevatorControl extends Command {
 	protected void execute() {
         double moveInput = (oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS)) * elevator.downSpeedModifier;
         
-
+        /*
         if((moveInput > 0 && elevator.atLevel3()) || (moveInput < 0 && elevator.atLevel0())) {
             moveInput = 0;
         } else { 
             elevator.move(moveInput * 0.5);
         }
+        */
+        elevator.move(moveInput * .5);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

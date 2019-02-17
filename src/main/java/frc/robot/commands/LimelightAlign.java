@@ -33,22 +33,25 @@ public class LimelightAlign extends Command {
 
     @Override
     protected void initialize(){
-        drivetrain.getPIDController().enable();
-        drivetrain.getPIDController().setEnabled(true);
-        drivetrain.setSetpoint(drivetrain.getAngle() + 90);
+        //drivetrain.getPIDController().enable();
+        //drivetrain.setSetpoint(drivetrain.getAngle() + 270);
+
+        
     }
     
     @Override
     protected void execute() {
+        
     }
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;//drivetrain.onTarget();
     }
 
     @Override
     protected void end() {
-
+        //drivetrain.getPIDController().disable();
+        //drivetrain.stop();
     }
 }

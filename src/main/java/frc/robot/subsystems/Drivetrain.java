@@ -20,14 +20,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SPI;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.LinkedHashMap;
-
-
-import com.kauailabs.navx.frc.AHRS;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
@@ -36,7 +30,7 @@ import frc.robot.Constants;
 /**
  * Code for drive train
  */
-public class Drivetrain extends PIDSubsystem {
+public class Drivetrain extends Subsystem {
   
     private DifferentialDrive robotDrive;
 
@@ -46,13 +40,7 @@ public class Drivetrain extends PIDSubsystem {
                       LEFT_FRONT = 1,
                       RIGHT_BACK = 2,
                       RIGHT_FRONT = 3;
-
-    private static final double kP = 0.5,
-                         kI = 0,
-                         kD = 0.1;
-
-    public double PIDOutput = 0;
-
+                    
     double previousThrottle = 0,
             previousTurn = 0,
             maxTurnDelta = .05,
@@ -73,11 +61,6 @@ public class Drivetrain extends PIDSubsystem {
     private double runDelay, lastShift;
 
     public Drivetrain() {
-        super("TurnToAnglePID", kP, kI, kD);
-        setAbsoluteTolerance(2.5);
-        setInputRange(-180.0, 180.0);
-        setOutputRange(-1.0, 1.0);
-        getPIDController().setContinuous(false);
         
         navx = new AHRS(SPI.Port.kMXP);
 
@@ -107,6 +90,7 @@ public class Drivetrain extends PIDSubsystem {
         lastShift = System.currentTimeMillis() - 2000;
         runDelay = System.currentTimeMillis();
 
+        
     }
 
     public void updateDrivetrain() {
@@ -116,9 +100,10 @@ public class Drivetrain extends PIDSubsystem {
         SmartDashboard.putBoolean("Is Low Gear", isLowGear());
         SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
         SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
-        SmartDashboard.putBoolean("Straight Mode", straightModeRun);
-        //SmartDashboard.putData("Turn PID", getPIDController().)
+        SmartDashboard.putBoolean("Straight Mode", straightModeRun);      
     }
+
+    
 
     public double getVoltage(int n) {
         return motors[n].getBusVoltage();
@@ -144,6 +129,10 @@ public class Drivetrain extends PIDSubsystem {
 
         robotDrive.arcadeDrive(speed, rotation);
 
+    }
+
+    public void tankDrive(double leftSpeed, double rightSpeed) {
+        robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     public void driveStraight(double speed, double rotation){
@@ -237,22 +226,6 @@ public class Drivetrain extends PIDSubsystem {
             }
         }
        
-    }
-
-    @Override
-    public void setSetpoint(double setpoint) {
-        super.setSetpoint(setpoint);
-    }
-
-    @Override
-    public double returnPIDInput(){
-        return navx.getAngle();
-    }
-
-    @Override
-    public void usePIDOutput(double output){
-        drive(0, output);
-        SmartDashboard.putNumber("PID Output", output);
     }
 
     public double degreeToRadian(double degree) {       

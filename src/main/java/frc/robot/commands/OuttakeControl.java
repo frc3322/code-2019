@@ -33,9 +33,9 @@ public class OuttakeControl extends Command{
     @Override
     protected void execute() {
         if(oi.upperChassis.getRawAxis(RIGHT_AXIS) > 0){
-            sideouttake.outtakeRight(Math.sqrt(oi.upperChassis.getRawAxis(RIGHT_AXIS)));
+            sideouttake.outtakeRight(Math.sqrt(oi.lowerChassis.getRawAxis(RIGHT_AXIS)));
         } else if(oi.upperChassis.getRawAxis(LEFT_AXIS) > 0){
-            sideouttake.outtakeLeft(Math.sqrt(oi.upperChassis.getRawAxis(LEFT_AXIS)));
+            sideouttake.outtakeLeft(Math.sqrt(oi.lowerChassis.getRawAxis(LEFT_AXIS)));
         } else {
             sideouttake.outtakeStop();
         }
