@@ -16,6 +16,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -59,6 +63,9 @@ public class Drivetrain extends Subsystem {
     private boolean straightModeStart, straightModeRun;
     private double runDelay, lastShift;
 
+    private PIDController pidForDriveStraight;
+    private double pidOutputForDriveStraight;
+
     public Drivetrain() {
         
         navx = new AHRS(SPI.Port.kMXP);
@@ -88,8 +95,41 @@ public class Drivetrain extends Subsystem {
 
         lastShift = System.currentTimeMillis() - 2000;
         runDelay = System.currentTimeMillis();
-
         
+        pidForDriveStraight = new PIDController(0.0415, 0, 0, new PIDSource(){
+            PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
+
+            @Override
+            public void setPIDSourceType(PIDSourceType pidSource) {
+                m_sourceType = pidSource;
+            }
+        
+            @Override
+            public double pidGet() {
+                return navx.getYaw();
+            }
+        
+            @Override
+            public PIDSourceType getPIDSourceType() {
+                return m_sourceType;
+            }
+        }, new PIDOutput(){
+
+            @Override
+            public void pidWrite(double output) {
+                
+                pidOutputForDriveStraight = output;
+
+            }
+
+        });
+
+        pidForDriveStraight.setAbsoluteTolerance(3);
+		pidForDriveStraight.setInputRange(-180.0f,  180.0f);
+		pidForDriveStraight.setOutputRange(-1.0, 1.0);
+		pidForDriveStraight.setContinuous(true);
+		pidForDriveStraight.setSetpoint(0);
+
     }
 
     public void updateDrivetrain() {
@@ -134,7 +174,7 @@ public class Drivetrain extends Subsystem {
         robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
-    public void driveStraight(double speed, double rotation){
+    public void driveStraight(Double speed, double rotation){
 
         if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){
             if (!straightModeStart) {
@@ -146,12 +186,16 @@ public class Drivetrain extends Subsystem {
             // Wait a bit before setting our desired angle
             if (System.currentTimeMillis() - runDelay > 250 && !straightModeRun) {
                 //initialize pid code here
+                navx.reset();
+		        pidForDriveStraight.reset();
+                pidForDriveStraight.enable();
+                
                 straightModeRun = true;
             }
 
             if (straightModeRun) {
                 //pid command for driving straight
-                drive(speed, 0);
+                drive(speed, pidOutputForDriveStraight);
             } else {
                 drive(speed, rotation);
             }
@@ -159,8 +203,14 @@ public class Drivetrain extends Subsystem {
 
         }else{
 
-            straightModeStart = false;
-            straightModeRun = false;
+            if(straightModeStart){
+
+                straightModeStart = false;
+                straightModeRun = false; 
+                
+                pidForDriveStraight.disable();
+
+            }
 
             drive(speed, rotation);
 

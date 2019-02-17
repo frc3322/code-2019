@@ -12,10 +12,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.*;
-
 import static frc.robot.Robot.drivetrain;
-import static frc.robot.Robot.oi;
 
 /**
  * Drive until the robot is the given angle away from the box. Uses a local

@@ -11,27 +11,30 @@
 package frc.robot;
 
 public class RobotMap {
+    public static boolean isRobotP1 = false;
 
     public static class CAN {
-
-        //drivetrain
-        public static final int LEFT_FRONT_MOTOR = 37;
-        public static final int LEFT_BACK_MOTOR = 35;
-        public static final int RIGHT_FRONT_MOTOR = 36;
-        public static final int RIGHT_BACK_MOTOR = 34;
+        
+        //TODO: add in P2 motor controller IDs 
+        
+        //drivetrain                                            P1  P2
+        public static final int LEFT_FRONT_MOTOR = (isRobotP1 ? 37 : 43);
+        public static final int LEFT_BACK_MOTOR = (isRobotP1 ? 35 : 44);
+        public static final int RIGHT_FRONT_MOTOR = (isRobotP1 ? 36 : 41);
+        public static final int RIGHT_BACK_MOTOR = (isRobotP1 ? 34 : 42);
 
         //hot mess
-        public static final int HOTMESS_MOTOR1 = 39;
-        public static final int HOTMESS_MOTOR2 = 40;
+        public static final int HOTMESS_MOTOR1 = (isRobotP1 ? 39 : 45);
+        public static final int HOTMESS_MOTOR2 = (isRobotP1 ? 40 : 46);
 
         //cargo
-        public static final int L_SIDE_OUTTAKE = 20;
-        public static final int R_SIDE_OUTTAKE = 21;
-        public static final int INTAKE_MOTOR = 19;
+        public static final int L_SIDE_OUTTAKE = (isRobotP1 ? 20 : 20);
+        public static final int R_SIDE_OUTTAKE = (isRobotP1 ? 21 : 21);
+        public static final int INTAKE_MOTOR = (isRobotP1 ? 19 : 19);
 
         //elevator
-        public static final int ELEVATOR_MOTOR_1 = 23;
-        public static final int ELEVATOR_MOTOR_2 = 22;
+        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 23 : 23);
+        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 22 : 22);
 
     }
 
