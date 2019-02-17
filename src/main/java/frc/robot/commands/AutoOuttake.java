@@ -37,9 +37,9 @@ public class AutoOuttake extends Command {
             while(outtaking) {
                 drivetrain.stop();
                 if (sideouttake.getRightInfrared()) {
-                    sideouttake.outtakeRight(0.75);
+                    //sideouttake.outtakeRight(0.75);
                 } else {
-                    sideouttake.outtakeLeft(0.75);
+                    //sideouttake.outtakeLeft(0.75);
                 }
                 //Timer.delay(2)?
                 new Timer().schedule( 

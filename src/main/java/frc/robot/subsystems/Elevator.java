@@ -11,6 +11,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -34,9 +35,9 @@ public class Elevator extends PIDSubsystem {
     private double upSpeed = 0.2; // temp
     private double downSpeed = -0.2; // temp
     private double bottom = 0;
-    private double firstLevel = 10; // temp
-    private double secondLevel = 20; // temp
-    private double thirdLevel = 30; // temp
+    private double firstLevel = 1000; // temp
+    private double secondLevel = 2000; // temp
+    private double thirdLevel = 3000; // temp
     public double pidSpeed;
     public double downSpeedModifier = .75;
 
@@ -51,25 +52,19 @@ public class Elevator extends PIDSubsystem {
     DigitalInput hallEffectLevel3;
 
     public Elevator() {
-        super("Elevator PID", 0, 0, 0, 0);
-        setAbsoluteTolerance(0.05);
+        super("Elevator PID", .03, 0, 0);
+        setAbsoluteTolerance(100);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
 
-        elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_M_ENCODER_A, RobotMap.DIO.ELEVATOR_M_ENCODER_B);
+        elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B);
         
         elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
         elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
 
-        // CANSparkMax elevatorMotor1 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_1, MotorType.kBrushless);
-        // CANSparkMax elevatorMotor2 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_2, MotorType.kBrushless);
-        
-        hallEffectLevel0 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_0);
-        hallEffectLevel1 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_1);
-        hallEffectLevel2 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_2);
-        hallEffectLevel3 = new DigitalInput(RobotMap.DIO.HALL_EFFECT_LEVEL_3);
-
         elevatorMotor1.setInverted(true);
+        elevatorMotor2.setInverted(true);
+
         elevatorMotor2.follow(elevatorMotor1);
         elevator = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
         
@@ -81,25 +76,17 @@ public class Elevator extends PIDSubsystem {
         this.downSpeed = downSpeed;
     }
 
+    public void update() {
+        SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getDistance());
+    }
+
+    public void reset() {
+        elevatorEncoder.reset();
+    }
+
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new ElevatorControl()); // run elevator command in Commands
-    }
-
-    public boolean atLevel0() {
-        return hallEffectLevel0.get();
-    }
-
-    public boolean atLevel1() {
-        return hallEffectLevel1.get();
-    }
-
-    public boolean atLevel2() {
-        return hallEffectLevel2.get();
-    }
-
-    public boolean atLevel3() {
-        return hallEffectLevel3.get();
     }
 
     public void moveUp() { // move at current upSpeed
@@ -146,24 +133,6 @@ public class Elevator extends PIDSubsystem {
         }
         //elevator.set(pidSpeed);
 
-    }
-
-    public void stopAtGoal() {
-        if(hallEffectLevel0.get() && desiredLevel == 0) {
-            elevator.stopMotor();
-        }
-
-        if(hallEffectLevel1.get() && desiredLevel == 1) {
-            elevator.stopMotor();
-        }
-
-        if(hallEffectLevel2.get() && desiredLevel == 2) {
-            elevator.stopMotor();
-        }
-
-        if(hallEffectLevel3.get() && desiredLevel == 3) {
-            elevator.stopMotor();
-        }
     }
 
     @Override

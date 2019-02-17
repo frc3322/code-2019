@@ -52,7 +52,7 @@ public class ElevatorControl extends Command {
             elevator.move(moveInput * 0.5);
         }
         */
-        elevator.move(moveInput * .5);
+        elevator.move(moveInput);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

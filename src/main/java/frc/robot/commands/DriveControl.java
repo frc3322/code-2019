@@ -28,6 +28,7 @@ public class DriveControl extends Command {
     private int speedPow = 1;
     private int turnPow = 3;
     private double deadZone = 0;
+    private double rotationModifier= 0;
 
     private double maxSpeed = 1;
 
@@ -43,8 +44,23 @@ public class DriveControl extends Command {
     @Override
     protected void execute() {
 
-        double speed = oi.lowerChassis.getRawAxis(SPEED_AXIS)  * 0.5;
-        double turn = -oi.lowerChassis.getRawAxis(ROTATION_AXIS) * 0.5;
+        double speed = oi.lowerChassis.getRawAxis(SPEED_AXIS);
+
+        if(speed > 0 || speed < 0) {
+            rotationModifier = 0.775;
+        } else {
+            rotationModifier = 0.6;
+        }
+
+        double turn = -oi.lowerChassis.getRawAxis(ROTATION_AXIS) * rotationModifier;
+
+        if(speed == 0) {
+            drivetrain.shiftLow();
+        }
+
+        if(drivetrain.isHighGear()) {
+            speed = .7;
+        }
         
         // speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, speedPow - 1)) : 0;
         // turn = (Math.abs(turn) > deadZone) ? turn * Math.abs(Math.pow(turn, turnPow - 1)) : 0;

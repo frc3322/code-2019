@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -46,8 +45,8 @@ public class Drivetrain extends Subsystem {
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
 
-    public int upShiftMidpoint = 530,
-                downShiftMidpoint = 1120;
+    public int upShiftMidpoint = 515,
+                downShiftMidpoint = 700; //TODO: Tweak the autoshift
 
     public AHRS navx;
 
@@ -211,7 +210,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public void autoShift() {
-        if(System.currentTimeMillis() - lastShift > 2000 && straightModeRun) {
+        if(System.currentTimeMillis() - lastShift > 800 && straightModeRun) {
             if(Math.abs(wheelRPM(LEFT_FRONT)) > upShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) > upShiftMidpoint){
                 if (!isHighGear()) {
                     shiftHigh();

@@ -28,9 +28,9 @@ public class IntakeCargo extends Command {
 
     @Override
     protected void execute() {
-        if(!elevator.atLevel0()) {
-            elevator.goToLevel(0);
-        }
+        //if(!elevator.atLevel0()) {
+        //    elevator.goToLevel(0);
+        //}
         wideintake.intakeStart();
         sideouttake.intakeCarriage();
     }

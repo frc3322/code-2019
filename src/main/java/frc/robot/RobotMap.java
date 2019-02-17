@@ -36,8 +36,8 @@ public class RobotMap {
     }
 
     public static class DIO {
-        public static final int CARGO_DETECTOR_INTAKE = 3;
-        public static final int CARGO_DETECTOR_OUTTAKE = 2;
+        public static final int CARGO_DETECTOR_INTAKE = 4;
+        public static final int CARGO_DETECTOR_OUTTAKE = 5;
 
         public static final int HATCH_DETECTOR = 10;
 
@@ -45,12 +45,8 @@ public class RobotMap {
         public static final int RIGHT_INFRARED = 0;
 
       //elevator
-        public static final int HALL_EFFECT_LEVEL_0 = 2;
-        public static final int HALL_EFFECT_LEVEL_1 = 3;
-        public static final int HALL_EFFECT_LEVEL_2 = 4;
-        public static final int HALL_EFFECT_LEVEL_3 = 5;
-        public static final int ELEVATOR_M_ENCODER_A = 6;
-        public static final int ELEVATOR_M_ENCODER_B = 7;
+      public static final int ELEVATOR_ENCODER_A = 2;
+      public static final int ELEVATOR_ENCODER_B = 3;
 
     }
 

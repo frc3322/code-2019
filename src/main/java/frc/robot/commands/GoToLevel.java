@@ -27,12 +27,24 @@ public class GoToLevel extends Command{
     }
 
     @Override
-    protected void execute() {
+    protected void initialize() {
+        elevator.enable();
         elevator.goToLevel(level);
     }
 
     @Override
-    protected boolean isFinished() {
-        return false;
+    protected void execute() {
+        
     }
+
+    @Override
+    protected boolean isFinished() {
+        return elevator.onTarget();
+    }
+
+    @Override
+    protected void end() {
+        elevator.disable();
+    }
+
 }
