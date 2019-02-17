@@ -33,7 +33,7 @@ public class TurnToAngle extends Command {
         calculatedP = 0.265196 * Math.pow(0.796868, Math.abs(angle)) + 0.0341779;
         SmartDashboard.putNumber("input angle", angle);
         SmartDashboard.putNumber("Caclulated P", calculatedP);
-		m_pid = new PIDController(0.0415, 0, 0, new PIDSource() {
+		m_pid = new PIDController(calculatedP, 0, 0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override
@@ -51,8 +51,9 @@ public class TurnToAngle extends Command {
 				return m_sourceType;
 			}
 		}, d -> drivetrain.tankDrive(-d/2, d/2));
-
-        if(angle >= 15){
+        if (angle >= 20){
+            tolerance = 7;
+        } else if(angle >= 15){
             tolerance = 5;
         } else if(angle < 15){
             tolerance = 3;

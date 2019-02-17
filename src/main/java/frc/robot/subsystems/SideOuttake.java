@@ -59,8 +59,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void update(){
-        SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
-        SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
+        SmartDashboard.putBoolean("Right Infrared", rightInfrared.get());
+        SmartDashboard.putBoolean("Left Infrared", leftInfrared.get());
     }
 
     public boolean getRightInfrared() {

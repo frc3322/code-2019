@@ -41,8 +41,8 @@ public class RobotMap {
 
         public static final int HATCH_DETECTOR = 10;
 
-        public static final int LEFT_INFRARED = 1;
-        public static final int RIGHT_INFRARED = 0;
+        public static final int LEFT_INFRARED = 0;
+        public static final int RIGHT_INFRARED = 1;
 
       //elevator
       public static final int ELEVATOR_ENCODER_A = 2;
