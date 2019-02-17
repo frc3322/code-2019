@@ -11,7 +11,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import static frc.robot.Robot.drivetrain;
@@ -25,9 +24,6 @@ public class DriveControl extends Command {
     private final int SPEED_AXIS;
     private final int ROTATION_AXIS;
 
-    private int speedPow = 1;
-    private int turnPow = 3;
-    private double deadZone = 0;
     private double rotationModifier= 0;
 
     private double maxSpeed = 1;

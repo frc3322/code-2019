@@ -11,12 +11,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import frc.robot.subsystems.Limelight;
 
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.limelight;
-import static frc.robot.Robot.hatchManip;
 
 /**
  * Add your docs here.
@@ -28,7 +25,6 @@ public class LimelightAlign extends Command {
     public LimelightAlign() {
         requires(drivetrain);
         requires(limelight);
-        requires(hatchManip);
     }
 
     @Override

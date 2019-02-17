@@ -16,8 +16,6 @@ import static frc.robot.Robot.elevator;
 import static frc.robot.Robot.oi;
 
 public class ElevatorControl extends Command {
-
-    private static int level=1;
     
     private final int UP_AXIS;
     private final int DOWN_AXIS;
