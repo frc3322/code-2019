@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.*;
 
-import static frc.robot.Robot.drivetrain;;
+import static frc.robot.Robot.drivetrain;
+import static frc.robot.Robot.oi;
 
 /**
  * Drive until the robot is the given angle away from the box. Uses a local
@@ -23,9 +26,14 @@ import static frc.robot.Robot.drivetrain;;
 public class TurnToAngle extends Command {
 	private PIDController m_pid;
 
+    double calculatedP;
+    double tolerance;
 	public TurnToAngle(double angle) {
-		requires(drivetrain);
-		m_pid = new PIDController(0.025, 0, 0, new PIDSource() {
+        requires(drivetrain);
+        calculatedP = 0.265196 * Math.pow(0.796868, Math.abs(angle)) + 0.0341779;
+        SmartDashboard.putNumber("input angle", angle);
+        SmartDashboard.putNumber("Caclulated P", calculatedP);
+		m_pid = new PIDController(0.0415, 0, 0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override
@@ -44,7 +52,13 @@ public class TurnToAngle extends Command {
 			}
 		}, d -> drivetrain.tankDrive(-d/2, d/2));
 
-		m_pid.setAbsoluteTolerance(5.0);
+        if(angle >= 15){
+            tolerance = 5;
+        } else if(angle < 15){
+            tolerance = 3;
+        }
+
+		m_pid.setAbsoluteTolerance(tolerance);
 		m_pid.setInputRange(-180.0f,  180.0f);
 		m_pid.setOutputRange(-1.0, 1.0);
 		m_pid.setContinuous(true);
