@@ -48,8 +48,9 @@ public class TurnToAngle extends Command {
 				return m_sourceType;
 			}
 		}, d -> drivetrain.tankDrive(-d/2, d/2));
-
-        if(angle >= 15){
+        if (angle >= 20){
+            tolerance = 7;
+        } else if(angle >= 15){
             tolerance = 5;
         } else if(angle < 15){
             tolerance = 3;
