@@ -63,8 +63,8 @@ public class Drivetrain extends Subsystem {
     private boolean straightModeStart, straightModeRun;
     private double runDelay, lastShift;
 
-    private PIDController pidForDriveStraight;
-    private double pidOutputForDriveStraight;
+    //private PIDController pidForDriveStraight;
+    //private double pidOutputForDriveStraight;
 
     public Drivetrain() {
         
@@ -87,8 +87,8 @@ public class Drivetrain extends Subsystem {
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        motors[LEFT_FRONT].setRampRate(.5);
-        motors[RIGHT_FRONT].setRampRate(.5);
+        motors[LEFT_FRONT].setClosedLoopRampRate(.5);
+        motors[RIGHT_FRONT].setClosedLoopRampRate(.5);
 
         straightModeStart = false;
         straightModeRun = false;
@@ -96,39 +96,39 @@ public class Drivetrain extends Subsystem {
         lastShift = System.currentTimeMillis() - 2000;
         runDelay = System.currentTimeMillis();
         
-        pidForDriveStraight = new PIDController(0.0415, 0, 0, new PIDSource(){
-            PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
+        // pidForDriveStraight = new PIDController(0.0415, 0, 0, new PIDSource(){
+        //     PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
-            @Override
-            public void setPIDSourceType(PIDSourceType pidSource) {
-                m_sourceType = pidSource;
-            }
+        //     @Override
+        //     public void setPIDSourceType(PIDSourceType pidSource) {
+        //         m_sourceType = pidSource;
+        //     }
         
-            @Override
-            public double pidGet() {
-                return navx.getYaw();
-            }
+        //     @Override
+        //     public double pidGet() {
+        //         return navx.getYaw();
+        //     }
         
-            @Override
-            public PIDSourceType getPIDSourceType() {
-                return m_sourceType;
-            }
-        }, new PIDOutput(){
+        //     @Override
+        //     public PIDSourceType getPIDSourceType() {
+        //         return m_sourceType;
+        //     }
+        // }, new PIDOutput(){
 
-            @Override
-            public void pidWrite(double output) {
+        //     @Override
+        //     public void pidWrite(double output) {
                 
-                pidOutputForDriveStraight = output;
+        //         pidOutputForDriveStraight = output;
 
-            }
+        //     }
 
-        });
+        // });
 
-        pidForDriveStraight.setAbsoluteTolerance(3);
-		pidForDriveStraight.setInputRange(-180.0f,  180.0f);
-		pidForDriveStraight.setOutputRange(-1.0, 1.0);
-		pidForDriveStraight.setContinuous(true);
-		pidForDriveStraight.setSetpoint(0);
+        // pidForDriveStraight.setAbsoluteTolerance(3);
+		// pidForDriveStraight.setInputRange(-180.0f,  180.0f);
+		// pidForDriveStraight.setOutputRange(-1.0, 1.0);
+		// pidForDriveStraight.setContinuous(true);
+		// pidForDriveStraight.setSetpoint(0);
 
     }
 
@@ -174,49 +174,49 @@ public class Drivetrain extends Subsystem {
         robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
-    public void driveStraight(Double speed, double rotation){
+    // public void driveStraight(Double speed, double rotation){
 
-        if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){
-            if (!straightModeStart) {
-                straightModeStart = true;
+    //     if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){
+    //         if (!straightModeStart) {
+    //             straightModeStart = true;
 
-                runDelay = System.currentTimeMillis();
-            }
+    //             runDelay = System.currentTimeMillis();
+    //         }
 
-            // Wait a bit before setting our desired angle
-            if (System.currentTimeMillis() - runDelay > 250 && !straightModeRun) {
-                //initialize pid code here
-                navx.reset();
-		        pidForDriveStraight.reset();
-                pidForDriveStraight.enable();
+    //         // Wait a bit before setting our desired angle
+    //         if (System.currentTimeMillis() - runDelay > 250 && !straightModeRun) {
+    //             //initialize pid code here
+    //             // navx.reset();
+	// 	        // pidForDriveStraight.reset();
+    //             // pidForDriveStraight.enable();
                 
-                straightModeRun = true;
-            }
+    //             straightModeRun = true;
+    //         }
 
-            if (straightModeRun) {
-                //pid command for driving straight
-                drive(speed, pidOutputForDriveStraight);
-            } else {
-                drive(speed, rotation);
-            }
+    //         if (straightModeRun) {
+    //             //pid command for driving straight
+    //             drive(speed, 0);
+    //         } else {
+    //             drive(speed, rotation);
+    //         }
 
 
-        }else{
+    //     }else{
 
-            if(straightModeStart){
+    //         if(straightModeStart){
 
-                straightModeStart = false;
-                straightModeRun = false; 
+    //             straightModeStart = false;
+    //             straightModeRun = false; 
                 
-                pidForDriveStraight.disable();
+    //             // pidForDriveStraight.disable();
 
-            }
+    //         }
 
-            drive(speed, rotation);
+    //         drive(speed, rotation);
 
-        }
+    //     }
 
-    }
+    // }
 
     public void stop(){
         drive(0, 0);
