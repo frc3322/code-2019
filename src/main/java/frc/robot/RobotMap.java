@@ -18,14 +18,14 @@ public class RobotMap {
         //TODO: add in P2 motor controller IDs 
         
         //drivetrain                                            P1  P2
-        public static final int LEFT_FRONT_MOTOR = (isRobotP1 ? 37 : 37);
-        public static final int LEFT_BACK_MOTOR = (isRobotP1 ? 35 : 35);
-        public static final int RIGHT_FRONT_MOTOR = (isRobotP1 ? 36 : 36);
-        public static final int RIGHT_BACK_MOTOR = (isRobotP1 ? 34 : 34);
+        public static final int LEFT_FRONT_MOTOR = (isRobotP1 ? 37 : 43);
+        public static final int LEFT_BACK_MOTOR = (isRobotP1 ? 35 : 44);
+        public static final int RIGHT_FRONT_MOTOR = (isRobotP1 ? 36 : 41);
+        public static final int RIGHT_BACK_MOTOR = (isRobotP1 ? 34 : 42);
 
         //hot mess
-        public static final int HOTMESS_MOTOR1 = (isRobotP1 ? 39 : 39);
-        public static final int HOTMESS_MOTOR2 = (isRobotP1 ? 40 : 40);
+        public static final int HOTMESS_MOTOR1 = (isRobotP1 ? 39 : 45);
+        public static final int HOTMESS_MOTOR2 = (isRobotP1 ? 40 : 46);
 
         //cargo
         public static final int L_SIDE_OUTTAKE = (isRobotP1 ? 20 : 20);
