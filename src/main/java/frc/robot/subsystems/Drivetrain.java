@@ -87,8 +87,8 @@ public class Drivetrain extends Subsystem {
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        motors[LEFT_FRONT].setClosedLoopRampRate(.5);
-        motors[RIGHT_FRONT].setClosedLoopRampRate(.5);
+        motors[LEFT_FRONT].setClosedLoopRampRate(.1);
+        motors[RIGHT_FRONT].setClosedLoopRampRate(.1);
 
         straightModeStart = false;
         straightModeRun = false;
