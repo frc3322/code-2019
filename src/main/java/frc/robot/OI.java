@@ -49,9 +49,10 @@ public class OI {
     public OI(){
 
         //lowerChassis controller
-        right_stick.whenPressed(new TurnToAngle(-16));
+        right_stick.whenPressed(new TurnToAngle(20));
         //right_stick.whenReleased(new TurnToAngle(0));
         //right_stick.whenPressed(new LimelightAlign());
+        bumper_left_lower.whileHeld(new AutoOuttake());
         button_start_lower.whileHeld(new HotMessClimb());
         button_back_lower.whileHeld(new HotMessReverse());
         bumper_right_lower.whenPressed(new GrabHatch());

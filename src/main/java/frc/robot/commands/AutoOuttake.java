@@ -18,10 +18,13 @@ import java.util.TimerTask;
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
+import static frc.robot.Robot.wideintake;
 
 public class AutoOuttake extends Command {
 
     public boolean outtaking;
+
+    public double lastOuttake;
 
     // long millisecondsToRun = 1000; // This should run 1000ms = 1 s.
     // long initTime = 
@@ -31,29 +34,18 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        drivetrain.driveStraight(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .55, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
+        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .55, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
         if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
             outtaking = true;
+            lastOuttake = System.currentTimeMillis();
             while(outtaking) {
                 drivetrain.stop();
-                if (sideouttake.getRightInfrared()) {
-                    //sideouttake.outtakeRight(0.75);
-                } else {
-                    //sideouttake.outtakeLeft(0.75);
+                wideintake.intakeStart();
+                if((System.currentTimeMillis() - lastOuttake) >= 2000) {
+                    outtaking = false;
+                    wideintake.intakeStop();
                 }
-                //Timer.delay(2)?
-                new Timer().schedule( 
-                    new TimerTask() {
-                        @Override
-                        public void run() {
-                            sideouttake.outtakeStop();
-                            outtaking = false;
-                        }
-                    }, 
-                    2000 
-                );
             }
-            
         }
     }
 
