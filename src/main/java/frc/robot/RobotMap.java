@@ -11,7 +11,7 @@
 package frc.robot;
 
 public class RobotMap {
-    public static boolean isRobotP1 = false;
+    public static boolean isRobotP1 = true;
 
     public static class CAN {
         
