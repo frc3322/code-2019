@@ -12,9 +12,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
