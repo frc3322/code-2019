@@ -71,7 +71,7 @@ public class DriveControl extends Command {
         }
         */
 
-        drivetrain.drive(speed, turn);
+        drivetrain.driveStraight(speed, turn);
         
     }
 
