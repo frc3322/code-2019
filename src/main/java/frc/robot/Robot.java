@@ -170,7 +170,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Left Front Output Current", drivetrain.getOutputCurrent(2));
         SmartDashboard.putNumber("Right Front Output Current", drivetrain.getOutputCurrent(3));
         */
-
+        SmartDashboard.putNumber("HotMess motor 1 current", hotMess.motor1.getOutputCurrent());
+        SmartDashboard.putNumber("HotMess motor 2 current", hotMess.motor2.getOutputCurrent());
     }
 
     /**

@@ -25,7 +25,7 @@ import frc.robot.commands.HotMessIdle;
  */
 public class HotMess extends Subsystem {
     
-    private CANSparkMax motor1,
+    public CANSparkMax motor1,
                         motor2;
     
     private CANEncoder encoder1,
@@ -71,7 +71,7 @@ public class HotMess extends Subsystem {
     }
 
     public void reverse() {
-        motorGroup.set(-.2);
+        motorGroup.set(-.1);
     }
 
     public double getEncoderVal(){
