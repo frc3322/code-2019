@@ -15,7 +15,7 @@ public class RobotMap {
 
     public static class CAN {
         
-        //TODO: add in P2 motor controller IDs 
+        //TODO: add in P2 Talon IDs
         
         //drivetrain                                            P1  P2
         public static final int LEFT_FRONT_MOTOR = (isRobotP1 ? 37 : 43);
