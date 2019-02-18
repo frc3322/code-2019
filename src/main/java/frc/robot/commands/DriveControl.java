@@ -55,7 +55,7 @@ public class DriveControl extends Command {
         }
 
         if(drivetrain.isHighGear()) {
-            speed = .7;
+            speed = speed * .85;
         }
         
         // speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, speedPow - 1)) : 0;

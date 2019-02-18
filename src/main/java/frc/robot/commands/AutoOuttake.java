@@ -27,21 +27,32 @@ public class AutoOuttake extends Command {
     public double lastOuttake;
 
     // long millisecondsToRun = 1000; // This should run 1000ms = 1 s.
-    // long initTime = 
+    // long initTime =
 
     public AutoOuttake() {
         requires(sideouttake);
     }
 
     protected void execute() {
-        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .55, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
-        if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
+        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .3, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
+        if (sideouttake.getRightInfrared()) {
             outtaking = true;
             lastOuttake = System.currentTimeMillis();
-            while(outtaking) {
+            while (outtaking) {
                 drivetrain.stop();
                 wideintake.intakeStart();
-                if((System.currentTimeMillis() - lastOuttake) >= 2000) {
+                if ((System.currentTimeMillis() - lastOuttake) >= 500) {
+                    outtaking = false;
+                    wideintake.intakeStop();
+                }
+            }
+        } else if (sideouttake.getLeftInfrared()) {
+            outtaking = true;
+            lastOuttake = System.currentTimeMillis();
+            while (outtaking) {
+                drivetrain.stop();
+                wideintake.intakeStart();
+                if ((System.currentTimeMillis() - lastOuttake) >= 500) {
                     outtaking = false;
                     wideintake.intakeStop();
                 }
