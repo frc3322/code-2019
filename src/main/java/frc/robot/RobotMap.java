@@ -81,7 +81,7 @@ public class RobotMap {
         public static final int BUTTON_BACK = 7;    // Retract Hot Mess         Intake procedure
         public static final int BUTTON_START = 8;   // Extend Hot Mess          Extend/Retract hatch gripper
         public static final int STICK_LEFT = 9;     // Gear shift
-        public static final int STICK_RIGHT = 10;   // Auto-align procedure
+        public static final int STICK_RIGHT = 10;   // Auto-alime procedure
 
        // Axes
         public static final int STICK_L_X_AXIS = 0; // Forward/backwards drive
@@ -95,10 +95,10 @@ public class RobotMap {
           (If any of this seems too difficult or too stupid to implement, talk to either Colt or Fish about it)
         
         
-        Auto-Align Procedure:
+        Auto-Alime Procedure:
           
           While button is held AND LimeLight can find targets:
-            Robot automatically and continuously aligns based on LimeLight input
+            Robot automatically and continuously alimes based on LimeLight input
             Driver 1 still has Left/Right control, but their input is mixed with the algorithm’s input
             Driver 1 still has full control over Forward/Backward, but speed is reduced
           
