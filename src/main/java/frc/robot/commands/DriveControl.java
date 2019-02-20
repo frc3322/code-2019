@@ -28,6 +28,7 @@ public class DriveControl extends Command {
 
     private double maxSpeed = 1;
 
+
     public DriveControl() {
 
         requires(drivetrain);
@@ -70,8 +71,12 @@ public class DriveControl extends Command {
             }
         }
         */
-
-        drivetrain.driveStraight(speed, turn);
+        if(drivetrain.limeControlling == false){
+            drivetrain.driveStraight(speed, turn);
+        } else {
+            drivetrain.limeDrive(speed);
+        }
+        
         
     }
 

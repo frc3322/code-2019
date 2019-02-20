@@ -30,6 +30,8 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
 import frc.robot.Constants;
 
+import static frc.robot.Robot.limelight;
+
 /**
  * Code for drive train
  */
@@ -65,6 +67,11 @@ public class Drivetrain extends Subsystem {
 
     private PIDController pidForDriveStraight;
     private double pidOutputForDriveStraight;
+
+    private PIDController limelightPID;
+    private double limelightPIDOutput;
+
+    public boolean limeControlling = false;
 
     public Drivetrain() {
         
@@ -126,7 +133,38 @@ public class Drivetrain extends Subsystem {
 		pidForDriveStraight.setInputRange(-180f, 180f);
 		pidForDriveStraight.setOutputRange(-.4, .4);
 		pidForDriveStraight.setContinuous(true);
-		pidForDriveStraight.setSetpoint(0);
+        pidForDriveStraight.setSetpoint(0);
+        
+        limelightPID = new PIDController(0.015, 0, 0, new PIDSource(){ //@jonathan
+            PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
+
+            @Override
+            public void setPIDSourceType(PIDSourceType pidSource) {
+                m_sourceType = pidSource;
+            }
+
+            @Override
+            public double pidGet() {
+                return navx.getYaw();
+            }
+
+            @Override
+            public PIDSourceType getPIDSourceType() {
+                return m_sourceType;
+            }
+        }, new PIDOutput() {
+
+            @Override
+            public void pidWrite(double output) {
+                limelightPIDOutput = output;
+            }
+
+        });
+
+        limelightPID.setAbsoluteTolerance(3);
+		limelightPID.setInputRange(-180f, 180f);
+		limelightPID.setOutputRange(-.4, .4);
+		limelightPID.setContinuous(true);
 
     }
 
@@ -170,6 +208,14 @@ public class Drivetrain extends Subsystem {
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
         robotDrive.tankDrive(leftSpeed, rightSpeed);
+    }
+
+    public void limeDrive(double speed) {
+        navx.reset();
+        limelightPID.setSetpoint(limelight.getTx());
+        limelightPID.reset();
+        limelightPID.enable();
+        tankDrive(speed - limelightPIDOutput, speed + limelightPIDOutput);
     }
 
     public void driveStraight(Double speed, double rotation){
@@ -239,7 +285,7 @@ public class Drivetrain extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new DriveControl());
+            setDefaultCommand(new DriveControl());
     }
 
     public void autoShift() {
