@@ -10,7 +10,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.robot.Robot.hotMess;
@@ -25,9 +24,7 @@ public class HotMessClimb extends Command{
 
     @Override
     protected void execute() {
-        if(Timer.getFPGATimestamp() > 120) {
-            hotMess.climb(.5);
-        }
+        hotMess.climb(1);
         //SmartDashboard.putNumber("HotMess Speed", RobotMap.XBOX)
     }
 

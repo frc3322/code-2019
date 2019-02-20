@@ -30,6 +30,8 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
 import frc.robot.Constants;
 
+import static frc.robot.Robot.limelight;
+
 /**
  * Code for drive train
  */
@@ -49,7 +51,7 @@ public class Drivetrain extends Subsystem {
             maxTurnDelta = .05,
             maxThrottleDelta = .05;
 
-    public int upShiftMidpoint = 515,
+    public int upShiftMidpoint = 510,
                 downShiftMidpoint = 700; //TODO: Tweak the autoshift
 
     public AHRS navx;
@@ -65,6 +67,12 @@ public class Drivetrain extends Subsystem {
 
     private PIDController pidForDriveStraight;
     private double pidOutputForDriveStraight;
+
+    private PIDController limelightPID;
+    private double limelightPIDOutput;
+
+    public boolean limeControlling = false;
+    public boolean outtakeControlling = false;
 
     public Drivetrain() {
         
@@ -96,7 +104,7 @@ public class Drivetrain extends Subsystem {
         lastShift = System.currentTimeMillis() - 2000;
         runDelay = System.currentTimeMillis();
         
-        pidForDriveStraight = new PIDController(0.0415, 0, 0, new PIDSource(){
+        pidForDriveStraight = new PIDController(0.015, 0, 0, new PIDSource(){ //@jonathan
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
             @Override
@@ -116,19 +124,48 @@ public class Drivetrain extends Subsystem {
         }, new PIDOutput(){
 
             @Override
-            public void pidWrite(double output) {
-                
+            public void pidWrite(double output) {       
                 pidOutputForDriveStraight = output;
-
-            }
+            } 
 
         });
 
         pidForDriveStraight.setAbsoluteTolerance(3);
-		pidForDriveStraight.setInputRange(-180.0f,  180.0f);
-		pidForDriveStraight.setOutputRange(-1.0, 1.0);
+		pidForDriveStraight.setInputRange(-180f, 180f);
+		pidForDriveStraight.setOutputRange(-.4, .4);
 		pidForDriveStraight.setContinuous(true);
-		pidForDriveStraight.setSetpoint(0);
+        pidForDriveStraight.setSetpoint(0);
+        
+        limelightPID = new PIDController(0.015, 0, 0, new PIDSource(){ //@jonathan
+            PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
+
+            @Override
+            public void setPIDSourceType(PIDSourceType pidSource) {
+                m_sourceType = pidSource;
+            }
+
+            @Override
+            public double pidGet() {
+                return navx.getYaw();
+            }
+
+            @Override
+            public PIDSourceType getPIDSourceType() {
+                return m_sourceType;
+            }
+        }, new PIDOutput() {
+
+            @Override
+            public void pidWrite(double output) {
+                limelightPIDOutput = output;
+            }
+
+        });
+
+        limelightPID.setAbsoluteTolerance(3);
+		limelightPID.setInputRange(-180f, 180f);
+		limelightPID.setOutputRange(-.4, .4);
+		limelightPID.setContinuous(true);
 
     }
 
@@ -139,10 +176,10 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putBoolean("Is Low Gear", isLowGear());
         SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
         SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
-        SmartDashboard.putBoolean("Straight Mode", straightModeRun);      
+        SmartDashboard.putBoolean("Straight Mode", straightModeRun);
+        SmartDashboard.putNumber("PID Output", pidOutputForDriveStraight);
+        SmartDashboard.putNumber("Setpoint", pidForDriveStraight.getSetpoint());
     }
-
-    
 
     public double getVoltage(int n) {
         return motors[n].getBusVoltage();
@@ -174,48 +211,41 @@ public class Drivetrain extends Subsystem {
         robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
-    public void driveStraight(Double speed, double rotation){
+    public void limeDrive(double speed) {
+        navx.reset();
+        limelightPID.setSetpoint(limelight.getTx());
+        limelightPID.reset();
+        limelightPID.enable();
+        tankDrive(speed - limelightPIDOutput, speed + limelightPIDOutput);
+    }
 
+    public void driveStraight(Double speed, double rotation){
         if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){
             if (!straightModeStart) {
                 straightModeStart = true;
-
                 runDelay = System.currentTimeMillis();
             }
-
             // Wait a bit before setting our desired angle
             if (System.currentTimeMillis() - runDelay > 250 && !straightModeRun) {
-                //initialize pid code here
-                // navx.reset();
-		        // pidForDriveStraight.reset();
-                // pidForDriveStraight.enable();
-                
+                navx.reset();
+		        pidForDriveStraight.reset();
+                pidForDriveStraight.enable();             
                 straightModeRun = true;
             }
-
             if (straightModeRun) {
-                //pid command for driving straight
-                drive(speed, 0);
+                tankDrive(speed - pidOutputForDriveStraight / 2, speed + pidOutputForDriveStraight / 2);
+                //drive(speed, pidOutputForDriveStraight);
             } else {
                 drive(speed, rotation);
             }
-
-
         }else{
-
             if(straightModeStart){
-
                 straightModeStart = false;
-                straightModeRun = false; 
-                
-                // pidForDriveStraight.disable();
-
+                straightModeRun = false;               
+                pidForDriveStraight.disable();
             }
-
             drive(speed, rotation);
-
         }
-
     }
 
     public void stop(){

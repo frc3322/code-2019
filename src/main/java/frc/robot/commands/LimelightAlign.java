@@ -12,6 +12,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import frc.robot.commands.DriveControl;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.limelight;
 
@@ -29,25 +30,12 @@ public class LimelightAlign extends Command {
 
     @Override
     protected void initialize(){
-        //drivetrain.getPIDController().enable();
-        //drivetrain.setSetpoint(drivetrain.getAngle() + 270);
-
-        
-    }
-    
-    @Override
-    protected void execute() {
+        drivetrain.limeControlling = true;
         
     }
 
     @Override
     protected boolean isFinished() {
-        return false;//drivetrain.onTarget();
-    }
-
-    @Override
-    protected void end() {
-        //drivetrain.getPIDController().disable();
-        //drivetrain.stop();
+        return true;
     }
 }

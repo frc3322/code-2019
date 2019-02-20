@@ -12,9 +12,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
@@ -27,23 +24,38 @@ public class AutoOuttake extends Command {
     public double lastOuttake;
 
     // long millisecondsToRun = 1000; // This should run 1000ms = 1 s.
-    // long initTime = 
+    // long initTime =
 
     public AutoOuttake() {
         requires(sideouttake);
     }
 
     protected void execute() {
-        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .55, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
-        if (sideouttake.getRightInfrared() || sideouttake.getLeftInfrared()) {
+        //drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS), -oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
+        if (sideouttake.getRightInfrared()) {
             outtaking = true;
+            drivetrain.outtakeControlling = true;
             lastOuttake = System.currentTimeMillis();
-            while(outtaking) {
+            while (outtaking) {
                 drivetrain.stop();
-                wideintake.intakeStart();
-                if((System.currentTimeMillis() - lastOuttake) >= 2000) {
+                sideouttake.outtakeRight(1);
+                if ((System.currentTimeMillis() - lastOuttake) >= 500) {
+                    sideouttake.outtakeStop();
                     outtaking = false;
-                    wideintake.intakeStop();
+                    drivetrain.outtakeControlling = false;
+                }
+            }
+        } else if (sideouttake.getLeftInfrared()) {
+            outtaking = true;
+            drivetrain.outtakeControlling = true;
+            lastOuttake = System.currentTimeMillis();
+            while (outtaking) {
+                drivetrain.stop();
+                sideouttake.outtakeLeft(1);
+                if ((System.currentTimeMillis() - lastOuttake) >= 500) {
+                    sideouttake.outtakeStop();
+                    outtaking = false;
+                    drivetrain.outtakeControlling = false;
                 }
             }
         }

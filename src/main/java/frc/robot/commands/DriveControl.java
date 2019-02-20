@@ -28,6 +28,7 @@ public class DriveControl extends Command {
 
     private double maxSpeed = 1;
 
+
     public DriveControl() {
 
         requires(drivetrain);
@@ -39,7 +40,7 @@ public class DriveControl extends Command {
 
     @Override
     protected void execute() {
-
+        if(!drivetrain.outtakeControlling){
         double speed = oi.lowerChassis.getRawAxis(SPEED_AXIS);
 
         if(speed > 0 || speed < 0) {
@@ -55,7 +56,7 @@ public class DriveControl extends Command {
         }
 
         if(drivetrain.isHighGear()) {
-            speed = .7;
+            speed = speed * .85;
         }
         
         // speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, speedPow - 1)) : 0;
@@ -70,8 +71,12 @@ public class DriveControl extends Command {
             }
         }
         */
-
-        drivetrain.driveStraight(speed, turn);
+        if(drivetrain.limeControlling == false){
+            drivetrain.driveStraight(speed, turn);
+        } else {
+            drivetrain.limeDrive(speed);
+        }
+    }
         
     }
 

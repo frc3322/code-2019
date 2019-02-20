@@ -15,7 +15,7 @@ public class RobotMap {
 
     public static class CAN {
         
-        //TODO: add in P2 motor controller IDs 
+        //TODO: add in P2 Talon IDs
         
         //drivetrain                                            P1  P2
         public static final int LEFT_FRONT_MOTOR = (isRobotP1 ? 37 : 43);
@@ -29,12 +29,12 @@ public class RobotMap {
 
         //cargo
         public static final int L_SIDE_OUTTAKE = (isRobotP1 ? 20 : 20);
-        public static final int R_SIDE_OUTTAKE = (isRobotP1 ? 21 : 21);
-        public static final int INTAKE_MOTOR = (isRobotP1 ? 19 : 19);
+        public static final int R_SIDE_OUTTAKE = (isRobotP1 ? 23 : 23);
+        public static final int INTAKE_MOTOR = (isRobotP1 ? 22 : 22);
 
-        //elevator
-        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 23 : 23);
-        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 22 : 22);
+        //elevator TODO: update to real IDs
+        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 24 : 24);
+        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 21 : 21);
 
     }
 
@@ -57,16 +57,16 @@ public class RobotMap {
 
         public static final int PCM_ID = 3;
 
-        public static final int SHIFT_GEAR_1 = 5;
-        public static final int SHIFT_GEAR_2 = 4;
+        public static final int SHIFT_GEAR_1 = 7;
+        public static final int SHIFT_GEAR_2 = 6;
         public static final int LOWER_MECHANISM = 0;
         public static final int RAISE_MECHANSIM = 1;
         public static final int GRAB_HATCH = 2;
         public static final int RELEASE_HATCH = 3;
         
 
-        public static final int INTAKE_EXTEND = 6;
-        public static final int INTAKE_RETRACT = 7;
+        public static final int INTAKE_EXTEND = 4;
+        public static final int INTAKE_RETRACT = 5;
  
     }
   

@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.HotMessIdle;
 
@@ -24,7 +25,7 @@ import frc.robot.commands.HotMessIdle;
  */
 public class HotMess extends Subsystem {
     
-    private CANSparkMax motor1,
+    public CANSparkMax motor1,
                         motor2;
     
     private CANEncoder encoder1,
@@ -49,9 +50,14 @@ public class HotMess extends Subsystem {
 
     }
 
+    public void update() {
+        SmartDashboard.putNumber("Motor Current 1", motor1.getOutputCurrent());
+        SmartDashboard.putNumber("Motor Current 2", motor2.getOutputCurrent());
+    }
+
     public void climb(double speed){
-        if(speed >= .5) {
-            speed = .5;
+        if(speed >= 1) {
+            speed = 1;
             motorGroup.set(speed);
         } else {
             motorGroup.set(speed);
@@ -65,7 +71,7 @@ public class HotMess extends Subsystem {
     }
 
     public void reverse() {
-        motorGroup.set(-.2);
+        motorGroup.set(-.1);
     }
 
     public double getEncoderVal(){
