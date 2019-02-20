@@ -31,16 +31,16 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .3, oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
+        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS), -oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
         if (sideouttake.getRightInfrared()) {
             outtaking = true;
             lastOuttake = System.currentTimeMillis();
             while (outtaking) {
                 drivetrain.stop();
-                wideintake.intakeStart();
+                sideouttake.outtakeRight(.7);
                 if ((System.currentTimeMillis() - lastOuttake) >= 500) {
                     outtaking = false;
-                    wideintake.intakeStop();
+                    sideouttake.outtakeStop();
                 }
             }
         } else if (sideouttake.getLeftInfrared()) {
@@ -48,10 +48,10 @@ public class AutoOuttake extends Command {
             lastOuttake = System.currentTimeMillis();
             while (outtaking) {
                 drivetrain.stop();
-                wideintake.intakeStart();
+                sideouttake.outtakeLeft(.7);
                 if ((System.currentTimeMillis() - lastOuttake) >= 500) {
                     outtaking = false;
-                    wideintake.intakeStop();
+                    sideouttake.outtakeStop();
                 }
             }
         }
