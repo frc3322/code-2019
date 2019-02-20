@@ -40,7 +40,7 @@ public class DriveControl extends Command {
 
     @Override
     protected void execute() {
-
+        if(!drivetrain.outtakeControlling){
         double speed = oi.lowerChassis.getRawAxis(SPEED_AXIS);
 
         if(speed > 0 || speed < 0) {
@@ -76,7 +76,7 @@ public class DriveControl extends Command {
         } else {
             drivetrain.limeDrive(speed);
         }
-        
+    }
         
     }
 

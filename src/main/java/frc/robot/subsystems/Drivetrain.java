@@ -72,6 +72,7 @@ public class Drivetrain extends Subsystem {
     private double limelightPIDOutput;
 
     public boolean limeControlling = false;
+    public boolean outtakeControlling = false;
 
     public Drivetrain() {
         
@@ -285,7 +286,7 @@ public class Drivetrain extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-            setDefaultCommand(new DriveControl());
+        setDefaultCommand(new DriveControl());
     }
 
     public void autoShift() {

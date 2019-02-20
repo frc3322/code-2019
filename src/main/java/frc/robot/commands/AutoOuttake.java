@@ -31,27 +31,31 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS), -oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
+        //drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS), -oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
         if (sideouttake.getRightInfrared()) {
             outtaking = true;
+            drivetrain.outtakeControlling = true;
             lastOuttake = System.currentTimeMillis();
             while (outtaking) {
                 drivetrain.stop();
-                sideouttake.outtakeRight(.7);
+                sideouttake.outtakeRight(1);
                 if ((System.currentTimeMillis() - lastOuttake) >= 500) {
-                    outtaking = false;
                     sideouttake.outtakeStop();
+                    outtaking = false;
+                    drivetrain.outtakeControlling = false;
                 }
             }
         } else if (sideouttake.getLeftInfrared()) {
             outtaking = true;
+            drivetrain.outtakeControlling = true;
             lastOuttake = System.currentTimeMillis();
             while (outtaking) {
                 drivetrain.stop();
-                sideouttake.outtakeLeft(.7);
+                sideouttake.outtakeLeft(1);
                 if ((System.currentTimeMillis() - lastOuttake) >= 500) {
-                    outtaking = false;
                     sideouttake.outtakeStop();
+                    outtaking = false;
+                    drivetrain.outtakeControlling = false;
                 }
             }
         }
