@@ -95,8 +95,9 @@ public class Drivetrain extends Subsystem {
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        motors[LEFT_FRONT].setClosedLoopRampRate(.1);
-        motors[RIGHT_FRONT].setClosedLoopRampRate(.1);
+        //TODO tune these values
+        motors[LEFT_FRONT].setOpenLoopRampRate(0.3);
+        motors[RIGHT_FRONT].setOpenLoopRampRate(0.3);
 
         straightModeStart = false;
         straightModeRun = false;
@@ -104,7 +105,7 @@ public class Drivetrain extends Subsystem {
         lastShift = System.currentTimeMillis() - 2000;
         runDelay = System.currentTimeMillis();
         
-        pidForDriveStraight = new PIDController(0.015, 0, 0, new PIDSource(){ //@jonathan
+        pidForDriveStraight = new PIDController(0.025, 0, 0, new PIDSource(){ //@jonathan
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
             @Override
