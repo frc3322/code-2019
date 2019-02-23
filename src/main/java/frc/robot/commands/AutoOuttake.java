@@ -31,7 +31,7 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        //drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS), -oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS));
+        drivetrain.drive(oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_L_Y_AXIS) * .4, -oi.lowerChassis.getRawAxis(RobotMap.XBOX.STICK_R_X_AXIS) * .4);
         if (sideouttake.getRightInfrared()) {
             outtaking = true;
             drivetrain.outtakeControlling = true;
