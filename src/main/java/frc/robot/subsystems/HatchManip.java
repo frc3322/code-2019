@@ -24,8 +24,8 @@ public class HatchManip extends Subsystem {
     DoubleSolenoid grabberExtender = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.LOWER_MECHANISM, RobotMap.PCM.RAISE_MECHANSIM);
 
     public void updateHatch() {
-        SmartDashboard.putBoolean("hatchGrabberActivated", !hatchGrabberActivated());
-        SmartDashboard.putBoolean("hatchGrabberExtended", !hatchGrabberExtended());
+        //SmartDashboard.putBoolean("hatchGrabberActivated", !hatchGrabberActivated());
+        //SmartDashboard.putBoolean("hatchGrabberExtended", !hatchGrabberExtended());
     }
 
     public void grabHatch() {

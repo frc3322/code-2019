@@ -17,6 +17,7 @@ public class LimelightStop extends Command{
     @Override
     protected void initialize() {
        drivetrain.limeControlling = false;
+       drivetrain.limelightPID.disable();
     }
     
     @Override

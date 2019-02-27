@@ -30,6 +30,7 @@ public class LimelightAlign extends Command {
 
     @Override
     protected void initialize(){
+        drivetrain.limelightPID.reset();
         drivetrain.limeControlling = true;
     }
 

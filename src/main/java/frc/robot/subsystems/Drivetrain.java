@@ -68,7 +68,7 @@ public class Drivetrain extends Subsystem {
     private PIDController pidForDriveStraight;
     private double pidOutputForDriveStraight;
 
-    private PIDController limelightPID;
+    public PIDController limelightPID;
     private double limelightPIDOutput;
 
     public boolean limeControlling = false;
@@ -137,7 +137,7 @@ public class Drivetrain extends Subsystem {
 		pidForDriveStraight.setContinuous(true);
         pidForDriveStraight.setSetpoint(0);
         
-        limelightPID = new PIDController(0.015, 0, 0, new PIDSource(){ //@jonathan
+        limelightPID = new PIDController(0.007 , 0, 0.004, new PIDSource(){ //@jonathan
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
             @Override
@@ -173,8 +173,8 @@ public class Drivetrain extends Subsystem {
     public void updateDrivetrain() {
         SmartDashboard.putNumber("WheelRPM Left", wheelRPM(LEFT_FRONT));
         SmartDashboard.putNumber("WheelRPM Right", wheelRPM(RIGHT_FRONT));
-        SmartDashboard.putBoolean("Is High Gear", isHighGear());
-        SmartDashboard.putBoolean("Is Low Gear", isLowGear());
+        //SmartDashboard.putBoolean("Is High Gear", isHighGear());
+        //SmartDashboard.putBoolean("Is Low Gear", isLowGear());
         SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
         SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
         SmartDashboard.putBoolean("Straight Mode", straightModeRun);
@@ -213,9 +213,9 @@ public class Drivetrain extends Subsystem {
     }
 
     public void limeDrive(double speed) {
+        
         navx.reset();
         limelightPID.setSetpoint(limelight.getTx());
-        limelightPID.reset();
         limelightPID.enable();
         tankDrive(speed - limelightPIDOutput, speed + limelightPIDOutput);
     }
@@ -278,11 +278,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public boolean isHighGear() {
-        return shiftSolenoid.get() == Value.kReverse;
+        return false; //shiftSolenoid.get() == Value.kReverse;
     }
 
     public boolean isLowGear() {
-        return shiftSolenoid.get() == Value.kForward;
+        return true; //shiftSolenoid.get() == Value.kForward;
     }
 
     @Override
