@@ -30,6 +30,8 @@ public class HotMess extends Subsystem {
     
     private CANEncoder encoder1,
                        encoder2;
+
+    private Double hotmessRampRate;
     
     private SpeedControllerGroup motorGroup;
 
@@ -41,13 +43,14 @@ public class HotMess extends Subsystem {
         encoder1 = motor1.getEncoder();
         encoder2 = motor2.getEncoder();
 
+        hotmessRampRate = 5.0;
+
         motorGroup = new SpeedControllerGroup(motor1, motor2);
 
         motor1.setInverted(true);
 
-        //motor1.setRampRate(0.5);
-        //motor2.setRampRate(0.5);
-
+        motor1.setClosedLoopRampRate(hotmessRampRate);
+        motor2.setClosedLoopRampRate(hotmessRampRate);
     }
 
     public void update() {
