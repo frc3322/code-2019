@@ -83,9 +83,9 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         //sideouttake.update();
-        //drivetrain.updateDrivetrain();
+        drivetrain.updateDrivetrain();
         //hatchManip.updateHatch();
-        //elevator.update();
+        elevator.update();
         //hotMess.update();
     }
 

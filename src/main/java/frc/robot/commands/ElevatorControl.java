@@ -41,7 +41,21 @@ public class ElevatorControl extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+
         double moveInput = (oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS)) * elevator.downSpeedModifier;
+        if(elevator.canMoveUp == false) {
+            moveInput = Math.min(0, moveInput);
+        }
+        if(elevator.canMoveDown == false){
+            moveInput = Math.max(0, moveInput);
+        }
+        if(moveInput > 0){
+            elevator.canMoveDown = true;
+        }
+        if(moveInput < 0){
+            elevator.canMoveUp = true;
+        }
+
         
         /*
         if((moveInput > 0 && elevator.atLevel3()) || (moveInput < 0 && elevator.atLevel0())) {
@@ -50,8 +64,8 @@ public class ElevatorControl extends Command {
             elevator.move(moveInput * 0.5);
         }
         */
-        if(moveInput != 0) {
-            elevator.stopped = false;
+        if(moveInput < -0.1) {
+            elevator.canMoveDown = true;
         }
         elevator.move(moveInput);
 	}

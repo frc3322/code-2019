@@ -33,24 +33,19 @@ public class RobotMap {
         public static final int INTAKE_MOTOR = (isRobotP1 ? 22 : 22);
 
         //elevator TODO: update to real IDs
-        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 24 : 24);
-        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 21 : 21);
+        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 9 : 24);
+        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 12 : 21);
 
     }
 
     public static class DIO {
-        public static final int CARGO_DETECTOR_INTAKE = 4;
-        public static final int CARGO_DETECTOR_OUTTAKE = 5;
-
-        public static final int HATCH_DETECTOR = 10;
-
         public static final int LEFT_INFRARED = 0;
-        public static final int RIGHT_INFRARED = 1;
+        public static final int RIGHT_INFRARED = 4;
 
         //elevator
-        public static final int ELEVATOR_ENCODER_A = 2;
-        public static final int ELEVATOR_ENCODER_B = 3;
-        public static final int ELEVATOR_LIMIT_SWITCH = 6;
+        public static final int ELEVATOR_ENCODER_A = 1;
+        public static final int ELEVATOR_ENCODER_B = 2;
+        public static final int ELEVATOR_LIMIT_SWITCH = 3;
 
     }
 
