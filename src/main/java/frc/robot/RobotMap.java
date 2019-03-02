@@ -50,6 +50,7 @@ public class RobotMap {
       //elevator
       public static final int ELEVATOR_ENCODER_A = 2;
       public static final int ELEVATOR_ENCODER_B = 3;
+      public static final int ELEVATOR_LIMIT_SWITCH = 6;
 
     }
 

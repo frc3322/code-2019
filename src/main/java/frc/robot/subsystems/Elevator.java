@@ -46,10 +46,7 @@ public class Elevator extends PIDSubsystem {
     WPI_TalonSRX elevatorMotor1;
     WPI_TalonSRX elevatorMotor2;
     
-    DigitalInput hallEffectLevel0;
-    DigitalInput hallEffectLevel1;
-    DigitalInput hallEffectLevel2;
-    DigitalInput hallEffectLevel3;
+    DigitalInput elevatorLimitSwitch;
 
     public Elevator() {
         super("Elevator PID", .03, 0, 0);
@@ -58,6 +55,7 @@ public class Elevator extends PIDSubsystem {
         // create elevator motors and assign to speed group for easy control
 
         elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B);
+        elevatorLimitSwitch = new DigitalInput(RobotMap.DIO.ELEVATOR_LIMIT_SWITCH);
         
         elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
         elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
@@ -78,16 +76,31 @@ public class Elevator extends PIDSubsystem {
 
     public void update() {
         SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getDistance());
+        resetOnLimitSwitch();
     }
 
     public void reset() {
         elevatorEncoder.reset();
     }
 
+    public void resetOnLimitSwitch(){
+        if(elevatorLimitSwitch == true){
+            reset();
+        }
+    }
+
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new ElevatorControl()); // run elevator command in Commands
     }
+
+    private double toInchRatio(double input) {
+        // This ratio determines the lift translation based on experimental data
+        double inchesTraveled = 58.3; //temp
+        double encoderTicks = 8371; //temp
+        return input * (inchesTraveled / encoderTicks);
+    }
+
 
     public void moveUp() { // move at current upSpeed
         move(upSpeed);
