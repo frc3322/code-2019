@@ -50,6 +50,9 @@ public class ElevatorControl extends Command {
             elevator.move(moveInput * 0.5);
         }
         */
+        if(moveInput != 0) {
+            elevator.stopped = false;
+        }
         elevator.move(moveInput);
 	}
 

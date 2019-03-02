@@ -40,6 +40,7 @@ public class Elevator extends PIDSubsystem {
     private double thirdLevel = 3000; // temp
     public double pidSpeed;
     public double downSpeedModifier = .75;
+    public boolean stopped = false;
 
     Encoder elevatorEncoder;
 
@@ -76,15 +77,18 @@ public class Elevator extends PIDSubsystem {
 
     public void update() {
         SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getDistance());
-        resetOnLimitSwitch();
+        SmartDashboard.putBoolean("Elevator Limit Switch", elevatorLimitSwitch.get());
+        onLimitSwitch();
     }
 
     public void reset() {
         elevatorEncoder.reset();
     }
 
-    public void resetOnLimitSwitch(){
-        if(elevatorLimitSwitch == true){
+    public void onLimitSwitch(){
+        if(elevatorLimitSwitch.get() == true && !stopped){
+            stopped = true;
+            stop();
             reset();
         }
     }
@@ -156,6 +160,7 @@ public class Elevator extends PIDSubsystem {
     @Override
     protected void usePIDOutput(double output) {
         //pidSpeed = output;
+        stopped = false;
         elevatorMotor1.pidWrite(output);
     }
 

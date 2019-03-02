@@ -47,10 +47,10 @@ public class RobotMap {
         public static final int LEFT_INFRARED = 0;
         public static final int RIGHT_INFRARED = 1;
 
-      //elevator
-      public static final int ELEVATOR_ENCODER_A = 2;
-      public static final int ELEVATOR_ENCODER_B = 3;
-      public static final int ELEVATOR_LIMIT_SWITCH = 6;
+        //elevator
+        public static final int ELEVATOR_ENCODER_A = 2;
+        public static final int ELEVATOR_ENCODER_B = 3;
+        public static final int ELEVATOR_LIMIT_SWITCH = 6;
 
     }
 
