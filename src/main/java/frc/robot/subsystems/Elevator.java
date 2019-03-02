@@ -38,8 +38,9 @@ public class Elevator extends PIDSubsystem {
     private double firstLevel = 1000; // temp
     private double secondLevel = 2000; // temp
     private double thirdLevel = 3000; // temp
+    private double top = 7850;
     public double pidSpeed;
-    public double downSpeedModifier = .75;
+    public double speedModifier = .75;
     public boolean canMoveUp = true;
     public boolean canMoveDown = true;
 
@@ -52,7 +53,7 @@ public class Elevator extends PIDSubsystem {
 
     public Elevator() {
         super("Elevator PID", .03, 0, 0);
-        setAbsoluteTolerance(100);
+        setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
 
@@ -82,6 +83,7 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         onLimitSwitch();
+        atTop();
     }
 
     public void reset() {
@@ -92,6 +94,12 @@ public class Elevator extends PIDSubsystem {
         if(elevatorLimitSwitch.get()) {
             canMoveDown = false;
             reset();
+        }
+    }
+
+    public void atTop(){
+        if(elevatorEncoder.getDistance() > top){
+            canMoveUp = false;
         }
     }
 

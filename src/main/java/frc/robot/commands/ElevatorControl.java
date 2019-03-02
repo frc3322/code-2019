@@ -42,7 +42,7 @@ public class ElevatorControl extends Command {
 	@Override
 	protected void execute() {
 
-        double moveInput = (oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS)) * elevator.downSpeedModifier;
+        double moveInput = (oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS)) * elevator.speedModifier;
         if(elevator.canMoveUp == false) {
             moveInput = Math.min(0, moveInput);
         }
