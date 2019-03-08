@@ -93,6 +93,7 @@ public class Elevator extends PIDSubsystem {
     public void onLimitSwitch(){
         if(elevatorLimitSwitch.get()) {
             canMoveDown = false;
+            move(0);
             reset();
         }
     }
@@ -137,7 +138,7 @@ public class Elevator extends PIDSubsystem {
         switch (level) {
         case 0:
             desiredLevel = 0;
-            setSetpoint(bottom);
+            move(downSpeed);
             currentLevel = 0;
             break;
         case 1:
