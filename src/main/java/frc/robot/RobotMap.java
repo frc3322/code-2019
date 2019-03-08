@@ -28,13 +28,13 @@ public class RobotMap {
         public static final int HOTMESS_MOTOR2 = (isRobotP1 ? 40 : 46);
 
         //cargo
-        public static final int L_SIDE_OUTTAKE = (isRobotP1 ? 20 : 20);
-        public static final int R_SIDE_OUTTAKE = (isRobotP1 ? 23 : 23);
-        public static final int INTAKE_MOTOR = (isRobotP1 ? 22 : 22);
+        public static final int L_SIDE_OUTTAKE = (isRobotP1 ? 20 : 27);
+        public static final int R_SIDE_OUTTAKE = (isRobotP1 ? 23 : 28);
+        public static final int INTAKE_MOTOR = (isRobotP1 ? 22 : 24);
 
         //elevator TODO: update to real IDs
-        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 9 : 24);
-        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 12 : 21);
+        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 9 : 25);
+        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 12 : 26);
 
     }
 
