@@ -58,6 +58,8 @@ public class Drivetrain extends Subsystem {
 
     public boolean shiftPause;
 
+    public boolean isHatchFront = false;
+
     private CANSparkMax[] motors = new CANSparkMax[4];
 
     private CANEncoder[] encoders = new CANEncoder[4];
@@ -180,6 +182,7 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putBoolean("Straight Mode", straightModeRun);
         SmartDashboard.putNumber("PID Output", pidOutputForDriveStraight);
         SmartDashboard.putNumber("Setpoint", pidForDriveStraight.getSetpoint());
+        SmartDashboard.putBoolean("isHatchFront", isHatchFront);
     }
 
     public double getVoltage(int n) {
@@ -203,7 +206,9 @@ public class Drivetrain extends Subsystem {
     }
 
     public void drive(double speed, double rotation){
-
+        if(isHatchFront){
+            speed = -speed;
+        }
         robotDrive.arcadeDrive(speed, rotation);
 
     }
