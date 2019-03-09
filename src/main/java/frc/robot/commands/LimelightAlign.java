@@ -19,11 +19,11 @@ import static frc.robot.Robot.limelight;
 /**
  * Add your docs here.
  */
-public class LimelightAlign extends Command {
+public class LimelightAlime extends Command {
 
     double angleModifier = .05;
 
-    public LimelightAlign() {
+    public LimelightAlime() {
         requires(drivetrain);
         requires(limelight);
     }
