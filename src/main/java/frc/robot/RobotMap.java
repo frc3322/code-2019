@@ -17,35 +17,35 @@ public class RobotMap {
         
         //TODO: add in P2 Talon IDs
         
-        //drivetrain                                            P1  P2
-        public static final int LEFT_FRONT_MOTOR = (isRobotP1 ? 37 : 43);
-        public static final int LEFT_BACK_MOTOR = (isRobotP1 ? 35 : 44);
-        public static final int RIGHT_FRONT_MOTOR = (isRobotP1 ? 36 : 41);
-        public static final int RIGHT_BACK_MOTOR = (isRobotP1 ? 34 : 42);
+        //drivetrain
+        public static final int LEFT_FRONT_MOTOR = 37;
+        public static final int LEFT_BACK_MOTOR = 35;
+        public static final int RIGHT_FRONT_MOTOR = 36;
+        public static final int RIGHT_BACK_MOTOR = 34;
 
         //hot mess
-        public static final int HOTMESS_MOTOR1 = (isRobotP1 ? 39 : 45);
-        public static final int HOTMESS_MOTOR2 = (isRobotP1 ? 40 : 46);
+        public static final int HOTMESS_MOTOR1 = 45;
+        public static final int HOTMESS_MOTOR2 = 46;
 
         //cargo
-        public static final int L_SIDE_OUTTAKE = (isRobotP1 ? 20 : 27);
-        public static final int R_SIDE_OUTTAKE = (isRobotP1 ? 23 : 28);
-        public static final int INTAKE_MOTOR = (isRobotP1 ? 22 : 24);
+        public static final int L_SIDE_OUTTAKE = 27;
+        public static final int R_SIDE_OUTTAKE = 28;
+        public static final int INTAKE_MOTOR = 24;
 
         //elevator TODO: update to real IDs
-        public static final int ELEVATOR_MOTOR_1 = (isRobotP1 ? 9 : 25);
-        public static final int ELEVATOR_MOTOR_2 = (isRobotP1 ? 12 : 26);
+        public static final int ELEVATOR_MOTOR_1 = 26;
+        public static final int ELEVATOR_MOTOR_2 = 25;
 
     }
 
     public static class DIO {
-        public static final int LEFT_INFRARED = 0;
+        public static final int LEFT_INFRARED = 3;
         public static final int RIGHT_INFRARED = 4;
 
         //elevator
-        public static final int ELEVATOR_ENCODER_A = 1;
-        public static final int ELEVATOR_ENCODER_B = 2;
-        public static final int ELEVATOR_LIMIT_SWITCH = 3;
+        public static final int ELEVATOR_ENCODER_A = 0;
+        public static final int ELEVATOR_ENCODER_B = 1;
+        public static final int ELEVATOR_LIMIT_SWITCH = 2;
 
     }
 
@@ -53,16 +53,16 @@ public class RobotMap {
 
         public static final int PCM_ID = 5;
 
-        public static final int SHIFT_GEAR_1 = 7;
-        public static final int SHIFT_GEAR_2 = 6;
-        public static final int LOWER_MECHANISM = 0;
-        public static final int RAISE_MECHANSIM = 1;
-        public static final int GRAB_HATCH = 2;
-        public static final int RELEASE_HATCH = 3;
+        public static final int SHIFT_GEAR_1 = 4;
+        public static final int SHIFT_GEAR_2 = 5;
+        public static final int LOWER_MECHANISM = 2;
+        public static final int RAISE_MECHANSIM = 3;
+        public static final int GRAB_HATCH = 0;
+        public static final int RELEASE_HATCH = 1;
         
 
-        public static final int INTAKE_EXTEND = 4;
-        public static final int INTAKE_RETRACT = 5;
+        public static final int INTAKE_EXTEND = 6;
+        public static final int INTAKE_RETRACT = 7;
  
     }
   
