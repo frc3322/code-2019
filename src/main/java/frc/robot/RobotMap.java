@@ -17,7 +17,7 @@ public class RobotMap {
         
         //TODO: add in P2 Talon IDs
         
-        //drivetrain                                            P1  P2
+        //drivetrain
         public static final int LEFT_FRONT_MOTOR = 37;
         public static final int LEFT_BACK_MOTOR = 35;
         public static final int RIGHT_FRONT_MOTOR = 36;
