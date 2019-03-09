@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import static frc.robot.Robot.drivetrain;
 
 // import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -102,6 +103,10 @@ public class Elevator extends PIDSubsystem {
         if(elevatorEncoder.getDistance() > top){
             canMoveUp = false;
         }
+    }
+
+    public void adjustRampRate() {
+        drivetrain.rampRate = .4 + elevatorEncoder.getDistance() / 10000;
     }
 
     @Override

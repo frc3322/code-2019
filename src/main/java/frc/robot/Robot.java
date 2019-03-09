@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.CameraServer;
 import frc.robot.subsystems.*;
 
 /**
@@ -61,6 +62,8 @@ public class Robot extends TimedRobot {
         compressor = new Compressor(RobotMap.PCM.PCM_ID);
 
         oi = new OI();
+
+        CameraServer.getInstance().startAutomaticCapture();
 
         hatchManip.grabberExtend();
         hatchManip.hatchGrab();

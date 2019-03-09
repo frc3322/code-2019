@@ -76,6 +76,8 @@ public class Drivetrain extends Subsystem {
     public boolean limeControlling = false;
     public boolean outtakeControlling = false;
 
+    public double rampRate;
+
     public Drivetrain() {
         
         navx = new AHRS(SPI.Port.kMXP);
@@ -98,8 +100,8 @@ public class Drivetrain extends Subsystem {
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
         //TODO tune these values
-        motors[LEFT_FRONT].setOpenLoopRampRate(0.3);
-        motors[RIGHT_FRONT].setOpenLoopRampRate(0.3);
+        motors[LEFT_FRONT].setOpenLoopRampRate(rampRate);
+        motors[RIGHT_FRONT].setOpenLoopRampRate(rampRate);
 
         straightModeStart = false;
         straightModeRun = false;
