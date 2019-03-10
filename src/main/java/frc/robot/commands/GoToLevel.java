@@ -39,7 +39,11 @@ public class GoToLevel extends Command{
 
     @Override
     protected boolean isFinished() {
-        return elevator.onTarget();
+        if(elevator.moveInput != 0 || elevator.onTarget()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
