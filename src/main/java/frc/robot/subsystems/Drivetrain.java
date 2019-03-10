@@ -76,7 +76,7 @@ public class Drivetrain extends Subsystem {
     public boolean limeControlling = false;
     public boolean outtakeControlling = false;
 
-    public double rampRate;
+    public double rampRate = .4;
 
     public Drivetrain() {
         

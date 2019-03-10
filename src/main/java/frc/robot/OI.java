@@ -55,7 +55,6 @@ public class OI {
         button_a_lower.whileHeld(new ToggleDrivetrainInversion());
         button_start_lower.whileHeld(new HotMessClimb());
         button_back_lower.whileHeld(new HotMessReverse());
-        bumper_right_lower.whenPressed(new GrabHatch());
         bumper_left_lower.whileHeld(new AutoOuttake());
         left_stick.whenPressed(new ToggleShift());
 

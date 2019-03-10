@@ -61,7 +61,7 @@ public class ElevatorControl extends Command {
             cycleCounter = 0;
             elevator.move(0);
         //needs 200 encoder ticks to get off switch
-        } else if (/*elevator.pidSpeed == 0 &&*/ elevator.moveInput == 0 && elevator.currentHeight() > 200){
+        } else if (elevator.moveInput == 0 && elevator.currentHeight() > 200 && !elevator.getPIDController().isEnabled()){
             elevator.move(idleSpeed);
         } else {
             elevator.move(elevator.moveInput);

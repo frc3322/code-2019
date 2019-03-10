@@ -9,6 +9,9 @@ package frc.robot.commands;
 
 import static frc.robot.Robot.drivetrain;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Limelight.CameraMode;
+import frc.robot.subsystems.Limelight.LightMode;
 
 /**
  * Add your docs here.
@@ -16,8 +19,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LimelightStop extends Command{
     @Override
     protected void initialize() {
-       drivetrain.limeControlling = false;
-       drivetrain.limelightPID.disable();
+        Limelight.setLedMode(LightMode.eOff);
+        Limelight.setCameraMode(CameraMode.eDriver);
+        drivetrain.limeControlling = false;
+        drivetrain.limelightPID.disable();
     }
     
     @Override

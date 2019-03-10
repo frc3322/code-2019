@@ -28,8 +28,8 @@ public class RobotMap {
         public static final int HOTMESS_MOTOR2 = 46;
 
         //cargo
-        public static final int L_SIDE_OUTTAKE = 27;
-        public static final int R_SIDE_OUTTAKE = 28;
+        public static final int L_SIDE_OUTTAKE = 28;
+        public static final int R_SIDE_OUTTAKE = 27;
         public static final int INTAKE_MOTOR = 24;
 
         //elevator TODO: update to real IDs
@@ -55,10 +55,10 @@ public class RobotMap {
 
         public static final int SHIFT_GEAR_1 = 4;
         public static final int SHIFT_GEAR_2 = 5;
-        public static final int LOWER_MECHANISM = 2;
-        public static final int RAISE_MECHANSIM = 3;
-        public static final int GRAB_HATCH = 0;
-        public static final int RELEASE_HATCH = 1;
+        public static final int LOWER_MECHANISM = 0;
+        public static final int RAISE_MECHANSIM = 1;
+        public static final int GRAB_HATCH = 2;
+        public static final int RELEASE_HATCH = 3;
         
 
         public static final int INTAKE_EXTEND = 6;

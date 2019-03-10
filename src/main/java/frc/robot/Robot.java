@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.Limelight.CameraMode;
+import frc.robot.subsystems.Limelight.LightMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -63,7 +65,10 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
 
-        CameraServer.getInstance().startAutomaticCapture();
+        CameraServer.getInstance().startAutomaticCapture(0);
+
+        Limelight.setCameraMode(CameraMode.eDriver);
+        Limelight.setLedMode(LightMode.eOff);
 
         hatchManip.grabberExtend();
         hatchManip.hatchGrab();

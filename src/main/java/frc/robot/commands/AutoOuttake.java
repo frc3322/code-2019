@@ -12,11 +12,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.RobotMap;
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
-import static frc.robot.Robot.wideintake;
 
 public class AutoOuttake extends Command {
 

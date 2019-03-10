@@ -36,16 +36,18 @@ public class SideOuttake extends Subsystem{
 
     public SideOuttake() {
         leftOuttake.setInverted(true);
+        rightOuttake.setInverted(true);
+
     }
 
     public void outtakeRight(double baseSpeed) {
-        leftOuttake.set(-(baseSpeed*slowSpeedModifier*leftOuttakeModifier));
+        leftOuttake.set(-(baseSpeed*slowSpeedModifier));
         rightOuttake.set(baseSpeed*fastSpeedModifier);
     }
 
     public void outtakeLeft(double baseSpeed) {
         rightOuttake.set(-(baseSpeed*slowSpeedModifier));
-        leftOuttake.set(baseSpeed*fastSpeedModifier*leftOuttakeModifier);
+        leftOuttake.set(baseSpeed*fastSpeedModifier);
     }
 
     public void outtakeStop() {
@@ -54,8 +56,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void intakeCarriage() {
-        leftOuttake.set(.3);
-        rightOuttake.set(.3);
+        leftOuttake.set(-.2);
+        rightOuttake.set(-.2);
     }
 
     public void update(){
