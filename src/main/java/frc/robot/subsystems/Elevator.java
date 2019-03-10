@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Robot.drivetrain;
-
+import static frc.robot.Robot.oi;
 // import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 //import frc.robot.PIDController;
@@ -36,16 +36,18 @@ public class Elevator extends PIDSubsystem {
     private double upSpeed = 0.2; // temp
     private double downSpeed = -0.2; // temp
     private double bottom = 0;
-    private double firstLevel = 1000; // temp
-    private double secondLevel = 2000; // temp
-    private double thirdLevel = 3000; // temp
+    private double cargoLevel = 2000; // temp
+    private double secondLevel = 3250; // temp
+    private double thirdLevel = 4000; // temp
     private double top = 7850;
     public double pidSpeed;
     public double speedModifier = .75;
     public boolean canMoveUp = true;
     public boolean canMoveDown = true;
-
+    public double moveInput;
     Encoder elevatorEncoder;
+
+    public boolean gotThere = false;
 
     WPI_TalonSRX elevatorMotor1;
     WPI_TalonSRX elevatorMotor2;
@@ -53,7 +55,7 @@ public class Elevator extends PIDSubsystem {
     DigitalInput elevatorLimitSwitch;
 
     public Elevator() {
-        super("Elevator PID", .03, 0, 0);
+        super("Elevator PID", .04, 0, 0);
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
@@ -69,7 +71,6 @@ public class Elevator extends PIDSubsystem {
 
         elevatorMotor2.follow(elevatorMotor1);
         elevator = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
-        
     }
 
     public Elevator(double upSpeed, double downSpeed) { // set up and down speeds
@@ -85,18 +86,31 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         onLimitSwitch();
         atTop();
+        SmartDashboard.putBoolean("Got There", gotThere);
+        moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
     }
 
     public void reset() {
         elevatorEncoder.reset();
     }
 
+    public double currentHeight() {
+        return elevatorEncoder.getDistance();
+    }
+
     public void onLimitSwitch(){
         if(elevatorLimitSwitch.get()) {
             canMoveDown = false;
+            speedModifier = 1;
             move(0);
             reset();
+        } else {
+            speedModifier = .75;
         }
+    }
+
+    public boolean getLimitSwitch() {
+        return elevatorLimitSwitch.get();
     }
 
     public void atTop(){
@@ -143,12 +157,13 @@ public class Elevator extends PIDSubsystem {
         switch (level) {
         case 0:
             desiredLevel = 0;
+            disable();
             move(downSpeed);
             currentLevel = 0;
             break;
         case 1:
             desiredLevel = 1;
-            setSetpoint(firstLevel);
+            setSetpoint(cargoLevel);
             currentLevel = 1;
             break;
         case 2:
@@ -159,6 +174,7 @@ public class Elevator extends PIDSubsystem {
         case 3:
             desiredLevel = 3;
             setSetpoint(thirdLevel);
+            gotThere = true;
             currentLevel = 3;
             break;
         default:
@@ -175,7 +191,7 @@ public class Elevator extends PIDSubsystem {
 
     @Override
     protected void usePIDOutput(double output) {
-        //pidSpeed = output;
+        pidSpeed = output;
         elevatorMotor1.pidWrite(output);
     }
 

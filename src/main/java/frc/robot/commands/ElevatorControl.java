@@ -11,14 +11,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.*;
 import static frc.robot.Robot.elevator;
-import static frc.robot.Robot.oi;
 
 public class ElevatorControl extends Command {
-    
-    private final int UP_AXIS;
-    private final int DOWN_AXIS;
+
+    public int cycleCounter;
+    public boolean hasSeenSwitch;
+    public double idleSpeed;
 
     /*
   	public ElevatorControl(boolean upOrDown) {
@@ -32,9 +31,8 @@ public class ElevatorControl extends Command {
 
 	public ElevatorControl(){
         requires(elevator);
-        
-        this.UP_AXIS = RobotMap.XBOX.TRIGGER_L_AXIS;
-        this.DOWN_AXIS = RobotMap.XBOX.TRIGGER_R_AXIS;
+        hasSeenSwitch = false;
+        cycleCounter = 0;
 	
 	}
 
@@ -42,7 +40,7 @@ public class ElevatorControl extends Command {
 	@Override
 	protected void execute() {
 
-        double moveInput = (oi.upperChassis.getRawAxis(UP_AXIS) - oi.upperChassis.getRawAxis(DOWN_AXIS)) * elevator.speedModifier;
+        /*
         if(elevator.canMoveUp == false) {
             moveInput = Math.min(0, moveInput);
         }
@@ -55,19 +53,28 @@ public class ElevatorControl extends Command {
         if(moveInput < 0){
             elevator.canMoveUp = true;
         }
-
-        
-        /*
-        if((moveInput > 0 && elevator.atLevel3()) || (moveInput < 0 && elevator.atLevel0())) {
-            moveInput = 0;
-        } else { 
-            elevator.move(moveInput * 0.5);
-        }
         */
-        if(moveInput < -0.1) {
-            elevator.canMoveDown = true;
+        cycleCounter++;
+        idleSpeed = 0.15;
+        if(elevator.getLimitSwitch() && hasSeenSwitch == false){
+            hasSeenSwitch = true;
+            cycleCounter = 0;
+            elevator.move(0);
+        } else if (elevator.moveInput == 0){
+            elevator.move(idleSpeed);
+        } else {
+            elevator.move(elevator.moveInput);
         }
-        elevator.move(moveInput);
+        if(cycleCounter >= 5){
+            if(!elevator.getLimitSwitch()){
+                hasSeenSwitch = false;
+            }
+        }
+
+        if(cycleCounter > 10000){
+            cycleCounter = 1;
+        }
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
