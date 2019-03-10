@@ -65,6 +65,8 @@ public class ElevatorControl extends Command {
         } else {
             elevator.move(elevator.moveInput);
         }
+
+        //prevents limit switch bounce
         if(cycleCounter >= 5){
             if(!elevator.getLimitSwitch()){
                 hasSeenSwitch = false;
