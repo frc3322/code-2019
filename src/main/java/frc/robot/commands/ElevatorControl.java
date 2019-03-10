@@ -55,19 +55,19 @@ public class ElevatorControl extends Command {
         }
         */
         cycleCounter++;
-        idleSpeed = 0.15;
+        idleSpeed = 0.2;
         if(elevator.getLimitSwitch() && hasSeenSwitch == false){
             hasSeenSwitch = true;
             cycleCounter = 0;
             elevator.move(0);
-        } else if (elevator.moveInput == 0){
+        } else if (elevator.moveInput == 0 && elevator.currentHeight() > 10){
             elevator.move(idleSpeed);
         } else {
             elevator.move(elevator.moveInput);
         }
 
         //prevents limit switch bounce
-        if(cycleCounter >= 5){
+        if(cycleCounter >= 10){
             if(!elevator.getLimitSwitch()){
                 hasSeenSwitch = false;
             }
