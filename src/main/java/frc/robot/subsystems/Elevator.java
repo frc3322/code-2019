@@ -58,6 +58,8 @@ public class Elevator extends PIDSubsystem {
         super("Elevator PID", .04, 0, 0);
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
+        getPIDController().setInputRange(0, 10000);
+        getPIDController().setOutputRange(-1, 1);
         // create elevator motors and assign to speed group for easy control
 
         elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B);
@@ -97,18 +99,16 @@ public class Elevator extends PIDSubsystem {
     public double currentHeight() {
         return elevatorEncoder.getDistance();
     }
-
+    
     public void onLimitSwitch(){
         if(elevatorLimitSwitch.get()) {
-            canMoveDown = false;
             speedModifier = 1;
-            move(0);
             reset();
         } else {
             speedModifier = .75;
         }
     }
-
+    
     public boolean getLimitSwitch() {
         return elevatorLimitSwitch.get();
     }
