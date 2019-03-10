@@ -30,7 +30,6 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
-        drivetrain.outtakeControlling = true;
         if (sideouttake.getRightInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
@@ -41,7 +40,6 @@ public class AutoOuttake extends Command {
                     sideouttake.outtakeStop();
                     outtaking = false;
                     oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
-                    drivetrain.outtakeControlling = false;
                 }
             }
         } else if (sideouttake.getLeftInfrared()) {
@@ -54,7 +52,6 @@ public class AutoOuttake extends Command {
                     sideouttake.outtakeStop();
                     outtaking = false;
                     oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-                    drivetrain.outtakeControlling = false;
                 }
             }
         }

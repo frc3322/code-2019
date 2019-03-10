@@ -56,7 +56,6 @@ public class Elevator extends PIDSubsystem {
         super("Elevator PID", 0.3, 0, 0.01);
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
-        getPIDController().setInputRange(0, 10000);
         // create elevator motors and assign to speed group for easy control
 
         elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B);
@@ -83,7 +82,8 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Limit Switch", elevatorLimitSwitch.get());
         SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
-        //onLimitSwitch();
+        SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
+        onLimitSwitch();
         //atTop();
         SmartDashboard.putBoolean("Got There", gotThere);
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
@@ -96,16 +96,13 @@ public class Elevator extends PIDSubsystem {
     public double currentHeight() {
         return elevatorEncoder.getDistance();
     }
-    /*
+    
     public void onLimitSwitch(){
         if(elevatorLimitSwitch.get()) {
-            speedModifier = 1;
             reset();
-        } else {
-            speedModifier = .75;
         }
     }
-    */
+    
     public boolean getLimitSwitch() {
         return elevatorLimitSwitch.get();
     }
