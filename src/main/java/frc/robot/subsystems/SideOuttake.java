@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  */
 public class SideOuttake extends Subsystem{
     private double slowSpeedModifier = 0.3;
-    private double fastSpeedModifier = 0.75;
+    private double fastSpeedModifier = 0.75;  //https://i.imgur.com/BKIr3Kt.jpg
     private double leftOuttakeModifier = 0.8;
 
     public static final long outtakeTime = 2000;
