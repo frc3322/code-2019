@@ -33,11 +33,14 @@ public class Elevator extends PIDSubsystem {
     
     private int currentLevel = 0;
     private int desiredLevel;
-    private double upSpeed = 0.2; // temp
-    private double downSpeed = -0.2; // temp
-    private double cargoLevel = 2000; // temp
-    private double secondLevel = 3250; // temp
-    private double thirdLevel = 8100; // temp
+    private double upSpeed = 0.2;
+    private double downSpeed = -0.2;
+    private double cargoLevel = 2000;
+    private double secondLevel = 3250;
+    private double thirdLevel = 8100;
+    private static double P = 0;
+    private static double I = 0;
+    private static double D = 0;
     public double speedModifier = .75;
     public boolean canMoveUp = true;
     public boolean canMoveDown = true;
@@ -52,7 +55,7 @@ public class Elevator extends PIDSubsystem {
     DigitalInput elevatorLimitSwitch;
 
     public Elevator() {
-        super("Elevator PID", 0.3, 0, 0.01);
+        super("Elevator PID", P, I, D);
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
@@ -81,6 +84,9 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
+        SmartDashboard.putNumber("Elevator P Value", P);
+        SmartDashboard.putNumber("Elevator I Value", I);
+        SmartDashboard.putNumber("Elevator D Value", D);
         onLimitSwitch();
         SmartDashboard.putBoolean("Got There", gotThere);
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
