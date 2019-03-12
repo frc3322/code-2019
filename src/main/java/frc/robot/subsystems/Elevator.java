@@ -47,8 +47,6 @@ public class Elevator extends PIDSubsystem {
     public double moveInput;
     Encoder elevatorEncoder;
 
-    public boolean gotThere = false;
-
     WPI_TalonSRX elevatorMotor1;
     WPI_TalonSRX elevatorMotor2;
     
@@ -93,7 +91,6 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
 
         onLimitSwitch();
-        SmartDashboard.putBoolean("Got There", gotThere);
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
     }
 
@@ -162,7 +159,6 @@ public class Elevator extends PIDSubsystem {
         case 3:
             desiredLevel = 3;
             setSetpoint(thirdLevel);
-            gotThere = true;
             currentLevel = 3;
             break;
         default:

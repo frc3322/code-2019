@@ -19,6 +19,7 @@ public class IntakeIdle extends Command {
     
     public IntakeIdle() {
         requires(wideintake);
+        requires(sideouttake);
     }
 
     @Override

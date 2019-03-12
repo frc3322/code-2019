@@ -13,14 +13,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import static frc.robot.Robot.wideintake;
 import static frc.robot.Robot.sideouttake;
-import static frc.robot.Robot.elevator;
 
 public class IntakeCargo extends Command {
 
     public IntakeCargo() {
         requires(wideintake);
         requires(sideouttake);
-        requires(elevator);
     }
 
     @Override

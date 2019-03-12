@@ -16,10 +16,10 @@ public class RobotMap {
     public static class CAN {
         
         //drivetrain
-        public static final int LEFT_FRONT_MOTOR = 37;
-        public static final int LEFT_BACK_MOTOR = 35;
-        public static final int RIGHT_FRONT_MOTOR = 36;
-        public static final int RIGHT_BACK_MOTOR = 34;
+        public static final int LEFT_FRONT_MOTOR = 44;
+        public static final int LEFT_BACK_MOTOR = 43;
+        public static final int RIGHT_FRONT_MOTOR = 41;
+        public static final int RIGHT_BACK_MOTOR = 42;
 
         //hot mess
         public static final int HOTMESS_MOTOR1 = 45;
