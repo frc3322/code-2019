@@ -66,7 +66,6 @@ public class Elevator extends PIDSubsystem {
         elevatorMotor1.setInverted(true);
         elevatorMotor2.setInverted(true);
 
-        elevatorMotor2.follow(elevatorMotor1);
         elevator = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
     }
 
@@ -169,7 +168,7 @@ public class Elevator extends PIDSubsystem {
     @Override
     protected void usePIDOutput(double output) {
         SmartDashboard.putNumber("PID Output", output);
-        elevatorMotor1.pidWrite(output);
+        elevator.pidWrite(output);
     }
 
 }
