@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.robot.Robot.wideintake;
 
-/**
- * Add your docs here.
- */
 public class TestIntake extends Command {
 
     public TestIntake() {

@@ -19,9 +19,6 @@ import frc.robot.subsystems.Limelight.LightMode;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.limelight;
 
-/**
- * Add your docs here.
- */
 public class LimelightAlign extends Command {
 
     double angleModifier = .05;

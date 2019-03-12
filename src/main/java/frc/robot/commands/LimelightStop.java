@@ -1,9 +1,12 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+/**
+ *  _____    _____     _____     _____   
+ * |___  \  |___  \   /  _  \   /  _  \
+ *  ___|  |  ___|  | |__| |  | |__| |  |
+ * |___   | |___   |     /  /      /  /
+ *  ___|  |  ___|  |   /  /__    /  /__
+ * |_____/  |_____/   |______|  |______|
+ *
+ */
 
 package frc.robot.commands;
 
@@ -13,9 +16,6 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Limelight.CameraMode;
 import frc.robot.subsystems.Limelight.LightMode;
 
-/**
- * Add your docs here.
- */
 public class LimelightStop extends Command{
     @Override
     protected void initialize() {

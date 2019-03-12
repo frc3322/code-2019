@@ -19,16 +19,6 @@ public class ElevatorControl extends Command {
     public boolean hasSeenSwitch;
     public double idleSpeed;
 
-    /*
-  	public ElevatorControl(boolean upOrDown) {
-
-		requires(elevator);
-
-		//level += (upOrDown) ? ((level == 3) ? 0 : 1) : ((level == 1) ? 0 : -1);
-
-    }
-     */
-
 	public ElevatorControl(){
         requires(elevator);
         hasSeenSwitch = false;
@@ -40,20 +30,6 @@ public class ElevatorControl extends Command {
 	@Override
 	protected void execute() {
 
-        /*
-        if(elevator.canMoveUp == false) {
-            moveInput = Math.min(0, moveInput);
-        }
-        if(elevator.canMoveDown == false){
-            moveInput = Math.max(0, moveInput);
-        }
-        if(moveInput > 0){
-            elevator.canMoveDown = true;
-        }
-        if(moveInput < 0){
-            elevator.canMoveUp = true;
-        }
-        */
         cycleCounter++;
         idleSpeed = 0.2;
         if(elevator.getLimitSwitch() && hasSeenSwitch == false){

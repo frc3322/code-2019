@@ -18,13 +18,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
-/**
- * Add your docs here.
- */
 public class SideOuttake extends Subsystem{
     private double slowSpeedModifier = 0.3;
     private double fastSpeedModifier = 0.75;
-    private double leftOuttakeModifier = 0.8;
 
     public static final long outtakeTime = 2000;
 

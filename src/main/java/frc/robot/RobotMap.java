@@ -15,8 +15,6 @@ public class RobotMap {
 
     public static class CAN {
         
-        //TODO: add in P2 Talon IDs
-        
         //drivetrain
         public static final int LEFT_FRONT_MOTOR = 37;
         public static final int LEFT_BACK_MOTOR = 35;
@@ -32,7 +30,7 @@ public class RobotMap {
         public static final int R_SIDE_OUTTAKE = 27;
         public static final int INTAKE_MOTOR = 24;
 
-        //elevator TODO: update to real IDs
+        //elevator
         public static final int ELEVATOR_MOTOR_1 = 26;
         public static final int ELEVATOR_MOTOR_2 = 25;
 

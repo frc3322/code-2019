@@ -16,9 +16,6 @@ import frc.robot.RobotMap;
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.oi;
 
-/**
- * Add your docs here.
- */
 public class OuttakeControl extends Command{
 
     private final int RIGHT_AXIS;

@@ -35,7 +35,6 @@ public class Elevator extends PIDSubsystem {
     private int desiredLevel;
     private double upSpeed = 0.2; // temp
     private double downSpeed = -0.2; // temp
-    private double bottom = 0;
     private double cargoLevel = 2000; // temp
     private double secondLevel = 3250; // temp
     private double thirdLevel = 8100; // temp
@@ -84,7 +83,6 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
         onLimitSwitch();
-        //atTop();
         SmartDashboard.putBoolean("Got There", gotThere);
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
     }
@@ -107,14 +105,6 @@ public class Elevator extends PIDSubsystem {
         return elevatorLimitSwitch.get();
     }
 
-    /*
-    public void atTop(){
-        if(elevatorEncoder.getDistance() > top){
-            canMoveUp = false;
-        }
-    }
-    */
-
     public void adjustRampRate() {
         drivetrain.rampRate = .4 + elevatorEncoder.getDistance() / 10000;
     }
@@ -123,14 +113,6 @@ public class Elevator extends PIDSubsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new ElevatorControl()); // run elevator command in Commands
     }
-
-    private double toInchRatio(double input) {
-        // This ratio determines the lift translation based on experimental data
-        double inchesTraveled = 58.3; //temp
-        double encoderTicks = 8371; //temp
-        return input * (inchesTraveled / encoderTicks);
-    }
-
 
     public void moveUp() { // move at current upSpeed
         move(upSpeed);
@@ -176,7 +158,6 @@ public class Elevator extends PIDSubsystem {
         default:
             return;
         }
-        //elevator.set(pidSpeed);
 
     }
 

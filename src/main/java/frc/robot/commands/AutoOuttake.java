@@ -22,9 +22,6 @@ public class AutoOuttake extends Command {
 
     public double lastOuttake;
 
-    // long millisecondsToRun = 1000; // This should run 1000ms = 1 s.
-    // long initTime =
-
     public AutoOuttake() {
         requires(sideouttake);
     }

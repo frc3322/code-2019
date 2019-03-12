@@ -15,9 +15,6 @@ import static frc.robot.Robot.wideintake;
 import static frc.robot.Robot.sideouttake;
 import static frc.robot.Robot.elevator;
 
-/**
- * Add your docs here.
- */
 public class IntakeCargo extends Command {
 
     public IntakeCargo() {
@@ -28,9 +25,6 @@ public class IntakeCargo extends Command {
 
     @Override
     protected void execute() {
-        //if(!elevator.atLevel0()) {
-        //    elevator.goToLevel(0);
-        //}
         wideintake.intakeStart();
         sideouttake.intakeCarriage();
     }
