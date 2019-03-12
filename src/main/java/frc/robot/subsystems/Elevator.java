@@ -35,12 +35,12 @@ public class Elevator extends PIDSubsystem {
     private int desiredLevel;
     private double upSpeed = 0.2;
     private double downSpeed = -0.2;
-    private double cargoLevel = 2000;
-    private double secondLevel = 3250;
-    private double thirdLevel = 8100;
-    private static double P = 0.3;
-    private static double I = 0;
-    private static double D = 0;
+    public double cargoLevel = 2000;
+    public double secondLevel = 3250;
+    public double thirdLevel = 8100;
+    public static double P = 0.3;
+    public static double I = 0;
+    public static double D = 0;
     public double speedModifier = .75;
     public boolean canMoveUp = true;
     public boolean canMoveDown = true;
@@ -91,13 +91,6 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
-        
-        SmartDashboard.putNumber("Cargo Level Encoder Value", cargoLevel);
-        SmartDashboard.putNumber("Second Level Encoder Value", secondLevel);
-        SmartDashboard.putNumber("Third Level Encoder Value", thirdLevel);
-        SmartDashboard.putNumber("Elevator P Value", P);
-        SmartDashboard.putNumber("Elevator I Value", I);
-        SmartDashboard.putNumber("Elevator D Value", D);
 
         onLimitSwitch();
         SmartDashboard.putBoolean("Got There", gotThere);
