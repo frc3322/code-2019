@@ -38,7 +38,7 @@ public class Elevator extends PIDSubsystem {
     private double cargoLevel = 2000;
     private double secondLevel = 3250;
     private double thirdLevel = 8100;
-    private static double P = 0;
+    private static double P = 0.3;
     private static double I = 0;
     private static double D = 0;
     public double speedModifier = .75;
@@ -56,6 +56,13 @@ public class Elevator extends PIDSubsystem {
 
     public Elevator() {
         super("Elevator PID", P, I, D);
+        cargoLevel = SmartDashboard.getNumber("Cargo Level Encoder Value", 2000);
+        secondLevel = SmartDashboard.getNumber("Second Level Encoder Value", 3250);
+        thirdLevel = SmartDashboard.getNumber("Third Level Encoder Value", 8100);
+        P = SmartDashboard.getNumber("Elevator P Value", P);
+        I = SmartDashboard.getNumber("Elevator I Value", I);
+        D = SmartDashboard.getNumber("Elevator D Value", D);
+
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
@@ -84,9 +91,14 @@ public class Elevator extends PIDSubsystem {
         SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
+        
+        SmartDashboard.putNumber("Cargo Level Encoder Value", cargoLevel);
+        SmartDashboard.putNumber("Second Level Encoder Value", secondLevel);
+        SmartDashboard.putNumber("Third Level Encoder Value", thirdLevel);
         SmartDashboard.putNumber("Elevator P Value", P);
         SmartDashboard.putNumber("Elevator I Value", I);
         SmartDashboard.putNumber("Elevator D Value", D);
+
         onLimitSwitch();
         SmartDashboard.putBoolean("Got There", gotThere);
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
