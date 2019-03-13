@@ -36,8 +36,8 @@ public class Elevator extends PIDSubsystem {
     private double upSpeed = 0.2;
     private double downSpeed = -0.2;
     public double cargoLevel = 2000;
-    public double secondLevel = 3250;
-    public double thirdLevel = 8100;
+    public double secondLevel = 4100;
+    public double thirdLevel = 6775;
     public static double P = 0.3;
     public static double I = 0;
     public static double D = 0;
@@ -104,7 +104,7 @@ public class Elevator extends PIDSubsystem {
     
     public void onLimitSwitch(){
         if(elevatorLimitSwitch.get()) {
-            reset();
+            //reset();
         }
     }
     

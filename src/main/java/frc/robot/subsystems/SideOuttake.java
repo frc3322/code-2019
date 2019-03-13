@@ -37,13 +37,13 @@ public class SideOuttake extends Subsystem{
     }
 
     public void outtakeRight(double baseSpeed) {
-        leftOuttake.set(baseSpeed*slowSpeedModifier);
-        rightOuttake.set(-(baseSpeed*fastSpeedModifier));
+        leftOuttake.set(-(baseSpeed*slowSpeedModifier));
+        rightOuttake.set((baseSpeed*fastSpeedModifier));
     }
 
     public void outtakeLeft(double baseSpeed) {
-        rightOuttake.set(baseSpeed*slowSpeedModifier);
-        leftOuttake.set(-(baseSpeed*fastSpeedModifier));
+        rightOuttake.set(-(baseSpeed*slowSpeedModifier));
+        leftOuttake.set((baseSpeed*fastSpeedModifier));
     }
 
     public void outtakeStop() {

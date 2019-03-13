@@ -18,7 +18,6 @@ public class IntakeCargo extends Command {
 
     public IntakeCargo() {
         requires(wideintake);
-        requires(sideouttake);
     }
 
     @Override
