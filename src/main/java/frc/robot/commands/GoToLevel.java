@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.robot.Robot.elevator;
 
-/**
- * Add your docs here.
- */
 public class GoToLevel extends Command{
 
     public int level;

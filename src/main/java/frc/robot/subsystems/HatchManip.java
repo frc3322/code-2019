@@ -13,7 +13,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
  * code for hatch manipulation
@@ -77,7 +76,5 @@ public class HatchManip extends Subsystem {
     }
 
     @Override
-    public void initDefaultCommand() {
-        // setDefaultCommand(new MySpecialCommand());
-    }
+    public void initDefaultCommand() {}
 }
