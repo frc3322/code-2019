@@ -12,13 +12,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import frc.robot.commands.DriveControl;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Limelight.CameraMode;
+import frc.robot.subsystems.Limelight.LightMode;
+
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.limelight;
 
-/**
- * Add your docs here.
- */
 public class LimelightAlime extends Command {
 
     double angleModifier = .05;
@@ -30,6 +30,8 @@ public class LimelightAlime extends Command {
 
     @Override
     protected void initialize(){
+        Limelight.setLedMode(LightMode.eOn);
+        Limelight.setCameraMode(CameraMode.eVision);
         drivetrain.limelightPID.reset();
         drivetrain.limeControlling = true;
     }

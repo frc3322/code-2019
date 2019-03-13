@@ -17,17 +17,12 @@ import frc.robot.RobotMap;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
 
-/**
- * An example command.  You can replace me with your own command.
- */
 public class DriveControl extends Command {
 
     private final int SPEED_AXIS;
     private final int ROTATION_AXIS;
 
     private double rotationModifier= 0;
-
-    private double maxSpeed = 1;
 
 
     public DriveControl() {
@@ -58,25 +53,10 @@ public class DriveControl extends Command {
         if(drivetrain.isHighGear()) {
             speed = speed * .85;
         }
-        
-        // speed = (Math.abs(speed) > deadZone) ? speed * Math.abs(Math.pow(speed, speedPow - 1)) : 0;
-        // turn = (Math.abs(turn) > deadZone) ? turn * Math.abs(Math.pow(turn, turnPow - 1)) : 0;
-
-        /*
-        if(Math.abs(speed) > maxSpeed) {
-            if(speed > 0) {
-                speed = maxSpeed;
-            } else if(speed < 0){
-                speed = -maxSpeed;
-            }
-        }
-        */
+    
         if(drivetrain.limeControlling) {
             SmartDashboard.putBoolean("Limelight Controlling", true);
             drivetrain.limeDrive(speed); 
-        } else if(drivetrain.outtakeControlling) {
-            SmartDashboard.putBoolean("Limelight Controlling", false);
-            drivetrain.driveStraight(speed * .4, turn * .4);
         } else {
             SmartDashboard.putBoolean("Limelight Controlling", false);
             drivetrain.driveStraight(speed, turn);

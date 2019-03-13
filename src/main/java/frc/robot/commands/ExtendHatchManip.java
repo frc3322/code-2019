@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.robot.Robot.hatchManip;
 
-/**
- * Add your docs here.
- */
 public class ExtendHatchManip extends Command{
 
     public ExtendHatchManip(){

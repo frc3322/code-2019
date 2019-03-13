@@ -16,9 +16,6 @@ import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-/**
- * Add your docs here.
- */
 public class WideIntake extends Subsystem{
 
     WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.CAN.INTAKE_MOTOR);

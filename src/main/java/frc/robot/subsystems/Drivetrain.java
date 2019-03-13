@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj.SPI;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveControl;
-import frc.robot.Constants;
 
 import static frc.robot.Robot.limelight;
 
@@ -52,7 +51,7 @@ public class Drivetrain extends Subsystem {
             maxThrottleDelta = .05;
 
     public int upShiftMidpoint = 510,
-                downShiftMidpoint = 700; //TODO: Tweak the autoshift
+                downShiftMidpoint = 700;
 
     public AHRS navx;
 
@@ -76,7 +75,7 @@ public class Drivetrain extends Subsystem {
     public boolean limeControlling = false;
     public boolean outtakeControlling = false;
 
-    public double rampRate;
+    public double rampRate = .4;
 
     public Drivetrain() {
         
@@ -99,7 +98,6 @@ public class Drivetrain extends Subsystem {
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 
-        //TODO tune these values
         motors[LEFT_FRONT].setOpenLoopRampRate(rampRate);
         motors[RIGHT_FRONT].setOpenLoopRampRate(rampRate);
 
@@ -141,7 +139,7 @@ public class Drivetrain extends Subsystem {
 		pidForDriveStraight.setContinuous(true);
         pidForDriveStraight.setSetpoint(0);
         
-        limelightPID = new PIDController(0.007 , 0, 0.004, new PIDSource(){ //@jonathan
+        limelightPID = new PIDController(0.007 , 0, 0.004, new PIDSource(){
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
             @Override
@@ -242,7 +240,6 @@ public class Drivetrain extends Subsystem {
             }
             if (straightModeRun) {
                 tankDrive(speed - pidOutputForDriveStraight / 2, speed + pidOutputForDriveStraight / 2);
-                //drive(speed, pidOutputForDriveStraight);
             } else {
                 drive(speed, rotation);
             }
@@ -315,29 +312,7 @@ public class Drivetrain extends Subsystem {
        
     }
 
-    public double degreeToRadian(double degree) {       
-        return (degree * Math.PI) / 180;
-    }
-
-    public double radianToDegree(double radian) {
-        return (radian * 180) / Math.PI;
-    }
     public double getAngle(){
         return navx.getAngle();
-    }
-    public double getAngleToTarget(){
-        //calculate distance from the limelight to the target using equation found on limelight website
-        double limelightDistanceToTarget = (Constants.FieldDetails.targetHeight - Constants.LimelightMountingDetails.height) / Math.tan(degreeToRadian((Constants.LimelightMountingDetails.mountingAngle + Limelight.getTy())));
-        //calculate the angle from the limelight to the target based on how the limelight is mounted and the angle that the limelight calculates between the center of its fov and the target
-        double limelightAngleFromTarget = Constants.LimelightMountingDetails.angleOffset - Limelight.getTx();
-        
-        //calculate the distance between the robot and the target using the law of cosines
-        double robotDistanceToTarget = Math.sqrt(Math.pow(limelightDistanceToTarget, 2) + Math.pow(Constants.LimelightMountingDetails.centerOffset, 2) - 2 * limelightDistanceToTarget * Constants.LimelightMountingDetails.centerOffset * Math.cos(degreeToRadian(limelightAngleFromTarget)));
-        //calculate the angle between the robot and the target using the law of cosines
-        double calculatedAngle = radianToDegree(Math.acos(Math.sqrt((Math.pow(limelightDistanceToTarget, 2) - Math.pow(Constants.LimelightMountingDetails.centerOffset, 2) - Math.pow(robotDistanceToTarget, 2)) / -2 * Constants.LimelightMountingDetails.centerOffset * robotDistanceToTarget)));
-        //find the turn angle
-        double returnAngle = 90 - calculatedAngle;
-
-        return returnAngle;
     }
 }

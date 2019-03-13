@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.Limelight.CameraMode;
+import frc.robot.subsystems.Limelight.LightMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -59,11 +61,21 @@ public class Robot extends TimedRobot {
         limelight = new Limelight();
         elevator = new Elevator();
         wideintake = new WideIntake();
-        compressor = new Compressor(RobotMap.PCM.PCM_ID);
+//compressor = new Compressor(RobotMap.PCM.PCM_ID);
+
+        SmartDashboard.putNumber("Cargo Level Encoder Value", elevator.cargoLevel);
+        SmartDashboard.putNumber("Second Level Encoder Value", elevator.secondLevel);
+        SmartDashboard.putNumber("Third Level Encoder Value", elevator.thirdLevel);
+        SmartDashboard.putNumber("Elevator P Value", elevator.P);
+        SmartDashboard.putNumber("Elevator I Value", elevator.I);
+        SmartDashboard.putNumber("Elevator D Value", elevator.D);
 
         oi = new OI();
 
-        CameraServer.getInstance().startAutomaticCapture();
+        CameraServer.getInstance().startAutomaticCapture(0);
+
+        Limelight.setCameraMode(CameraMode.eDriver);
+        Limelight.setLedMode(LightMode.eOff);
 
         hatchManip.grabberExtend();
         hatchManip.hatchGrab();
@@ -73,6 +85,8 @@ public class Robot extends TimedRobot {
         drivetrain.updateDrivetrain();
 
         drivetrain.navx.reset();
+
+        
     }
 
     /**
