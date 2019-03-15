@@ -22,14 +22,14 @@ public class IntakeIdle extends Command {
     }
 
     @Override
-    protected void execute() { 
+    protected void initialize() { 
         wideintake.intakeStop();
         sideouttake.outtakeStop();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
 }
