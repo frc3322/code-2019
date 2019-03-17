@@ -54,6 +54,10 @@ public class ElevatorControl extends Command {
             cycleCounter = 1;
         }
 
+        if(elevator.moveInput < 0) {
+            elevator.reset();
+        }
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

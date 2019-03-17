@@ -38,12 +38,12 @@ public class RobotMap {
 
     public static class DIO {
         public static final int LEFT_INFRARED = 3;
-        public static final int RIGHT_INFRARED = 4;
+        public static final int RIGHT_INFRARED = 2;
 
         //elevator
         public static final int ELEVATOR_ENCODER_A = 0;
         public static final int ELEVATOR_ENCODER_B = 1;
-        public static final int ELEVATOR_LIMIT_SWITCH = 2;
+        public static final int ELEVATOR_LIMIT_SWITCH = 4;
 
     }
 
