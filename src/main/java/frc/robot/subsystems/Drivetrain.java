@@ -282,11 +282,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public boolean isHighGear() {
-        return false; //shiftSolenoid.get() == Value.kReverse;
+        return shiftSolenoid.get() == Value.kReverse;
     }
 
     public boolean isLowGear() {
-        return true; //shiftSolenoid.get() == Value.kForward;
+        return shiftSolenoid.get() == Value.kForward;
     }
 
     @Override

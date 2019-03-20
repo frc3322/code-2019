@@ -135,7 +135,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-  }
+        Limelight.setCameraMode(CameraMode.eDriver);
+        Limelight.setLedMode(LightMode.eOff);
+    }
 
     /**
      * This function is called periodically during autonomous.
@@ -147,6 +149,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        Limelight.setCameraMode(CameraMode.eDriver);
+        Limelight.setLedMode(LightMode.eOff);
     }
 
     /**
