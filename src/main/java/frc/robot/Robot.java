@@ -86,6 +86,8 @@ public class Robot extends TimedRobot {
 
         drivetrain.navx.reset();
 
+        Limelight.setLedMode(Limelight.LightMode.eOff);
+
         
     }
 

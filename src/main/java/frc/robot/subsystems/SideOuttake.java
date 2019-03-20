@@ -1,3 +1,4 @@
+
 /**
  *  _____    _____     _____     _____   
  * |___  \  |___  \   /  _  \   /  _  \
@@ -42,8 +43,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void outtakeLeft(double baseSpeed) {
-        rightOuttake.set(-(baseSpeed*slowSpeedModifier));
-        leftOuttake.set((baseSpeed*fastSpeedModifier));
+        rightOuttake.set((baseSpeed*slowSpeedModifier));
+        leftOuttake.set(-(baseSpeed*fastSpeedModifier));
     }
 
     public void outtakeStop() {

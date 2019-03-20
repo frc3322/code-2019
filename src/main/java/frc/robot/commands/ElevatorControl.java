@@ -57,10 +57,6 @@ public class ElevatorControl extends Command {
             cycleCounter = 1;
         }
 
-        if((elevator.moveInput > 0 || elevator.pidSpeed > 0) && !hatchManip.hatchGrabberExtended()) {
-            hatchManip.grabberExtend();
-        }
-
         if(elevator.moveInput < 0) {
             elevator.reset();
         }
