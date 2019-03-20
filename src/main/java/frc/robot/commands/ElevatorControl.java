@@ -11,10 +11,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.HatchManip;
 
 import static frc.robot.Robot.elevator;
-import static frc.robot.Robot.hatchManip;
 
 public class ElevatorControl extends Command {
 

@@ -22,7 +22,11 @@ public class DriveControl extends Command {
     private final int SPEED_AXIS;
     private final int ROTATION_AXIS;
 
-    private double rotationModifier= 0;
+    private double rotationModifier;
+
+    private double speed;
+
+    private double turn;
 
 
     public DriveControl() {
@@ -36,7 +40,7 @@ public class DriveControl extends Command {
 
     @Override
     protected void execute() {
-        double speed = oi.lowerChassis.getRawAxis(SPEED_AXIS);
+        speed = oi.lowerChassis.getRawAxis(SPEED_AXIS);
 
         if(speed > 0 || speed < 0) {
             rotationModifier = 0.775;
@@ -44,11 +48,7 @@ public class DriveControl extends Command {
             rotationModifier = 0.6;
         }
 
-        double turn = -oi.lowerChassis.getRawAxis(ROTATION_AXIS) * rotationModifier;
-
-        if(speed == 0) {
-            drivetrain.shiftLow();
-        }
+        turn = -(Math.pow(oi.lowerChassis.getRawAxis(ROTATION_AXIS), 2)) * rotationModifier;
 
         if(drivetrain.isHighGear()) {
             speed = speed * .85;
