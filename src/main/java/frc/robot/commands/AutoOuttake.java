@@ -13,14 +13,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import static frc.robot.Robot.sideouttake;
-import static frc.robot.Robot.drivetrain;
+
 import static frc.robot.Robot.oi;
 
 public class AutoOuttake extends Command {
 
-    public boolean outtaking;
+    private boolean outtaking;
 
-    public double lastOuttake;
+    private double lastOuttake;
 
     public AutoOuttake() {
         requires(sideouttake);
@@ -31,8 +31,8 @@ public class AutoOuttake extends Command {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
             lastOuttake = System.currentTimeMillis();
+            sideouttake.outtakeRight(0.75);
             while (outtaking) {
-                drivetrain.stop();
                 if ((System.currentTimeMillis() - lastOuttake) >= 500) {
                     sideouttake.outtakeStop();
                     outtaking = false;
@@ -43,8 +43,8 @@ public class AutoOuttake extends Command {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
             lastOuttake = System.currentTimeMillis();
+            sideouttake.outtakeLeft(0.75);
             while (outtaking) {
-                drivetrain.stop();
                 if ((System.currentTimeMillis() - lastOuttake) >= 500) {
                     sideouttake.outtakeStop();
                     outtaking = false;
