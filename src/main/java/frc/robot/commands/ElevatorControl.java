@@ -11,7 +11,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.HatchManip;
+
 import static frc.robot.Robot.elevator;
+import static frc.robot.Robot.hatchManip;
 
 public class ElevatorControl extends Command {
 
@@ -52,6 +55,14 @@ public class ElevatorControl extends Command {
 
         if(cycleCounter > 10000){
             cycleCounter = 1;
+        }
+
+        if((elevator.moveInput > 0 || elevator.pidSpeed > 0) && !hatchManip.hatchGrabberExtended()) {
+            hatchManip.grabberExtend();
+        }
+
+        if(elevator.moveInput < 0) {
+            elevator.reset();
         }
 
 	}

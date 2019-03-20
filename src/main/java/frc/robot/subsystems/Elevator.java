@@ -45,6 +45,7 @@ public class Elevator extends PIDSubsystem {
     public boolean canMoveUp = true;
     public boolean canMoveDown = true;
     public double moveInput;
+    public double pidSpeed;
     Encoder elevatorEncoder;
 
     WPI_TalonSRX elevatorMotor1;
@@ -175,6 +176,7 @@ public class Elevator extends PIDSubsystem {
     @Override
     protected void usePIDOutput(double output) {
         SmartDashboard.putNumber("PID Output", output);
+        pidSpeed = output;
         elevator.pidWrite(output);
     }
 

@@ -52,7 +52,6 @@ public class OI {
         //lowerChassis controller
         right_stick.whenPressed(new LimelightAlign());
         right_stick.whenReleased(new LimelightStop());
-        //button_a_lower.whileHeld(new ToggleDrivetrainInversion());
         button_start_lower.whileHeld(new HotMessClimb());
         button_back_lower.whileHeld(new HotMessReverse());
         bumper_left_lower.whileHeld(new AutoOuttake());
@@ -62,7 +61,6 @@ public class OI {
         button_y.whenPressed(new GoToLevel(3));
         button_b.whenPressed(new GoToLevel(2));
         button_a.whenPressed(new GoToLevel(1));
-        button_x.whenPressed(new GoToLevel(0));
         button_back_upper.whileHeld(new IntakeCargo());
         button_back_upper.whenReleased(new IntakeIdle());
         button_start_upper.whenPressed(new ExtendHatchManip());

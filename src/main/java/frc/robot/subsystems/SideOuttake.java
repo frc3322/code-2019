@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
 public class SideOuttake extends Subsystem{
-    private double slowSpeedModifier = 0.3;
-    private double fastSpeedModifier = 0.75;
+    private double slowSpeedModifier = 0.25;
+    private double fastSpeedModifier = 0.55;
 
     public static final long outtakeTime = 2000;
 
@@ -37,8 +37,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void outtakeRight(double baseSpeed) {
-        leftOuttake.set(-(baseSpeed*slowSpeedModifier));
-        rightOuttake.set((baseSpeed*fastSpeedModifier));
+        leftOuttake.set((baseSpeed*slowSpeedModifier));
+        rightOuttake.set(-(baseSpeed*fastSpeedModifier));
     }
 
     public void outtakeLeft(double baseSpeed) {
@@ -52,8 +52,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void intakeCarriage() {
-        leftOuttake.set(-.2);
-        rightOuttake.set(-.2);
+        leftOuttake.set(-.25);
+        rightOuttake.set(-.25);
     }
 
     public void update(){
