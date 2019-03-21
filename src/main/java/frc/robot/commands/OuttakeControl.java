@@ -45,21 +45,17 @@ public class OuttakeControl extends Command{
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
             lastOuttake = System.currentTimeMillis();
-            while (outtaking) {
-                if ((System.currentTimeMillis() - lastOuttake) >= 500) {
-                    outtaking = false;
-                    oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
-                }
+            if ((System.currentTimeMillis() - lastOuttake) >= 500) {
+                outtaking = false;
+                oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
             }
         } else if (sideouttake.getLeftInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
             lastOuttake = System.currentTimeMillis();
-            while (outtaking) {
-                if ((System.currentTimeMillis() - lastOuttake) >= 500) {
-                    outtaking = false;
-                    oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-                }
+            if ((System.currentTimeMillis() - lastOuttake) >= 500) {
+                outtaking = false;
+                oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
             }
         }
     }
