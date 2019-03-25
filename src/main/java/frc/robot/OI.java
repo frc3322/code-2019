@@ -66,7 +66,6 @@ public class OI {
         button_start_upper.whenPressed(new ExtendHatchManip());
         bumper_left_upper.whenPressed(new ToggleIntake());
         bumper_right_upper.whenPressed(new GrabHatch());
-
     }
 
 }
