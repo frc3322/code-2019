@@ -11,6 +11,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.GenericHID;
 
@@ -41,23 +42,23 @@ public class OuttakeControl extends Command{
             sideouttake.outtakeStop();
         }
 
-        // if (sideouttake.getRightInfrared()) {
-        //     outtaking = true;
-        //     oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
-        //     lastOuttake = System.currentTimeMillis();
-        //     if ((System.currentTimeMillis() - lastOuttake) >= 500) {
-        //         outtaking = false;
-        //         oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
-        //     }
-        // } else if (sideouttake.getLeftInfrared()) {
-        //     outtaking = true;
-        //     oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
-        //     lastOuttake = System.currentTimeMillis();
-        //     if ((System.currentTimeMillis() - lastOuttake) >= 500) {
-        //         outtaking = false;
-        //         oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-        //     }
-        // }
+        if (sideouttake.getRightInfrared()) {
+            outtaking = true;
+            oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
+            lastOuttake = System.currentTimeMillis();
+        } else if (sideouttake.getLeftInfrared()) {
+            outtaking = true;
+            oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
+            lastOuttake = System.currentTimeMillis();
+        }
+
+        while (outtaking) {
+            if ((System.currentTimeMillis() - lastOuttake) >= 250) {
+                outtaking = false;
+                oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
+                oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+            }
+        }
     }
 
     @Override

@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        //sideouttake.update();
+        sideouttake.update();
         drivetrain.updateDrivetrain();
         //hatchManip.updateHatch();
         elevator.update();

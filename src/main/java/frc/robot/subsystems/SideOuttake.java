@@ -31,6 +31,11 @@ public class SideOuttake extends Subsystem{
     DigitalInput leftInfrared = new DigitalInput(RobotMap.DIO.LEFT_INFRARED);
     DigitalInput rightInfrared = new DigitalInput(RobotMap.DIO.RIGHT_INFRARED);
 
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new OuttakeControl());
+    }
+
     public SideOuttake() {
         leftOuttake.setInverted(true);
         rightOuttake.setInverted(true);
@@ -58,20 +63,15 @@ public class SideOuttake extends Subsystem{
     }
 
     public void update(){
-        SmartDashboard.putBoolean("Right Infrared", rightInfrared.get());
-        SmartDashboard.putBoolean("Left Infrared", leftInfrared.get());
+        SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
+        SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());
     }
 
     public boolean getRightInfrared() {
-        return rightInfrared.get();
+        return !rightInfrared.get();
     }
 
     public boolean getLeftInfrared() {
-        return leftInfrared.get();
-    }
-
-    @Override
-    protected void initDefaultCommand() {
-        setDefaultCommand(new OuttakeControl());
+        return !leftInfrared.get();
     }
 }
