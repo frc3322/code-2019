@@ -13,13 +13,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
-// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 //import frc.robot.PIDController;
 import frc.robot.RobotMap;
@@ -46,10 +46,10 @@ public class Elevator extends PIDSubsystem {
     public boolean canMoveDown = true;
     public double moveInput;
     public double pidSpeed;
-    Encoder elevatorEncoder;
+    CANEncoder elevatorEncoder;
 
-    WPI_TalonSRX elevatorMotor1;
-    WPI_TalonSRX elevatorMotor2;
+    CANSparkMax elevatorMotor1;
+    CANSparkMax elevatorMotor2;
     
     DigitalInput elevatorLimitSwitch;
 
@@ -65,12 +65,12 @@ public class Elevator extends PIDSubsystem {
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
-
-        elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B);
         elevatorLimitSwitch = new DigitalInput(RobotMap.DIO.ELEVATOR_LIMIT_SWITCH);
         
-        elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
-        elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
+        elevatorMotor1 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_1,MotorType.kBrushless);
+        elevatorMotor2 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_2,MotorType.kBrushless);
+
+        elevatorEncoder = elevatorMotor1.getEncoder();
 
         elevatorMotor1.setInverted(true);
         elevatorMotor2.setInverted(true);
@@ -85,7 +85,7 @@ public class Elevator extends PIDSubsystem {
     }
 
     public void update() {
-        SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getDistance());
+        SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getPosition());
         SmartDashboard.putBoolean("Elevator Limit Switch", elevatorLimitSwitch.get());
         SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
@@ -96,11 +96,11 @@ public class Elevator extends PIDSubsystem {
     }
 
     public void reset() {
-        elevatorEncoder.reset();
+        elevatorEncoder.setPosition(0);
     }
 
     public double currentHeight() {
-        return elevatorEncoder.getDistance();
+        return elevatorEncoder.getPosition();
     }
     
     public void onLimitSwitch(){
@@ -114,7 +114,7 @@ public class Elevator extends PIDSubsystem {
     }
 
     public void adjustRampRate() {
-        drivetrain.rampRate = .4 + elevatorEncoder.getDistance() / 10000;
+        drivetrain.rampRate = .4 + elevatorEncoder.getPosition() / 10000;
     }
 
     @Override
@@ -170,7 +170,7 @@ public class Elevator extends PIDSubsystem {
 
     @Override
     protected double returnPIDInput() {
-        return elevatorEncoder.getDistance();
+        return elevatorEncoder.getPosition();
     }
 
     @Override
