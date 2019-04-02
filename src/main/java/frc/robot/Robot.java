@@ -151,6 +151,7 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         Limelight.setCameraMode(CameraMode.eDriver);
         Limelight.setLedMode(LightMode.eOff);
+        drivetrain.navx.reset();
     }
 
     /**
