@@ -32,6 +32,9 @@ public class WideIntake extends Subsystem{
         intakeMotor.set(0);
     }
 
+    public void outtakeThruIntake() {
+        intakeMotor.set(-.4);
+    }
     public void intakeExtend() {
         intakeExtender.set(DoubleSolenoid.Value.kForward);
     }

@@ -70,7 +70,7 @@ public class TurnToAngle extends Command {
 	@Override
 	protected void initialize() {
 		// Get everything in a safe starting state.
-        drivetrain.navx.reset();
+        //drivetrain.navx.reset();
 		m_pid.reset();
 		m_pid.enable();
 	}

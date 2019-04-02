@@ -62,6 +62,11 @@ public class SideOuttake extends Subsystem{
         rightOuttake.set(-.25);
     }
 
+    public void outtakeThruIntake() {
+        leftOuttake.set(.25);
+        rightOuttake.set(.25);
+    }
+
     public void update(){
         SmartDashboard.putBoolean("Right Infrared", getRightInfrared());
         SmartDashboard.putBoolean("Left Infrared", getLeftInfrared());

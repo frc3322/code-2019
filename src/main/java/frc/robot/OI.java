@@ -56,11 +56,15 @@ public class OI {
         button_back_lower.whenPressed(new ShiftDown());
         bumper_left_lower.whileHeld(new AutoOuttake());
         left_stick.whenPressed(new ToggleShift());
+        button_y.whenPressed(new TurnToAngle(0));
+        button_a.whenPressed(new TurnToAngle(180));
+
 
         //upperChassis controller
         button_y.whenPressed(new GoToLevel(3));
         button_b.whenPressed(new GoToLevel(2));
         button_a.whenPressed(new GoToLevel(1));
+        button_x.whileHeld(new OuttakeThruIntake());
         button_back_upper.whileHeld(new IntakeCargo());
         button_back_upper.whenReleased(new IntakeIdle());
         button_start_upper.whenPressed(new ExtendHatchManip());
