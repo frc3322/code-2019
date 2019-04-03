@@ -43,7 +43,7 @@ public class OI {
     Button left_stick = new JoystickButton(lowerChassis, RobotMap.XBOX.STICK_LEFT);
     Button right_stick = new JoystickButton(lowerChassis, RobotMap.XBOX.STICK_RIGHT);
     Button button_a_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.BUTTON_A);
-    Button button_y_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.BUTTON_Y);
+    Button button_x_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.BUTTON_X);
     //Button left_trigger_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.TRIGGER_L_AXIS);
     //Button right_trigger_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.TRIGGER_R_AXIS);
 
@@ -56,6 +56,7 @@ public class OI {
         button_start_lower.whenPressed(new ShiftUp());
         button_back_lower.whenPressed(new ShiftDown());
         bumper_left_lower.whileHeld(new AutoOuttake());
+        button_x_lower.whenPressed(new ToggleHotmess());
         button_a_lower.whenPressed(new TurnToAngle());
 
 

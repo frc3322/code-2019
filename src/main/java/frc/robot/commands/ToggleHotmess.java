@@ -13,14 +13,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import static frc.robot.Robot.drivetrain;
 
-public class ToggleShift extends Command{
+public class ToggleHotmess extends Command{
 
-    public ToggleShift() {
+    public ToggleHotmess() {
         requires(drivetrain);
     }
 
     @Override
     protected void initialize() {
+        drivetrain.toggleShift();
     }
 
     @Override
