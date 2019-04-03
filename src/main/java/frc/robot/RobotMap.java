@@ -16,13 +16,13 @@ public class RobotMap {
     public static class CAN {
         
         //drivetrain
-        public static final int LEFT_FRONT_MOTOR = 44;
-        public static final int LEFT_BACK_MOTOR = 43;
-        public static final int RIGHT_FRONT_MOTOR = 41;
-        public static final int RIGHT_BACK_MOTOR = 42;
+        public static final int LEFT_FRONT_MOTOR = 37; //44
+        public static final int LEFT_BACK_MOTOR = 35; //43
+        public static final int RIGHT_FRONT_MOTOR = 34; //41
+        public static final int RIGHT_BACK_MOTOR = 36; //42
 
         //hot mess
-        public static final int HOTMESS_MOTOR1 = 45;
+        public static final int HOTMESS_MOTOR = 45;
 
         //cargo
         public static final int L_SIDE_OUTTAKE = 27;
@@ -48,7 +48,7 @@ public class RobotMap {
 
     public static class PCM {
 
-        public static final int PCM_ID = 5;
+        public static final int PCM_ID = 0;
 
         //public static final int SHIFT_GEAR_1 = 4;
         //public static final int SHIFT_GEAR_2 = 5;

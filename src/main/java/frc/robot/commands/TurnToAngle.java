@@ -27,13 +27,12 @@ public class TurnToAngle extends Command {
 	private PIDController m_pid;
 
     double calculatedP;
-    double tolerance;
-	public TurnToAngle(double angle) {
+	public TurnToAngle() {
         requires(drivetrain);
-        calculatedP = 0.265196 * Math.pow(0.796868, Math.abs(angle)) + 0.0341779;
-        SmartDashboard.putNumber("input angle", angle);
-        SmartDashboard.putNumber("Caclulated P", calculatedP);
-		m_pid = new PIDController(calculatedP, 0, 0, new PIDSource() {
+        //calculatedP = 0.265196 * Math.pow(0.796868, Math.abs(angle)) + 0.0341779;
+        //SmartDashboard.putNumber("input angle", angle);
+        //SmartDashboard.putNumber("Caclulated P", calculatedP);
+		m_pid = new PIDController(0.8, 0, 0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override
@@ -51,27 +50,25 @@ public class TurnToAngle extends Command {
 				return m_sourceType;
 			}
 		}, d -> drivetrain.tankDrive(-d/2, d/2));
-        if (angle >= 20){
-            tolerance = 7;
-        } else if(angle >= 15){
-            tolerance = 5;
-        } else if(angle < 15){
-            tolerance = 3;
-        }
 
-		m_pid.setAbsoluteTolerance(tolerance);
+		m_pid.setAbsoluteTolerance(5);
 		m_pid.setInputRange(-180.0f,  180.0f);
 		m_pid.setOutputRange(-1.0, 1.0);
-		m_pid.setContinuous(true);
-		m_pid.setSetpoint(angle);
+        m_pid.setContinuous(true);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		// Get everything in a safe starting state.
-        drivetrain.navx.reset();
-		m_pid.reset();
+        //drivetrain.navx.reset();
+        m_pid.reset();
+        if(Math.abs(drivetrain.navx.getYaw()) >= 90){
+            m_pid.setSetpoint(180);
+        } 
+        if (Math.abs(drivetrain.navx.getYaw()) < 90){
+            m_pid.setSetpoint(0);
+        }
 		m_pid.enable();
 	}
 

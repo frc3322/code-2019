@@ -13,6 +13,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.commands.HotMessClimb;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,28 +26,16 @@ import frc.robot.commands.HotMessIdle;
  */
 public class HotMess extends Subsystem {
     
-    public CANSparkMax motor1,
-                        motor2;
+    public CANSparkMax motor1;
     
-    private CANEncoder encoder1,
-                       encoder2;
-
-    private Double hotmessRampRate;
-    
-    private SpeedControllerGroup motorGroup;
+    private CANEncoder encoder1;
 
     public HotMess(){
 
-        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR1, MotorType.kBrushless);
+        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR, MotorType.kBrushless);
 
         encoder1 = motor1.getEncoder();
-
-        hotmessRampRate = 5.0;
-
-        motor1.setInverted(true);
-
-        motor1.setClosedLoopRampRate(hotmessRampRate);
-    }
+}
 
     public void update() {
         SmartDashboard.putNumber("Motor Current 1", motor1.getOutputCurrent());
@@ -79,6 +68,6 @@ public class HotMess extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new HotMessIdle());
+        setDefaultCommand(new HotMessClimb());
     }
 }

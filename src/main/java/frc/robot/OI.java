@@ -43,6 +43,7 @@ public class OI {
     Button left_stick = new JoystickButton(lowerChassis, RobotMap.XBOX.STICK_LEFT);
     Button right_stick = new JoystickButton(lowerChassis, RobotMap.XBOX.STICK_RIGHT);
     Button button_a_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.BUTTON_A);
+    Button button_y_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.BUTTON_Y);
     //Button left_trigger_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.TRIGGER_L_AXIS);
     //Button right_trigger_lower = new JoystickButton(lowerChassis, RobotMap.XBOX.TRIGGER_R_AXIS);
 
@@ -52,20 +53,22 @@ public class OI {
         //lowerChassis controller
         right_stick.whenPressed(new LimelightAlign());
         right_stick.whenReleased(new LimelightStop());
-        button_start_lower.whileHeld(new HotMessClimb());
-        button_back_lower.whileHeld(new HotMessReverse());
+        button_start_lower.whenPressed(new ShiftUp());
+        button_back_lower.whenPressed(new ShiftDown());
         bumper_left_lower.whileHeld(new AutoOuttake());
+        button_a_lower.whenPressed(new TurnToAngle());
+
 
         //upperChassis controller
         button_y.whenPressed(new GoToLevel(3));
         button_b.whenPressed(new GoToLevel(2));
         button_a.whenPressed(new GoToLevel(1));
+        button_x.whileHeld(new OuttakeThruIntake());
         button_back_upper.whileHeld(new IntakeCargo());
         button_back_upper.whenReleased(new IntakeIdle());
         button_start_upper.whenPressed(new ExtendHatchManip());
         bumper_left_upper.whenPressed(new ToggleIntake());
         bumper_right_upper.whenPressed(new GrabHatch());
-
     }
 
 }
