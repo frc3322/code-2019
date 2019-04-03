@@ -183,6 +183,7 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putNumber("PID Output", pidOutputForDriveStraight);
         SmartDashboard.putNumber("Setpoint", pidForDriveStraight.getSetpoint());
         SmartDashboard.putBoolean("isHatchFront", isHatchFront);
+        SmartDashboard.putNumber("Drivetrain Angle", getAngle());
     }
 
     public double getVoltage(int n) {
