@@ -57,8 +57,7 @@ public class OI {
         button_back_lower.whenPressed(new ShiftDown());
         bumper_left_lower.whileHeld(new AutoOuttake());
         left_stick.whenPressed(new ToggleShift());
-        button_y_lower.whenPressed(new TurnToAngle(0));
-        button_a_lower.whenPressed(new TurnToAngle(180));
+        button_a_lower.whenPressed(new TurnToAngle());
 
 
         //upperChassis controller

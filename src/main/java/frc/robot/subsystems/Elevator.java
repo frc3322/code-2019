@@ -35,9 +35,9 @@ public class Elevator extends PIDSubsystem {
     private int desiredLevel;
     private double upSpeed = 0.2;
     private double downSpeed = -0.2;
-    public double cargoLevel = 2000;
-    public double secondLevel = 3650;
-    public double thirdLevel = 6775;
+    public double cargoLevel = 0;
+    public double secondLevel = 0;
+    public double thirdLevel = 0;
     public static double P = 0.3;
     public static double I = 0;
     public static double D = 0;
