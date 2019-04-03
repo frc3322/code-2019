@@ -55,7 +55,6 @@ public class OI {
         button_start_lower.whileHeld(new HotMessClimb());
         button_back_lower.whileHeld(new HotMessReverse());
         bumper_left_lower.whileHeld(new AutoOuttake());
-        left_stick.whenPressed(new ToggleShift());
 
         //upperChassis controller
         button_y.whenPressed(new GoToLevel(3));

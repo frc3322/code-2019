@@ -38,48 +38,42 @@ public class HotMess extends Subsystem {
     public HotMess(){
 
         motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR1, MotorType.kBrushless);
-        motor2 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR2, MotorType.kBrushless);
 
         encoder1 = motor1.getEncoder();
-        encoder2 = motor2.getEncoder();
 
         hotmessRampRate = 5.0;
-
-        motorGroup = new SpeedControllerGroup(motor1, motor2);
 
         motor1.setInverted(true);
 
         motor1.setClosedLoopRampRate(hotmessRampRate);
-        motor2.setClosedLoopRampRate(hotmessRampRate);
     }
 
     public void update() {
         SmartDashboard.putNumber("Motor Current 1", motor1.getOutputCurrent());
-        SmartDashboard.putNumber("Motor Current 2", motor2.getOutputCurrent());
     }
 
     public void climb(double speed){
         if(speed >= 1) {
             speed = 1;
-            motorGroup.set(speed);
+            motor1.set(speed);
         } else {
-            motorGroup.set(speed);
+            motor1.set(speed);
         }
     }
 
     public void stop(){
 
-        motorGroup.set(0);
+        motor1.set(0);
 
     }
 
     public void reverse() {
-        motorGroup.set(-.1);
+        motor1.set(-.1);
     }
 
     public double getEncoderVal(){
 
-        return (encoder1.getPosition() + encoder2.getPosition()) / 2;
+        return (encoder1.getPosition());
 
     }
 
