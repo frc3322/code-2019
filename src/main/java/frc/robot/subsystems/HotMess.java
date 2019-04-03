@@ -32,7 +32,7 @@ public class HotMess extends Subsystem {
 
     public HotMess(){
 
-        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR1, MotorType.kBrushless);
+        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR, MotorType.kBrushless);
 
         encoder1 = motor1.getEncoder();
 }
