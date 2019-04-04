@@ -73,10 +73,10 @@ public class SideOuttake extends Subsystem{
     }
 
     public boolean getRightInfrared() {
-        return !rightInfrared.get();
+        return rightInfrared.get();
     }
 
     public boolean getLeftInfrared() {
-        return !leftInfrared.get();
+        return leftInfrared.get();
     }
 }

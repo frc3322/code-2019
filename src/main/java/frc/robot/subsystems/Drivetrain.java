@@ -170,10 +170,6 @@ public class Drivetrain extends Subsystem {
         //SmartDashboard.putBoolean("Is Low Gear", isClimbDown());
         SmartDashboard.putNumber("Encoder Left", getEncoder(LEFT_FRONT));
         SmartDashboard.putNumber("Encoder Right", getEncoder(RIGHT_FRONT));
-        SmartDashboard.putBoolean("Straight Mode", straightModeRun);
-        SmartDashboard.putNumber("PID Output", pidOutputForDriveStraight);
-        SmartDashboard.putNumber("Setpoint", pidForDriveStraight.getSetpoint());
-        SmartDashboard.putBoolean("isHatchFront", isHatchFront);
         SmartDashboard.putNumber("Drivetrain Angle", navx.getYaw());
     }
 

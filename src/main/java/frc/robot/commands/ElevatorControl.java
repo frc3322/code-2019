@@ -32,16 +32,18 @@ public class ElevatorControl extends Command {
 	protected void execute() {
 
         cycleCounter++;
-        idleSpeed = 0.2;
+
+        //TODO: check these changes
+        idleSpeed = 0.01;
         if(elevator.getLimitSwitch() && hasSeenSwitch == false){
             hasSeenSwitch = true;
             cycleCounter = 0;
             elevator.move(0);
         //needs 200 encoder ticks to get off switch
-        } else if (elevator.moveInput == 0 && elevator.currentHeight() > 200 && !elevator.getPIDController().isEnabled()){
+        } else if (elevator.moveInput == 0 && !elevator.getPIDController().isEnabled()){
             elevator.move(idleSpeed);
         } else {
-            elevator.move(elevator.moveInput);
+            elevator.move(elevator.moveInput*0.6);
         }
 
         //prevents limit switch bounce

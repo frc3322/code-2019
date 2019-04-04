@@ -32,9 +32,8 @@ public class HotMess extends Subsystem {
     private DoubleSolenoid hotMessSolenoid;
 
     public HotMess(){
-
+        hotMessSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.HOT_MESS_1, RobotMap.PCM.HOT_MESS_2);
         motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR, MotorType.kBrushless);
-
         encoder1 = motor1.getEncoder();
     }
 
