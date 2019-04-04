@@ -194,9 +194,6 @@ public class Drivetrain extends Subsystem {
     }
 
     public void drive(double speed, double rotation){
-        if(isHatchFront){
-            speed = -speed;
-        }
         robotDrive.arcadeDrive(speed, rotation);
 
     }

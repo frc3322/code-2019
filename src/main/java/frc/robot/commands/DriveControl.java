@@ -57,7 +57,7 @@ public class DriveControl extends Command {
             turnDirection = -1;
         }
         
-    
+        /*
         if(drivetrain.limeControlling) {
             SmartDashboard.putBoolean("Limelight Controlling", true);
             drivetrain.limeDrive(speed); 
@@ -65,6 +65,8 @@ public class DriveControl extends Command {
             SmartDashboard.putBoolean("Limelight Controlling", false);
             drivetrain.drive(speed, turnDirection * turn);
         }
+        */
+        drivetrain.drive(speed, turnDirection * turn);
     }
         
 
