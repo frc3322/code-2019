@@ -32,12 +32,11 @@ public class Elevator extends PIDSubsystem {
     private SpeedControllerGroup elevator;
     
     private int currentLevel = 0;
-    private int desiredLevel;
+    private int desiredLevel = 0;
     private double upSpeed = 0.2;
     private double downSpeed = -0.2;
     public double cargoLevel = 0;
     public double secondLevel = 0;
-    public double thirdLevel = 0;
     public static double P = 0.3;
     public static double I = 0;
     public static double D = 0;
@@ -55,12 +54,6 @@ public class Elevator extends PIDSubsystem {
 
     public Elevator() {
         super("Elevator PID", P, I, D);
-        cargoLevel = SmartDashboard.getNumber("Cargo Level Encoder Value", 2000);
-        secondLevel = SmartDashboard.getNumber("Second Level Encoder Value", 3250);
-        thirdLevel = SmartDashboard.getNumber("Third Level Encoder Value", 8100);
-        P = SmartDashboard.getNumber("Elevator P Value", P);
-        I = SmartDashboard.getNumber("Elevator I Value", I);
-        D = SmartDashboard.getNumber("Elevator D Value", D);
 
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
@@ -141,12 +134,6 @@ public class Elevator extends PIDSubsystem {
 
     public void goToLevel(int level) {
         switch (level) {
-        case 0:
-            desiredLevel = 0;
-            disable();
-            move(downSpeed);
-            currentLevel = 0;
-            break;
         case 1:
             desiredLevel = 1;
             setSetpoint(cargoLevel);
@@ -156,11 +143,6 @@ public class Elevator extends PIDSubsystem {
             desiredLevel = 2;
             setSetpoint(secondLevel);
             currentLevel = 2;
-            break;
-        case 3:
-            desiredLevel = 3;
-            setSetpoint(thirdLevel);
-            currentLevel = 3;
             break;
         default:
             return;

@@ -57,10 +57,6 @@ public class DriveControl extends Command {
             turnDirection = -1;
         }
         
-        if(drivetrain.isHighGear()) {
-            speed = speed * .85;
-        }
-        
     
         if(drivetrain.limeControlling) {
             SmartDashboard.putBoolean("Limelight Controlling", true);

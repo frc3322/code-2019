@@ -14,12 +14,11 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.commands.HotMessClimb;
-
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.HotMessIdle;
 
 /**
  * Add your docs here.
@@ -30,12 +29,14 @@ public class HotMess extends Subsystem {
     
     private CANEncoder encoder1;
 
+    private DoubleSolenoid hotMessSolenoid;
+
     public HotMess(){
 
         motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR, MotorType.kBrushless);
 
         encoder1 = motor1.getEncoder();
-}
+    }
 
     public void update() {
         SmartDashboard.putNumber("Motor Current 1", motor1.getOutputCurrent());
@@ -58,6 +59,30 @@ public class HotMess extends Subsystem {
 
     public void reverse() {
         motor1.set(-.1);
+    }
+
+    public void toggleHotMess() {
+        if(isClimbUp()) {
+            hotMessDown();
+        } else {
+            hotMessUp();
+        }
+    }
+
+    public void hotMessUp() {
+        hotMessSolenoid.set(Value.kReverse);
+    }
+
+    public void hotMessDown() {
+        hotMessSolenoid.set(Value.kForward);
+    }
+
+    public boolean isClimbUp() {
+        return hotMessSolenoid.get() == Value.kReverse;
+    }
+
+    public boolean isClimbDown() {
+        return hotMessSolenoid.get() == Value.kForward;
     }
 
     public double getEncoderVal(){

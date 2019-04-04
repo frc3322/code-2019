@@ -11,17 +11,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import static frc.robot.Robot.drivetrain;
+import static frc.robot.Robot.hotMess;
 
 public class ToggleHotmess extends Command{
 
     public ToggleHotmess() {
-        requires(drivetrain);
+        
     }
 
     @Override
     protected void initialize() {
-        drivetrain.toggleShift();
+        hotMess.toggleHotMess();
     }
 
     @Override

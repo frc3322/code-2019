@@ -63,12 +63,12 @@ public class Robot extends TimedRobot {
         wideintake = new WideIntake();
 //compressor = new Compressor(RobotMap.PCM.PCM_ID);
 
-        SmartDashboard.putNumber("Cargo Level Encoder Value", elevator.cargoLevel);
-        SmartDashboard.putNumber("Second Level Encoder Value", elevator.secondLevel);
-        SmartDashboard.putNumber("Third Level Encoder Value", elevator.thirdLevel);
-        SmartDashboard.putNumber("Elevator P Value", elevator.P);
-        SmartDashboard.putNumber("Elevator I Value", elevator.I);
-        SmartDashboard.putNumber("Elevator D Value", elevator.D);
+        //SmartDashboard.putNumber("Cargo Level Encoder Value", elevator.cargoLevel);
+        //SmartDashboard.putNumber("Second Level Encoder Value", elevator.secondLevel);
+        //SmartDashboard.putNumber("Third Level Encoder Value", elevator.thirdLevel);
+        //SmartDashboard.putNumber("Elevator P Value", elevator.P);
+        //SmartDashboard.putNumber("Elevator I Value", elevator.I);
+        //SmartDashboard.putNumber("Elevator D Value", elevator.D);
 
         oi = new OI();
 

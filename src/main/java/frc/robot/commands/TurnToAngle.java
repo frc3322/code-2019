@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import static frc.robot.Robot.drivetrain;
 
 /**
@@ -29,10 +28,7 @@ public class TurnToAngle extends Command {
     double calculatedP;
 	public TurnToAngle() {
         requires(drivetrain);
-        //calculatedP = 0.265196 * Math.pow(0.796868, Math.abs(angle)) + 0.0341779;
-        //SmartDashboard.putNumber("input angle", angle);
-        //SmartDashboard.putNumber("Caclulated P", calculatedP);
-		m_pid = new PIDController(0.8, 0, 0, new PIDSource() {
+		m_pid = new PIDController(0.3, 0, 0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override
