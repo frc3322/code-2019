@@ -35,7 +35,7 @@ public class HotMessClimb extends Command{
     protected void execute() {
         if(Math.abs(oi.upperChassis.getRawAxis(RIGHT_AXIS)) > .1 && Math.abs(oi.upperChassis.getRawAxis(LEFT_AXIS)) > .1){
             hotMess.hotMessUp();
-            speed = -((oi.upperChassis.getRawAxis(RIGHT_AXIS)+oi.upperChassis.getRawAxis(LEFT_AXIS))/2);
+            speed = ((oi.upperChassis.getRawAxis(RIGHT_AXIS)+oi.upperChassis.getRawAxis(LEFT_AXIS))/2);
         } else {
             hotMess.hotMessDown();
             speed = 0;

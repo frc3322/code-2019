@@ -41,6 +41,8 @@ public class OuttakeControl extends Command{
             sideouttake.outtakeStop();
         }
 
+        
+
         if (sideouttake.getRightInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
@@ -58,6 +60,7 @@ public class OuttakeControl extends Command{
                 oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
             }
         }
+        
     }
 
     @Override

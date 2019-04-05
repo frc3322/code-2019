@@ -93,11 +93,17 @@ public class Drivetrain extends Subsystem {
         motors[LEFT_FRONT].setOpenLoopRampRate(rampRate);
         motors[RIGHT_FRONT].setOpenLoopRampRate(rampRate);
 
+        motors[LEFT_FRONT].setSmartCurrentLimit(40);
+        motors[RIGHT_FRONT].setSmartCurrentLimit(40);
+        motors[LEFT_BACK].setSmartCurrentLimit(40);
+        motors[RIGHT_BACK].setSmartCurrentLimit(40);
+
         straightModeStart = false;
         straightModeRun = false;
 
         runDelay = System.currentTimeMillis();
         
+        /*
         pidForDriveStraight = new PIDController(0.025, 0, 0, new PIDSource(){ //@jonathan
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
@@ -130,6 +136,7 @@ public class Drivetrain extends Subsystem {
 		pidForDriveStraight.setContinuous(true);
         pidForDriveStraight.setSetpoint(navx.getYaw());
         
+        
         limelightPID = new PIDController(0.007 , 0, 0.004, new PIDSource(){
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
@@ -161,6 +168,7 @@ public class Drivetrain extends Subsystem {
 		limelightPID.setOutputRange(-.4, .4);
 		limelightPID.setContinuous(true);
 
+        */
     }
 
     public void updateDrivetrain() {
@@ -202,13 +210,18 @@ public class Drivetrain extends Subsystem {
         robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
+
+    /*
     public void limeDrive(double speed) {
         
-        navx.reset();
+        //navx.reset();
         limelightPID.setSetpoint(limelight.getTx());
         limelightPID.enable();
         tankDrive(speed - limelightPIDOutput, speed + limelightPIDOutput);
     }
+    */
+
+    /*
 
     public void driveStraight(Double speed, double rotation){
         if(Math.abs(speed) > 0.15 && Math.abs(rotation) < 0.15){
@@ -236,7 +249,7 @@ public class Drivetrain extends Subsystem {
             drive(speed, rotation);
         }
     }
-
+    */
     public void stop(){
         drive(0, 0);
     }

@@ -29,20 +29,21 @@ public class AutoOuttake extends Command {
     }
 
     protected void execute() {
+        
         if (sideouttake.getRightInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
             lastOuttake = System.currentTimeMillis();
             sideouttake.outtakeRight(0.75);
-            SmartDashboard.putBoolean("Outtaking Right", true);
+            //SmartDashboard.putBoolean("Outtaking Right", true);
         } else if (sideouttake.getLeftInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
             lastOuttake = System.currentTimeMillis();
             sideouttake.outtakeLeft(0.75);
-            SmartDashboard.putBoolean("Outtaking Left", true);
+           //SmartDashboard.putBoolean("Outtaking Left", true);
         }
-
+        
         while (outtaking) {
             if ((System.currentTimeMillis() - lastOuttake) >= 250) {
                 oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
@@ -50,11 +51,12 @@ public class AutoOuttake extends Command {
             }
             if ((System.currentTimeMillis() - lastOuttake) >= 500) {
                 sideouttake.outtakeStop();
-                SmartDashboard.putBoolean("Outtaking Right", false);
-                SmartDashboard.putBoolean("Outtaking Left", false);
+                //SmartDashboard.putBoolean("Outtaking Right", false);
+                //SmartDashboard.putBoolean("Outtaking Left", false);
                 outtaking = false;
             }
         }
+        
     }
 
     @Override

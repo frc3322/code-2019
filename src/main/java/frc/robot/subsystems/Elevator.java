@@ -79,7 +79,7 @@ public class Elevator extends PIDSubsystem {
 
     public void update() {
         SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getPosition());
-        //SmartDashboard.putBoolean("Elevator Limit Switch", elevatorLimitSwitch.get());
+        SmartDashboard.putBoolean("Elevator Limit Switch", elevatorLimitSwitch.get());
         //SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
         //SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
         //SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
