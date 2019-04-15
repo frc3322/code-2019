@@ -23,7 +23,6 @@ public class RobotMap {
 
         //hot mess
         public static final int HOTMESS_MOTOR1 = 45;
-        public static final int HOTMESS_MOTOR2 = 46;
 
         //cargo
         public static final int L_SIDE_OUTTAKE = 27;
@@ -31,8 +30,8 @@ public class RobotMap {
         public static final int INTAKE_MOTOR = 24;
 
         //elevator
-        public static final int ELEVATOR_MOTOR_1 = 26;
-        public static final int ELEVATOR_MOTOR_2 = 25;
+        public static final int ELEVATOR_MOTOR_1 = 38;
+        public static final int ELEVATOR_MOTOR_2 = 33;
 
     }
 
@@ -51,9 +50,11 @@ public class RobotMap {
 
         public static final int PCM_ID = 5;
 
-        public static final int SHIFT_GEAR_1 = 4;
-        public static final int SHIFT_GEAR_2 = 5;
-        public static final int LOWER_MECHANISM = 0;
+        //public static final int SHIFT_GEAR_1 = 4;
+        //public static final int SHIFT_GEAR_2 = 5;
+        public static final int HOT_MESS_1 = 4;
+        public static final int HOT_MESS_2 = 5;
+        public static final int LOWER_MECHANISM = 0; //TODO: check IDs
         public static final int RAISE_MECHANSIM = 1;
         public static final int GRAB_HATCH = 2;
         public static final int RELEASE_HATCH = 3;

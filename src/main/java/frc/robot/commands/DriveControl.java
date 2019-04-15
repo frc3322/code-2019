@@ -46,13 +46,14 @@ public class DriveControl extends Command {
 
         double turn = -oi.lowerChassis.getRawAxis(ROTATION_AXIS) * rotationModifier;
 
-        if(speed == 0) {
+        /*if(speed == 0) {
             drivetrain.shiftLow();
         }
 
         if(drivetrain.isHighGear()) {
             speed = speed * .85;
         }
+        */
     
         if(drivetrain.limeControlling) {
             SmartDashboard.putBoolean("Limelight Controlling", true);

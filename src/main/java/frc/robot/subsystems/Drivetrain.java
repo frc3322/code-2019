@@ -91,7 +91,6 @@ public class Drivetrain extends Subsystem {
         encoders[RIGHT_BACK] = motors[RIGHT_BACK].getEncoder();
         encoders[RIGHT_FRONT] = motors[RIGHT_FRONT].getEncoder();
 
-        shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
 
         robotDrive = new DifferentialDrive(motors[LEFT_FRONT], motors[RIGHT_FRONT]);
 
@@ -294,7 +293,7 @@ public class Drivetrain extends Subsystem {
         setDefaultCommand(new DriveControl());
     }
 
-    public void autoShift() {
+    /*public void autoShift() {
         if(System.currentTimeMillis() - lastShift > 800 && straightModeRun) {
             if(Math.abs(wheelRPM(LEFT_FRONT)) > upShiftMidpoint && Math.abs(wheelRPM(RIGHT_FRONT)) > upShiftMidpoint){
                 if (!isHighGear()) {
@@ -311,6 +310,7 @@ public class Drivetrain extends Subsystem {
         }
        
     }
+    */
 
     public double getAngle(){
         return navx.getAngle();
