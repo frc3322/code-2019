@@ -92,6 +92,6 @@ public class HotMess extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new HotMessClimb());
+        //setDefaultCommand(new HotMessClimb());
     }
 }

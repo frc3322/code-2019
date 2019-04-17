@@ -58,8 +58,8 @@ public class SideOuttake extends Subsystem{
     }
 
     public void intakeCarriage() {
-        leftOuttake.set(-.25);
-        rightOuttake.set(-.25);
+        leftOuttake.set(-.4);
+        rightOuttake.set(-.4);
     }
 
     public void outtakeThruIntake() {

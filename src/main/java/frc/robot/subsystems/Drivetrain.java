@@ -135,7 +135,7 @@ public class Drivetrain extends Subsystem {
 		pidForDriveStraight.setOutputRange(-.4, .4);
 		pidForDriveStraight.setContinuous(true);
         pidForDriveStraight.setSetpoint(navx.getYaw());
-        
+        */
         
         limelightPID = new PIDController(0.007 , 0, 0.004, new PIDSource(){
             PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
@@ -168,7 +168,7 @@ public class Drivetrain extends Subsystem {
 		limelightPID.setOutputRange(-.4, .4);
 		limelightPID.setContinuous(true);
 
-        */
+        
     }
 
     public void updateDrivetrain() {
@@ -211,15 +211,15 @@ public class Drivetrain extends Subsystem {
     }
 
 
-    /*
+    
     public void limeDrive(double speed) {
         
-        //navx.reset();
+        navx.reset();
         limelightPID.setSetpoint(limelight.getTx());
         limelightPID.enable();
         tankDrive(speed - limelightPIDOutput, speed + limelightPIDOutput);
     }
-    */
+    
 
     /*
 
