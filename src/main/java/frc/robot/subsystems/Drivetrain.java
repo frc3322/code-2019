@@ -94,6 +94,8 @@ public class Drivetrain extends Subsystem {
 
         robotDrive = new DifferentialDrive(motors[LEFT_FRONT], motors[RIGHT_FRONT]);
 
+        shiftSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.SHIFT_GEAR_1, RobotMap.PCM.SHIFT_GEAR_2);
+
         motors[LEFT_BACK].follow(motors[LEFT_FRONT]);
         motors[RIGHT_BACK].follow(motors[RIGHT_FRONT]);
 

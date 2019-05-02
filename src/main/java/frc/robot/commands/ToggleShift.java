@@ -21,6 +21,7 @@ public class ToggleShift extends Command{
 
     @Override
     protected void initialize() {
+        drivetrain.toggleShift();
     }
 
     @Override
