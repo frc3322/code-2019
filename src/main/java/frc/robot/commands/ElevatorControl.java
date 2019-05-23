@@ -24,6 +24,7 @@ public class ElevatorControl extends Command {
         requires(elevator);
         hasSeenSwitch = false;
         cycleCounter = 0;
+        idleSpeed = 0.01;
 	
 	}
 
@@ -34,7 +35,6 @@ public class ElevatorControl extends Command {
         cycleCounter++;
 
         //TODO: check these changes
-        idleSpeed = 0.01;
         if(elevator.getLimitSwitch() && hasSeenSwitch == false){
             hasSeenSwitch = true;
             cycleCounter = 0;

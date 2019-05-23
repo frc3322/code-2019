@@ -43,7 +43,7 @@ public class OuttakeControl extends Command{
 
         
 
-        if (sideouttake.getRightInfrared()) {
+        /*if (sideouttake.getRightInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
             lastOuttake = System.currentTimeMillis();
@@ -59,7 +59,7 @@ public class OuttakeControl extends Command{
                 oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 0);
                 oi.lowerChassis.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
             }
-        }
+        }*/
         
     }
 

@@ -86,6 +86,7 @@ public class Elevator extends PIDSubsystem {
 
         onLimitSwitch();
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
+        SmartDashboard.putNumber("elevator input", moveInput);
     }
 
     public void reset() {

@@ -30,7 +30,7 @@ public class AutoOuttake extends Command {
 
     protected void execute() {
         
-        if (sideouttake.getRightInfrared()) {
+        /*if (sideouttake.getRightInfrared()) {
             outtaking = true;
             oi.lowerChassis.setRumble(GenericHID.RumbleType.kRightRumble, 1);
             lastOuttake = System.currentTimeMillis();
@@ -56,7 +56,7 @@ public class AutoOuttake extends Command {
                 outtaking = false;
             }
         }
-        
+        */
     }
 
     @Override
