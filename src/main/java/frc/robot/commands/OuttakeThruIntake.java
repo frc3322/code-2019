@@ -11,18 +11,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import static frc.robot.Robot.wideintake;
+import static frc.robot.Robot.sideouttake;
 
-import static frc.robot.Robot.hotMess;
+public class OuttakeThruIntake extends Command {
 
-public class HotMessForceClimb extends Command {
-
-    public HotMessForceClimb() {
-        requires(hotMess);
+    public OuttakeThruIntake() {
+        requires(wideintake);
     }
 
     @Override
     protected void execute() {
-        hotMess.climb(.5);
+        wideintake.outtakeThruIntake();
+        sideouttake.outtakeThruIntake();
     }
 
     @Override
@@ -30,13 +31,4 @@ public class HotMessForceClimb extends Command {
         return false;
     }
 
-    @Override
-    protected void end() {
-        hotMess.stop();
-    }
-
-    @Override
-    protected void interrupted() {
-        super.interrupted();
-    }
 }

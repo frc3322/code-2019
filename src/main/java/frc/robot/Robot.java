@@ -63,12 +63,12 @@ public class Robot extends TimedRobot {
         wideintake = new WideIntake();
 //compressor = new Compressor(RobotMap.PCM.PCM_ID);
 
-        SmartDashboard.putNumber("Cargo Level Encoder Value", elevator.cargoLevel);
-        SmartDashboard.putNumber("Second Level Encoder Value", elevator.secondLevel);
-        SmartDashboard.putNumber("Third Level Encoder Value", elevator.thirdLevel);
-        SmartDashboard.putNumber("Elevator P Value", elevator.P);
-        SmartDashboard.putNumber("Elevator I Value", elevator.I);
-        SmartDashboard.putNumber("Elevator D Value", elevator.D);
+        //SmartDashboard.putNumber("Cargo Level Encoder Value", elevator.cargoLevel);
+        //SmartDashboard.putNumber("Second Level Encoder Value", elevator.secondLevel);
+        //SmartDashboard.putNumber("Third Level Encoder Value", elevator.thirdLevel);
+        //SmartDashboard.putNumber("Elevator P Value", elevator.P);
+        //SmartDashboard.putNumber("Elevator I Value", elevator.I);
+        //SmartDashboard.putNumber("Elevator D Value", elevator.D);
 
         oi = new OI();
 
@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
 
         drivetrain.updateDrivetrain();
 
-        drivetrain.navx.reset();
+        //drivetrain.navx.reset();
 
         Limelight.setLedMode(Limelight.LightMode.eOff);
 
@@ -101,8 +101,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        //sideouttake.update();
-        drivetrain.updateDrivetrain();
+        sideouttake.update();
+        //drivetrain.updateDrivetrain();
         //hatchManip.updateHatch();
         elevator.update();
         //hotMess.update();
@@ -151,6 +151,7 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         Limelight.setCameraMode(CameraMode.eDriver);
         Limelight.setLedMode(LightMode.eOff);
+        //drivetrain.navx.reset();
     }
 
     /**
@@ -193,7 +194,6 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Right Front Output Current", drivetrain.getOutputCurrent(3));
         */
         //SmartDashboard.putNumber("HotMess motor 1 current", hotMess.motor1.getOutputCurrent());
-        //SmartDashboard.putNumber("HotMess motor 2 current", hotMess.motor2.getOutputCurrent());
     }
 
     /**
