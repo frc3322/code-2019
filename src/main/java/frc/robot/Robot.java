@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         CameraServer.getInstance().startAutomaticCapture(0);
+        CameraServer.getInstance().startAutomaticCapture(1);
 
         Limelight.setCameraMode(CameraMode.eDriver);
         Limelight.setLedMode(LightMode.eOff);
