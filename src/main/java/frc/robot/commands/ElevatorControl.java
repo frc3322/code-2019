@@ -11,10 +11,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.HatchManip;
 
 import static frc.robot.Robot.elevator;
-import static frc.robot.Robot.hatchManip;
 
 public class ElevatorControl extends Command {
 
@@ -26,6 +24,7 @@ public class ElevatorControl extends Command {
         requires(elevator);
         hasSeenSwitch = false;
         cycleCounter = 0;
+        idleSpeed = 0.01;
 	
 	}
 
@@ -34,16 +33,17 @@ public class ElevatorControl extends Command {
 	protected void execute() {
 
         cycleCounter++;
-        idleSpeed = 0.2;
+
+        //TODO: check these changes
         if(elevator.getLimitSwitch() && hasSeenSwitch == false){
             hasSeenSwitch = true;
             cycleCounter = 0;
             elevator.move(0);
         //needs 200 encoder ticks to get off switch
-        } else if (elevator.moveInput == 0 && elevator.currentHeight() > 200 && !elevator.getPIDController().isEnabled()){
+        } else if (elevator.moveInput == 0 && elevator.getPosition() > 0.5 && !elevator.getPIDController().isEnabled()){
             elevator.move(idleSpeed);
         } else {
-            elevator.move(elevator.moveInput);
+            elevator.move(elevator.moveInput*0.6);
         }
 
         //prevents limit switch bounce

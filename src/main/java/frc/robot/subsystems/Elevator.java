@@ -13,13 +13,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import static frc.robot.Robot.drivetrain;
 import static frc.robot.Robot.oi;
-// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 //import frc.robot.PIDController;
 import frc.robot.RobotMap;
@@ -32,12 +32,11 @@ public class Elevator extends PIDSubsystem {
     private SpeedControllerGroup elevator;
     
     private int currentLevel = 0;
-    private int desiredLevel;
+    private int desiredLevel = 0;
     private double upSpeed = 0.2;
     private double downSpeed = -0.2;
-    public double cargoLevel = 2000;
-    public double secondLevel = 3650;
-    public double thirdLevel = 6775;
+    public double cargoLevel = 0;
+    public double secondLevel = 0;
     public static double P = 0.3;
     public static double I = 0;
     public static double D = 0;
@@ -46,31 +45,25 @@ public class Elevator extends PIDSubsystem {
     public boolean canMoveDown = true;
     public double moveInput;
     public double pidSpeed;
-    Encoder elevatorEncoder;
+    CANEncoder elevatorEncoder;
 
-    WPI_TalonSRX elevatorMotor1;
-    WPI_TalonSRX elevatorMotor2;
+    CANSparkMax elevatorMotor1;
+    CANSparkMax elevatorMotor2;
     
     DigitalInput elevatorLimitSwitch;
 
     public Elevator() {
         super("Elevator PID", P, I, D);
-        cargoLevel = SmartDashboard.getNumber("Cargo Level Encoder Value", 2000);
-        secondLevel = SmartDashboard.getNumber("Second Level Encoder Value", 3250);
-        thirdLevel = SmartDashboard.getNumber("Third Level Encoder Value", 8100);
-        P = SmartDashboard.getNumber("Elevator P Value", P);
-        I = SmartDashboard.getNumber("Elevator I Value", I);
-        D = SmartDashboard.getNumber("Elevator D Value", D);
 
         setAbsoluteTolerance(20);
         getPIDController().setContinuous(false);
         // create elevator motors and assign to speed group for easy control
-
-        elevatorEncoder = new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B);
         elevatorLimitSwitch = new DigitalInput(RobotMap.DIO.ELEVATOR_LIMIT_SWITCH);
         
-        elevatorMotor1 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_1);
-        elevatorMotor2 = new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_MOTOR_2);
+        elevatorMotor1 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_1,MotorType.kBrushless);
+        elevatorMotor2 = new CANSparkMax(RobotMap.CAN.ELEVATOR_MOTOR_2,MotorType.kBrushless);
+
+        elevatorEncoder = elevatorMotor1.getEncoder();
 
         elevatorMotor1.setInverted(true);
         elevatorMotor2.setInverted(true);
@@ -85,22 +78,23 @@ public class Elevator extends PIDSubsystem {
     }
 
     public void update() {
-        SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getDistance());
+        SmartDashboard.putNumber("Elevator Encoder", elevatorEncoder.getPosition());
         SmartDashboard.putBoolean("Elevator Limit Switch", elevatorLimitSwitch.get());
-        SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
-        SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
-        SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
+        //SmartDashboard.putBoolean("Elevator Can Move Up", canMoveUp);
+        //SmartDashboard.putBoolean("Elevator Can Move Down", canMoveDown);
+        //SmartDashboard.putNumber("Elevator Motor Speed", elevatorMotor1.getBusVoltage());
 
         onLimitSwitch();
         moveInput = (oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_R_AXIS) - oi.upperChassis.getRawAxis(RobotMap.XBOX.TRIGGER_L_AXIS)) * speedModifier;
+        SmartDashboard.putNumber("elevator input", moveInput);
     }
 
     public void reset() {
-        elevatorEncoder.reset();
+        elevatorEncoder.setPosition(0);
     }
 
     public double currentHeight() {
-        return elevatorEncoder.getDistance();
+        return elevatorEncoder.getPosition();
     }
     
     public void onLimitSwitch(){
@@ -114,7 +108,7 @@ public class Elevator extends PIDSubsystem {
     }
 
     public void adjustRampRate() {
-        drivetrain.rampRate = .4 + elevatorEncoder.getDistance() / 10000;
+        drivetrain.rampRate = .4 + elevatorEncoder.getPosition() / 10000;
     }
 
     @Override
@@ -141,12 +135,6 @@ public class Elevator extends PIDSubsystem {
 
     public void goToLevel(int level) {
         switch (level) {
-        case 0:
-            desiredLevel = 0;
-            disable();
-            move(downSpeed);
-            currentLevel = 0;
-            break;
         case 1:
             desiredLevel = 1;
             setSetpoint(cargoLevel);
@@ -157,11 +145,6 @@ public class Elevator extends PIDSubsystem {
             setSetpoint(secondLevel);
             currentLevel = 2;
             break;
-        case 3:
-            desiredLevel = 3;
-            setSetpoint(thirdLevel);
-            currentLevel = 3;
-            break;
         default:
             return;
         }
@@ -170,7 +153,7 @@ public class Elevator extends PIDSubsystem {
 
     @Override
     protected double returnPIDInput() {
-        return elevatorEncoder.getDistance();
+        return elevatorEncoder.getPosition();
     }
 
     @Override

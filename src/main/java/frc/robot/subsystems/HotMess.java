@@ -13,39 +13,28 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import frc.robot.commands.HotMessClimb;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.HotMessIdle;
 
 /**
  * Add your docs here.
  */
 public class HotMess extends Subsystem {
     
-    public CANSparkMax motor1,
-                        motor2;
+    public CANSparkMax motor1;
     
-    private CANEncoder encoder1,
-                       encoder2;
+    private CANEncoder encoder1;
 
-    private Double hotmessRampRate;
-    
-    private SpeedControllerGroup motorGroup;
+    private DoubleSolenoid hotMessSolenoid;
 
     public HotMess(){
-
-        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR1, MotorType.kBrushless);
-
+        hotMessSolenoid = new DoubleSolenoid(RobotMap.PCM.PCM_ID, RobotMap.PCM.HOT_MESS_1, RobotMap.PCM.HOT_MESS_2);
+        motor1 = new CANSparkMax(RobotMap.CAN.HOTMESS_MOTOR, MotorType.kBrushless);
         encoder1 = motor1.getEncoder();
-
-        hotmessRampRate = 5.0;
-
-        motor1.setInverted(true);
-
-        motor1.setClosedLoopRampRate(hotmessRampRate);
     }
 
     public void update() {
@@ -71,6 +60,30 @@ public class HotMess extends Subsystem {
         motor1.set(-.1);
     }
 
+    public void toggleHotMess() {
+        if(isClimbUp()) {
+            hotMessDown();
+        } else {
+            hotMessUp();
+        }
+    }
+
+    public void hotMessUp() {
+        hotMessSolenoid.set(Value.kReverse);
+    }
+
+    public void hotMessDown() {
+        hotMessSolenoid.set(Value.kForward);
+    }
+
+    public boolean isClimbUp() {
+        return hotMessSolenoid.get() == Value.kReverse;
+    }
+
+    public boolean isClimbDown() {
+        return hotMessSolenoid.get() == Value.kForward;
+    }
+
     public double getEncoderVal(){
 
         return (encoder1.getPosition());
@@ -79,6 +92,6 @@ public class HotMess extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new HotMessIdle());
+        //setDefaultCommand(new HotMessClimb());
     }
 }

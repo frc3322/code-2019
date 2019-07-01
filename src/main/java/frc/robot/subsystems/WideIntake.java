@@ -25,13 +25,16 @@ public class WideIntake extends Subsystem{
     }
 
     public void intakeStart() {
-        intakeMotor.set(.4);
+        intakeMotor.set(.45);
     }
 
     public void intakeStop() {
         intakeMotor.set(0);
     }
 
+    public void outtakeThruIntake() {
+        intakeMotor.set(-1);
+    }
     public void intakeExtend() {
         intakeExtender.set(DoubleSolenoid.Value.kForward);
     }
